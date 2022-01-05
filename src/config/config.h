@@ -1,0 +1,108 @@
+// constantes
+const float FPS = 120;  
+const int SCREEN_W = 960;
+const int SCREEN_H = 540;
+
+// fontes
+const char fonte_local[] = "src/fonts/arial.TTF";
+const int tamanho_fonte = 36;
+
+// variaveis globais
+ALLEGRO_DISPLAY *display = NULL;
+ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+ALLEGRO_TIMER *timer = NULL;
+ALLEGRO_FONT *fonte = NULL;
+ALLEGRO_EVENT ev;
+int jogando = 1;
+
+int iniciarAllegro()
+{
+	//inicializa o Allegro
+	if(!al_init()) {
+		fprintf(stderr, "falha ao inicializar o allegro!\n");
+		return -1;
+	}
+	
+    //inicializa o módulo de primitivas do Allegro
+    if(!al_init_primitives_addon()){
+		fprintf(stderr, "falha ao inicializar as primitivas do Allegro!\n");
+        return -1;
+    }	
+	
+	//inicializa o modulo que permite carregar imagens no jogo
+	if(!al_init_image_addon()){
+		fprintf(stderr, "falha ao inicializar o modulo de imagens!\n");
+		return -1;
+	}
+   
+	//cria um temporizador que incrementa uma unidade a cada 1.0/FPS segundos
+    timer = al_create_timer(1.0 / FPS);
+    if(!timer) {
+		fprintf(stderr, "falha ao criar o timer!\n");
+		return -1;
+	}
+ 
+	//cria uma tela com dimensoes de SCREEN_W, SCREEN_H pixels
+	display = al_create_display(SCREEN_W, SCREEN_H);
+	if(!display) {
+		fprintf(stderr, "falha ao criar a tela!\n");
+		al_destroy_timer(timer);
+		return -1;
+	}
+
+	//instala o teclado
+	if(!al_install_keyboard()) {
+		fprintf(stderr, "falha ao instalar o teclado!\n");
+		return -1;
+	}
+	
+	//instala o mouse
+	if(!al_install_mouse()) {
+		fprintf(stderr, "falha ao instalar o mouse!\n");
+		return -1;
+	}
+
+	//inicializa o modulo allegro que carrega as fontes
+	al_init_font_addon();
+
+	//inicializa o modulo allegro que entende arquivos tff de fontes
+	if(!al_init_ttf_addon()) {
+		fprintf(stderr, "falha ao iniciarlizar o modulo de fontes!\n");
+		return -1;
+	}
+	
+	//carrega o arquivo de fonte e define o tamanho que sera usado
+    fonte = al_load_font(fonte_local, tamanho_fonte, 0);   
+	if(fonte == NULL) {
+		fprintf(stderr, "arquivo de fonte nao pode ser encontrado!\n");
+	}
+
+ 	//cria a fila de eventos
+	event_queue = al_create_event_queue();
+	if(!event_queue) {
+		fprintf(stderr, "falha ao criar a fila de eventos!\n");
+		al_destroy_display(display);
+		al_destroy_timer(timer);
+		return -1;
+	}
+
+    //registra na fila os eventos de tela (ex: clicar no X na janela)
+	al_register_event_source(event_queue, al_get_display_event_source(display));
+	//registra na fila os eventos de tempo: quando o tempo altera de t para t+1
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
+	//registra na fila os eventos de teclado (ex: pressionar uma tecla)
+	al_register_event_source(event_queue, al_get_keyboard_event_source());
+	//registra na fila os eventos de mouse (ex: clicar em um botao do mouse)
+	al_register_event_source(event_queue, al_get_mouse_event_source());
+
+    //inicia o temporizador
+	al_start_timer(timer);
+}
+
+int finalizaAllegro()
+{
+    //procedimentos de fim de jogo (fecha a tela, limpa a memoria, etc)
+    al_destroy_timer(timer);
+	al_destroy_display(display);
+	al_destroy_event_queue(event_queue);
+}
