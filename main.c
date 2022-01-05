@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
 	iniciarAllegro();
 
-    desenhaNave();
+    iniciaNave();
 
     // loop principal
 	while(jogando)

@@ -2,6 +2,8 @@
 const float FPS = 120;  
 const int SCREEN_W = 960;
 const int SCREEN_H = 540;
+const int NAVE_W = 100;
+const int NAVE_H = 100;
 
 // fontes
 const char fonte_local[] = "src/fonts/arial.TTF";
@@ -22,6 +24,8 @@ ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP *nave;
 int jogando = 1;
+int nave_dx = 20;
+int nave_dy = 0;
 
 int iniciarAllegro();
 int finalizaAllegro();
