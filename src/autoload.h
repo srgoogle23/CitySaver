@@ -8,5 +8,11 @@
 // includes nativos
 #include <stdio.h>
 
-// includes utilidades
+// includes de configurações
 #include "config/config.h"
+
+// includes de eventos
+#include "events/mouse.h"
+#include "events/tela.h"
+#include "events/teclas.h"
+#include "events/temporizador.h"

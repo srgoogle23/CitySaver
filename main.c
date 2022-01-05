@@ -1,45 +1,4 @@
 #include "src/autoload.h"
- 
-void mostrarSegundosPassando()
-{
-	if(al_get_timer_count(timer)%(int)FPS == 0)
-		printf("\n%d segundos se passaram...", (int)(al_get_timer_count(timer)/FPS));
-}
-
-void eventosDeTemporizador()
-{
-	if(ev.type == ALLEGRO_EVENT_TIMER)
-	{
-		//atualiza a tela (quando houver algo para mostrar)
-		al_flip_display();
-
-		// mostra os segundos se passando ao longo do jogo
-		mostrarSegundosPassando();
-	}
-}
-
-void eventoFechamentoDeTela()
-{
-	if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
-	{
-		jogando = 0;
-	}
-}
-
-void eventoCliqueDoMouse()
-{
-	if(ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_DOWN) {
-		printf("\nmouse clicado em: %d, %d", ev.mouse.x, ev.mouse.y);
-	}
-}
-
-void eventoPressionarTecla()
-{
-	if(ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-		//imprime qual tecla foi
-		printf("\ncodigo tecla: %d", ev.keyboard.keycode);
-	}
-}
 
 int main(int argc, char **argv)
 {

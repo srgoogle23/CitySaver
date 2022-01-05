@@ -15,6 +15,9 @@ ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_EVENT ev;
 int jogando = 1;
 
+int iniciarAllegro();
+int finalizaAllegro();
+
 int iniciarAllegro()
 {
 	//inicializa o Allegro
