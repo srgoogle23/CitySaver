@@ -16,3 +16,6 @@
 #include "events/tela.h"
 #include "events/teclas.h"
 #include "events/temporizador.h"
+
+// includes de objetos
+#include "objects/nave.h"

@@ -4,7 +4,9 @@ int main(int argc, char **argv)
 {
 	iniciarAllegro();
 
-	// loop principal
+    desenhaNave();
+
+    // loop principal
 	while(jogando)
 	{
 		//espera por um evento e o armazena na variavel de evento ev
@@ -22,8 +24,11 @@ int main(int argc, char **argv)
 		//se o tipo de evento for um pressionar de uma tecla
 		eventoPressionarTecla();
 
-	} //fim do while
-	finalizaAllegro();
+	}
 
-	return 0;
+    // execuções de finalizações
+	finalizaAllegro();
+    finalizaNave();
+	
+    return 0;
 }

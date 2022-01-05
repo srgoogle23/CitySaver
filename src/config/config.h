@@ -7,16 +7,25 @@ const int SCREEN_H = 540;
 const char fonte_local[] = "src/fonts/arial.TTF";
 const int tamanho_fonte = 36;
 
+// background
+const char background_local[] = "src/images/background.jpg";
+
+// sprites da nave
+const char nave_local[] = "src/images/nave.png";
+
 // variaveis globais
 ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_EVENT ev;
+ALLEGRO_BITMAP* background;
+ALLEGRO_BITMAP *nave;
 int jogando = 1;
 
 int iniciarAllegro();
 int finalizaAllegro();
+void iniciarBackground();
 
 int iniciarAllegro()
 {
@@ -98,6 +107,18 @@ int iniciarAllegro()
 	//registra na fila os eventos de mouse (ex: clicar em um botao do mouse)
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 
+    // Dá nome a janela
+    al_set_window_title(display, "R-Type | Leonardo Oliveira");
+
+    //carrega a imagem de fundo
+    iniciarBackground();
+
+    // incia a nave
+    nave = al_load_bitmap(nave_local);
+
+    // atualiza a tela
+    al_flip_display();
+
     //inicia o temporizador
 	al_start_timer(timer);
 }
@@ -108,4 +129,11 @@ int finalizaAllegro()
     al_destroy_timer(timer);
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
+}
+
+void iniciarBackground()
+{
+    // define o background
+    background = al_load_bitmap(background_local);
+    al_draw_bitmap(background, 0, 0, 0);
 }
