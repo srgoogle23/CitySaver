@@ -1,11 +1,14 @@
 #include "src/autoload.h"
 
+void atualizatela(int c);
+
 int main(int argc, char **argv)
 {
 	iniciarAllegro();
 
     iniciaNave();
 
+    int c = 0;
     // loop principal
 	while(jogando)
 	{
@@ -24,11 +27,22 @@ int main(int argc, char **argv)
 		//se o tipo de evento for um pressionar de uma tecla
 		eventoPressionarTecla();
 
-	}
+        atualizatela(c);
+
+        c += 1;
+    }
 
     // execuções de finalizações
 	finalizaAllegro();
     finalizaNave();
 	
     return 0;
+}
+
+void atualizatela( int c)
+{
+        al_clear_to_color(al_map_rgb(0,0,0));
+        al_draw_bitmap(background, 0, 0, 0);
+        al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx+c, nave_dy, 0);
+        al_flip_display();
 }
