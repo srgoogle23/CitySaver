@@ -5,6 +5,7 @@ void movimentacaoAsteroid(int indice, int tipo);
 void reposicionaAsteroid(int indice);
 
 struct Asteroid {
+	bool colisao;
 	int tipo;
 	int x;
 	int y;
@@ -45,6 +46,7 @@ void calculaAsteroids()
     for (int i = 0; i < quantidadeArteroids; i++)
 	{
 		tipo_asteroid = randInt(4);
+		asteroid[i].colisao = false;
 		if (tipo_asteroid == 0)
 		{
 			asteroid[i].tipo = 1;
@@ -90,23 +92,32 @@ void redesenhaAsteroids()
 	{
 		movimentacaoAsteroid(i, asteroid[i].tipo);
 
-		if(asteroid[i].tipo == 1)
+		if(asteroid[i].colisao == false)
 		{
-			al_draw_bitmap_region(arteroids, 0, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			if(asteroid[i].tipo == 1)
+			{
+				al_draw_bitmap_region(arteroids, 0, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			}
+			else if(asteroid[i].tipo == 2)
+			{
+				al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			}
+			else if(asteroid[i].tipo == 3)
+			{
+				al_draw_bitmap_region(arteroids, 0, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			}
+			else if(asteroid[i].tipo == 4)
+			{
+				al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			}
 		}
-		else if(asteroid[i].tipo == 2)
+		else
 		{
-			al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			asteroid[i].x = (-2 * tamanho_sprite_asteroid);
+			asteroid[i].colisao = false;
+			reposicionaAsteroid(i);
 		}
-		else if(asteroid[i].tipo == 3)
-		{
-			al_draw_bitmap_region(arteroids, 0, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
-		}
-		else if(asteroid[i].tipo == 4)
-		{
-			al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
-		}
-	}
+	}	
 }
 
 void movimentacaoAsteroid(int indice, int tipo)

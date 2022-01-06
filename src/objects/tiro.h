@@ -69,8 +69,6 @@ void disparaTiro()
             limpaTiros();
         }
     }
-
-    printf("filaTiros: %d\n", filaTiros);
 }
 
 void calculaMovimentoTiro()
@@ -103,6 +101,7 @@ void colisaoTiros(int j)
                 {
                     //se o tiro com o asteroide, atualiza o valor da colisão
                     struct_tiro[j].colisao = true;
+                    asteroid[i].colisao = true;
                 }
             }
         }
