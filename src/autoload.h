@@ -11,11 +11,11 @@
 // includes de configurações
 #include "config/config.h"
 
+// includes de objetos
+#include "objects/nave.h"
+
 // includes de eventos
 #include "events/mouse.h"
 #include "events/tela.h"
 #include "events/teclas.h"
 #include "events/temporizador.h"
-
-// includes de objetos
-#include "objects/nave.h"

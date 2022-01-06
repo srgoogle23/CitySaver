@@ -47,23 +47,3 @@ void redesenhaTela()
 	al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx, nave_dy, 0);
 	al_flip_display();
 }
-
-void calculaMovimentoNave()
-{
-	if(move_up)
-	{
-		nave_dy -= 4;
-	}
-	else if(move_down)
-	{
-		nave_dy += 4;
-	}
-	else if(move_left)
-	{
-		nave_dx -= 4;
-	}
-	else if(move_right)
-	{
-		nave_dx += 4;
-	}
-}

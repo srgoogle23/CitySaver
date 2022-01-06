@@ -15,7 +15,7 @@ const char background_local[] = "src/images/background.jpg";
 // sprites da nave
 const char nave_local[] = "src/images/nave.png";
 
-// variaveis globais
+// variaveis globais allegro
 ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
@@ -23,13 +23,26 @@ ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP *nave;
+
+// definição de jogo
 int jogando = 1;
-int nave_dx = 20;
+
+// coordenadas da nave
+int nave_dx = -12;
 int nave_dy = 0;
+int movimentacaoNave = 4;
+
+// movimentação por teclas
 bool move_up = false;
 bool move_down = false;
 bool move_left = false;
 bool move_right = false;
+
+// limites da tela
+int limite_x_esquerda = -12;
+int limite_y_inferior = 456;
+int limite_x_direita = 876;
+int limite_y_superior = -12;
 
 int iniciarAllegro();
 int finalizaAllegro();
