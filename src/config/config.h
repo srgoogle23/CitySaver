@@ -29,6 +29,10 @@ ALLEGRO_BITMAP *arteroids;
 // definição de jogo
 int jogando = 1;
 
+// definição de colisão
+bool colisao = false;
+int animacaoColisao = 1;
+
 // coordenadas da nave
 int nave_dx = -12;
 int nave_dy = 0;

@@ -4,6 +4,8 @@ void finalizaNave();
 void teclasMovimentoNave(int tecla, int tipoEvento);
 void calculaMovimentoNave();
 void redesenhaNave();
+void colisaoNave();
+void animacaoExplosaoNave();
 
 void iniciaNave()
 {
@@ -92,5 +94,70 @@ void calculaMovimentoNave()
 void redesenhaNave()
 {
     calculaMovimentoNave();
-    al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	colisaoNave();
+
+	if(colisao)
+	{
+		animacaoExplosaoNave();
+	}
+	else
+	{
+		al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	
+}
+
+void colisaoNave()
+{
+	//verifica se a nave colidiu com algum asteroide
+	for(int i = 0; i < quantidadeArteroids; i++)
+	{
+		if(asteroid[i].x + tamanho_sprite_asteroid >= nave_dx && asteroid[i].x <= nave_dx + NAVE_W)
+		{
+			if(asteroid[i].y + tamanho_sprite_asteroid >= nave_dy && asteroid[i].y <= nave_dy + NAVE_H)
+			{
+				//se a nave colidiu com o asteroide, atualiza o valor da colisão
+				colisao = true;
+			}
+		}
+	}
+}
+
+void animacaoExplosaoNave()
+{
+	if(animacaoColisao < 20)
+	{
+		al_draw_bitmap_region(nave, 0, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	else if(animacaoColisao < 40)
+	{
+		al_draw_bitmap_region(nave, NAVE_W, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	else if(animacaoColisao < 60)
+	{
+		al_draw_bitmap_region(nave, NAVE_W * 2, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	else if(animacaoColisao < 80)
+	{
+		al_draw_bitmap_region(nave, NAVE_W * 3, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	else if(animacaoColisao < 100)
+	{
+		al_draw_bitmap_region(nave, NAVE_W * 4, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	else if(animacaoColisao < 120)
+	{
+		al_draw_bitmap_region(nave, NAVE_W * 5, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	else if(animacaoColisao < 140)
+	{
+		al_draw_bitmap_region(nave, NAVE_W * 6, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
+	else
+	{
+		colisao = false;
+		animacaoColisao = 0;
+	}
+
+	animacaoColisao++;
 }

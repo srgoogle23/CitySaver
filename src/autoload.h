@@ -17,8 +17,8 @@
 #include "config/config.h"
 
 // includes de objetos
-#include "objects/nave.h"
 #include "objects/asteroid.h"
+#include "objects/nave.h"
 #include "objects/tela.h"
 
 // includes de eventos
