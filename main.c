@@ -1,9 +1,5 @@
 #include "src/autoload.h"
 
-#define NUM_RUAS 10
-float TAM_RUA = 0;
-float LARGURA_BUS = 0;
-
 int main(int argc, char **argv)
 {
 	iniciarAllegro();
