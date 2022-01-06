@@ -2,6 +2,7 @@ void iniciaAsteroids();
 void calculaAsteroids();
 void redesenhaAsteroids();
 void movimentacaoAsteroid(int indice, int tipo);
+void reposicionaAsteroid(int indice);
 
 struct Asteroid {
 	int tipo;
@@ -47,7 +48,7 @@ void calculaAsteroids()
 		if (tipo_asteroid == 0)
 		{
 			asteroid[i].tipo = 1;
-			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].x = SCREEN_W;
 			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_1;
 			asteroid[i].altura = ALTURA_ASTEROID_1;
@@ -56,7 +57,7 @@ void calculaAsteroids()
 		else if (tipo_asteroid == 1)
 		{
 			asteroid[i].tipo = 2;
-			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].x = SCREEN_W;
 			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_2;
 			asteroid[i].altura = ALTURA_ASTEROID_2;
@@ -65,7 +66,7 @@ void calculaAsteroids()
 		else  if (tipo_asteroid == 2)
 		{
 			asteroid[i].tipo = 3;
-			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].x = SCREEN_W;
 			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_3;
 			asteroid[i].altura = ALTURA_ASTEROID_3;
@@ -74,7 +75,7 @@ void calculaAsteroids()
 		else
 		{
 			asteroid[i].tipo = 4;
-			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].x = SCREEN_W;
 			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_4;
 			asteroid[i].altura = ALTURA_ASTEROID_4;
@@ -125,6 +126,17 @@ void movimentacaoAsteroid(int indice, int tipo)
 	else if (tipo == 4)
 	{
 		asteroid[indice].x -= asteroid[indice].velocidade;
+	}
+
+	reposicionaAsteroid(indice);
+}
+
+void reposicionaAsteroid(int indice)
+{
+	if(asteroid[indice].x < (-1 * tamanho_sprite_asteroid))
+	{
+		asteroid[indice].x = SCREEN_W;
+		asteroid[indice].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 	}
 }
 
