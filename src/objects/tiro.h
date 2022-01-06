@@ -207,10 +207,9 @@ void redesenhaTiro()
 
 void animacaoExplosao(int i)
 {
-    printf("x:%d, y:%d\n", struct_tiro[i].x, struct_tiro[i].y);
     if(struct_tiro[i].timerExplosao < 10)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+       al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
     else if(struct_tiro[i].timerExplosao < 20)
     {
@@ -218,27 +217,27 @@ void animacaoExplosao(int i)
     }
     else if(struct_tiro[i].timerExplosao < 30)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[2][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[2][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        al_draw_bitmap_region(explosao, explosao_tamanho[2][2], explosao_tamanho[2][3], explosao_tamanho[2][0], explosao_tamanho[2][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
     else if(struct_tiro[i].timerExplosao < 40)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[3][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[3][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        al_draw_bitmap_region(explosao, explosao_tamanho[3][2], explosao_tamanho[3][3], explosao_tamanho[3][0], explosao_tamanho[3][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
     else if(struct_tiro[i].timerExplosao < 50)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[4][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[4][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        al_draw_bitmap_region(explosao, explosao_tamanho[4][2], explosao_tamanho[4][3], explosao_tamanho[4][0], explosao_tamanho[4][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
     else if(struct_tiro[i].timerExplosao < 60)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[5][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[5][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        al_draw_bitmap_region(explosao, explosao_tamanho[5][2], explosao_tamanho[5][3], explosao_tamanho[5][0], explosao_tamanho[5][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
     else if(struct_tiro[i].timerExplosao < 70)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[6][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[6][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        al_draw_bitmap_region(explosao, explosao_tamanho[6][2], explosao_tamanho[6][3], explosao_tamanho[6][0], explosao_tamanho[6][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
     else if(struct_tiro[i].timerExplosao < 80)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[7][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[7][3], explosao_tamanho[7][0], explosao_tamanho[7][1], struct_tiro[i].x, struct_tiro[i].y, 0);
         limpaTiro(i);
     }
     struct_tiro[i].timerExplosao++;
