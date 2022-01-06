@@ -1,6 +1,7 @@
 void iniciaAsteroids();
 void calculaAsteroids();
 void redesenhaAsteroids();
+void movimentacaoAsteroid(int indice, int tipo);
 
 struct Asteroid {
 	int tipo;
@@ -86,6 +87,8 @@ void redesenhaAsteroids()
 {
     for (int i = 0; i < quantidadeArteroids; i++)
 	{
+		movimentacaoAsteroid(i, asteroid[i].tipo);
+
 		if(asteroid[i].tipo == 1)
 		{
 			al_draw_bitmap_region(arteroids, 0, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
@@ -102,6 +105,29 @@ void redesenhaAsteroids()
 		{
 			al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
 		}
+	}
+}
+
+void movimentacaoAsteroid(int indice, int tipo)
+{
+	if (tipo == 1)
+	{
+		asteroid[indice].x -= asteroid[indice].velocidade;
+	}
+	else if (tipo == 2)
+	{
+		asteroid[indice].x -= asteroid[indice].velocidade;
+		asteroid[indice].y += randIntMinMax(-1, 1);
+	}
+	else if (tipo == 3)
+	{
+		asteroid[indice].x -= asteroid[indice].velocidade;
+		asteroid[indice].y += randIntMinMax(-1, 1);
+	}
+	else if (tipo == 4)
+	{
+		asteroid[indice].x -= asteroid[indice].velocidade;
+		asteroid[indice].y += randIntMinMax(-1, 1);
 	}
 }
 
