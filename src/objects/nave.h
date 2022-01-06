@@ -8,7 +8,7 @@ void redesenhaNave();
 void iniciaNave()
 {
     nave_dy = (SCREEN_H / 2) - NAVE_W / 2;
-    al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx, nave_dy, 0);
+    al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 }
 
 void finalizaNave()
@@ -71,19 +71,19 @@ void teclasMovimentoNave(int tecla, int tipoEvento)
 
 void calculaMovimentoNave()
 {
-	if(move_up && (nave_dy - 4) >= limite_y_superior && (nave_dy - 4) <= limite_y_inferior)
+	if(move_up && (nave_dy - 4) >= limite_y_superior_nave && (nave_dy - 4) <= limite_y_inferior_nave)
 	{
 		nave_dy -= movimentacaoNave;
 	}
-	else if(move_down && (nave_dy + 4) >= limite_y_superior && (nave_dy + 4) <= limite_y_inferior)
+	else if(move_down && (nave_dy + 4) >= limite_y_superior_nave && (nave_dy + 4) <= limite_y_inferior_nave)
 	{
 		nave_dy += movimentacaoNave;
 	}
-	else if(move_left && (nave_dx - 4) >= limite_x_esquerda && (nave_dx - 4) <= limite_x_direita)
+	else if(move_left && (nave_dx - 4) >= limite_x_esquerda_nave && (nave_dx - 4) <= limite_x_direita_nave)
 	{
 		nave_dx -= movimentacaoNave;
 	}
-	else if(move_right && (nave_dx + 4) >= limite_x_esquerda && (nave_dx + 4) <= limite_x_direita)
+	else if(move_right && (nave_dx + 4) >= limite_x_esquerda_nave && (nave_dx + 4) <= limite_x_direita_nave)
 	{
 		nave_dx += movimentacaoNave;
 	}
@@ -92,5 +92,5 @@ void calculaMovimentoNave()
 void redesenhaNave()
 {
     calculaMovimentoNave();
-    al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx, nave_dy, 0);
+    al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 }

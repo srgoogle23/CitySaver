@@ -40,11 +40,11 @@ bool move_down = false;
 bool move_left = false;
 bool move_right = false;
 
-// limites da tela
-int limite_x_esquerda = -12;
-int limite_y_inferior = 456;
-int limite_x_direita = 876;
-int limite_y_superior = -12;
+// limites da tela para a nave
+const int limite_x_esquerda_nave = -12;
+const int limite_y_inferior_nave  = 456;
+const int limite_x_direita_nave  = 876;
+const int limite_y_superior_nave  = -12;
 
 // definições de asteroids
 #define quantidadeArteroids 4
@@ -55,6 +55,12 @@ int LARGURA_ASTEROID_2 = 128, ALTURA_ASTEROID_2 = 128;
 int LARGURA_ASTEROID_3 = 128, ALTURA_ASTEROID_3 = 128;
 int LARGURA_ASTEROID_4 = 128, ALTURA_ASTEROID_4 = 128;
 int VELOCIDADE_ASTEROID_1 = 1, VELOCIDADE_ASTEROID_2 = 2, VELOCIDADE_ASTEROID_3 = 3, VELOCIDADE_ASTEROID_4 = 4;
+
+// limites da tela para os asteroids
+const int limite_x_esquerda_asteroids = 0;
+const int limite_y_inferior_asteroids  = 418;
+const int limite_x_direita_asteroids  = 830;
+const int limite_y_superior_asteroids  = 0;
 
 int iniciarAllegro();
 int finalizaAllegro();

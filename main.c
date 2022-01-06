@@ -7,22 +7,6 @@ int main(int argc, char **argv)
     iniciaNave();
 	iniciaAsteroids();
 
-	asteroid[0].tipo = 1;
-	asteroid[0].x = 475;
-	asteroid[0].y = 260;
-
-	asteroid[1].tipo = 2;
-	asteroid[1].x = 475 + 128;
-	asteroid[1].y = 260;
-
-	asteroid[2].tipo = 3;
-	asteroid[2].x = 475;
-	asteroid[2].y = 260 + 128;
-
-	asteroid[3].tipo = 4;
-	asteroid[3].x = 475 + 128;
-	asteroid[3].y = 260 + 128;
-
 	// loop principal
 	while(jogando)
 	{

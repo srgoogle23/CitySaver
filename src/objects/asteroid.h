@@ -46,8 +46,8 @@ void calculaAsteroids()
 		if (tipo_asteroid == 0)
 		{
 			asteroid[i].tipo = 1;
-			asteroid[i].x = randInt(SCREEN_W);
-			asteroid[i].y = randInt(SCREEN_H);
+			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_1;
 			asteroid[i].altura = ALTURA_ASTEROID_1;
 			asteroid[i].velocidade = VELOCIDADE_ASTEROID_1;
@@ -55,8 +55,8 @@ void calculaAsteroids()
 		else if (tipo_asteroid == 1)
 		{
 			asteroid[i].tipo = 2;
-			asteroid[i].x = randInt(SCREEN_W);
-			asteroid[i].y = randInt(SCREEN_H);
+			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_2;
 			asteroid[i].altura = ALTURA_ASTEROID_2;
 			asteroid[i].velocidade = VELOCIDADE_ASTEROID_2;
@@ -64,8 +64,8 @@ void calculaAsteroids()
 		else  if (tipo_asteroid == 2)
 		{
 			asteroid[i].tipo = 3;
-			asteroid[i].x = randInt(SCREEN_W);
-			asteroid[i].y = randInt(SCREEN_H);
+			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_3;
 			asteroid[i].altura = ALTURA_ASTEROID_3;
 			asteroid[i].velocidade = VELOCIDADE_ASTEROID_3;
@@ -73,8 +73,8 @@ void calculaAsteroids()
 		else
 		{
 			asteroid[i].tipo = 4;
-			asteroid[i].x = randInt(SCREEN_W);
-			asteroid[i].y = randInt(SCREEN_H);
+			asteroid[i].x = SCREEN_W - 128;
+			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 			asteroid[i].largura = LARGURA_ASTEROID_4;
 			asteroid[i].altura = ALTURA_ASTEROID_4;
 			asteroid[i].velocidade = VELOCIDADE_ASTEROID_4;
