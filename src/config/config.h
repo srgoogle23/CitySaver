@@ -47,14 +47,14 @@ const int limite_x_direita_nave  = 876;
 const int limite_y_superior_nave  = -12;
 
 // definições de asteroids
-#define quantidadeArteroids 4
+#define quantidadeArteroids 2
 const int tamanho_sprite_asteroid = 128;
 int tipo_asteroid;
 int LARGURA_ASTEROID_1 = 128, ALTURA_ASTEROID_1 = 128;
 int LARGURA_ASTEROID_2 = 128, ALTURA_ASTEROID_2 = 128;
 int LARGURA_ASTEROID_3 = 128, ALTURA_ASTEROID_3 = 128;
 int LARGURA_ASTEROID_4 = 128, ALTURA_ASTEROID_4 = 128;
-int VELOCIDADE_ASTEROID_1 = 1, VELOCIDADE_ASTEROID_2 = 2, VELOCIDADE_ASTEROID_3 = 3, VELOCIDADE_ASTEROID_4 = 4;
+float VELOCIDADE_ASTEROID_1 = 0.5, VELOCIDADE_ASTEROID_2 = 1, VELOCIDADE_ASTEROID_3 = 1.5, VELOCIDADE_ASTEROID_4 = 2;
 
 // limites da tela para os asteroids
 const int limite_x_esquerda_asteroids = 0;

@@ -117,17 +117,14 @@ void movimentacaoAsteroid(int indice, int tipo)
 	else if (tipo == 2)
 	{
 		asteroid[indice].x -= asteroid[indice].velocidade;
-		asteroid[indice].y += randIntMinMax(-1, 1);
 	}
 	else if (tipo == 3)
 	{
 		asteroid[indice].x -= asteroid[indice].velocidade;
-		asteroid[indice].y += randIntMinMax(-1, 1);
 	}
 	else if (tipo == 4)
 	{
 		asteroid[indice].x -= asteroid[indice].velocidade;
-		asteroid[indice].y += randIntMinMax(-1, 1);
 	}
 }
 
