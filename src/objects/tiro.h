@@ -34,17 +34,21 @@ void inciarTiros()
 
 void disparaTiro()
 {
-    filaTiros++;
+    if(filaTiros < quantidadeTiros)
+    {
+        filaTiros++;
 
-    struct_tiro[filaTiros-1].ativado = true;
-    struct_tiro[filaTiros-1].tipo = 0;
-    struct_tiro[filaTiros-1].x = nave_dx + 50;
-    struct_tiro[filaTiros-1].y = nave_dy + 40;
-    struct_tiro[filaTiros-1].largura = tiros_tamanho[struct_tiro[filaTiros - 1].tipo][0];
-    struct_tiro[filaTiros-1].altura = tiros_tamanho[struct_tiro[filaTiros-1].tipo][1];
-    struct_tiro[filaTiros-1].offset_x = tiros_tamanho[struct_tiro[filaTiros-1].tipo][2];
+        struct_tiro[filaTiros-1].ativado = true;
+        struct_tiro[filaTiros-1].tipo = 0;
+        struct_tiro[filaTiros-1].x = nave_dx + 50;
+        struct_tiro[filaTiros-1].y = nave_dy + 40;
+        struct_tiro[filaTiros-1].largura = tiros_tamanho[struct_tiro[filaTiros - 1].tipo][0];
+        struct_tiro[filaTiros-1].altura = tiros_tamanho[struct_tiro[filaTiros-1].tipo][1];
+        struct_tiro[filaTiros-1].offset_x = tiros_tamanho[struct_tiro[filaTiros-1].tipo][2];
 
-    al_draw_bitmap_region(tiros, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
+        al_draw_bitmap_region(tiros, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
+    }
+    printf("filaTiros: %d\n", filaTiros);
 }
 
 void calculaMovimentoTiro()
