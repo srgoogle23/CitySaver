@@ -10,9 +10,6 @@ void redesenhaTela()
     // redesenha objetos
     redesenhaBackground();
     redesenhaNave();
-
-    // atualiza a tela
-    al_flip_display();
 }
 
 void redesenhaNave()

@@ -5,6 +5,7 @@ void eventosDeTemporizador()
 {
 	if(ev.type == ALLEGRO_EVENT_TIMER)
 	{
+		redesenhaTela();
 		//atualiza a tela (quando houver algo para mostrar)
 		al_flip_display();
 

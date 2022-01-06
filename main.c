@@ -1,12 +1,15 @@
 #include "src/autoload.h"
 
+#define NUM_RUAS 10
+float TAM_RUA = 0;
+float LARGURA_BUS = 0;
+
 int main(int argc, char **argv)
 {
 	iniciarAllegro();
 
     iniciaNave();
 
-    int c = 0;
     // loop principal
 	while(jogando)
 	{
@@ -24,8 +27,6 @@ int main(int argc, char **argv)
 
 		//se o tipo de evento for um pressionar de uma tecla
 		eventoPressionarTecla();
-
-		redesenhaTela();
 	}
 
     // execuções de finalizações
