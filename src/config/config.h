@@ -48,6 +48,7 @@ int limite_y_superior = -12;
 
 // definições de asteroids
 #define quantidadeArteroids 4
+const int tamanho_sprite_asteroid = 128;
 int tipo_asteroid;
 int LARGURA_ASTEROID_1 = 128, ALTURA_ASTEROID_1 = 128;
 int LARGURA_ASTEROID_2 = 128, ALTURA_ASTEROID_2 = 128;

@@ -25,15 +25,15 @@ void iniciaAsteroids()
 		}
 		else if(asteroid[i].tipo == 2)
 		{
-			al_draw_bitmap_region(arteroids, LARGURA_ASTEROID_1, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
 		}
 		else if(asteroid[i].tipo == 3)
 		{
-			al_draw_bitmap_region(arteroids, 0, ALTURA_ASTEROID_1, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			al_draw_bitmap_region(arteroids, 0, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
 		}
 		else if(asteroid[i].tipo == 4)
 		{
-			al_draw_bitmap_region(arteroids, LARGURA_ASTEROID_2, ALTURA_ASTEROID_1, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
 		}
 	}
 }
@@ -92,15 +92,15 @@ void redesenhaAsteroids()
 		}
 		else if(asteroid[i].tipo == 2)
 		{
-			al_draw_bitmap_region(arteroids, LARGURA_ASTEROID_1, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, 0, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
 		}
 		else if(asteroid[i].tipo == 3)
 		{
-			al_draw_bitmap_region(arteroids, 0, ALTURA_ASTEROID_1, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			al_draw_bitmap_region(arteroids, 0, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
 		}
 		else if(asteroid[i].tipo == 4)
 		{
-			al_draw_bitmap_region(arteroids, LARGURA_ASTEROID_2, ALTURA_ASTEROID_1, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
+			al_draw_bitmap_region(arteroids, tamanho_sprite_asteroid, tamanho_sprite_asteroid, asteroid[i].largura, asteroid[i].altura, asteroid[i].x, asteroid[i].y, 0);
 		}
 	}
 }
