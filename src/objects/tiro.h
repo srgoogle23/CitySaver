@@ -10,10 +10,12 @@ void limpaTiros();
 void colisaoTiros(int j);
 void animacaoExplosao(int i);
 void finalizaExplosao();
+void limpaTiro(int i);
 
 struct Tiro {
     bool ativado;
     bool colisao;
+    int timerExplosao;
     int tipo;
 	int x;
 	int y;
@@ -31,6 +33,7 @@ void inciarTiros()
 {
     for (int i = 0; i < quantidadeTiros; i++)
     {
+        struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
         struct_tiro[i].tipo = 0;
@@ -51,6 +54,7 @@ void disparaTiro()
     {
         filaTiros++;
 
+        struct_tiro[filaTiros-1].timerExplosao = 0;
         struct_tiro[filaTiros-1].ativado = true;
         struct_tiro[filaTiros-1].colisao = false;
         struct_tiro[filaTiros-1].tipo = 0;
@@ -114,6 +118,7 @@ void limpaTiros()
 {
     for (int i = 0; i < quantidadeTiros; i++)
     {
+        struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
         struct_tiro[i].tipo = 0;
@@ -179,8 +184,6 @@ void mudaAnimacaoTiro(int i)
 
 void redesenhaTiro()
 {
-    //al_draw_bitmap_region(explosao, explosao_tamanho[leo][2], explosao_tamanho[leo][3], explosao_tamanho[leo][0], explosao_tamanho[leo][1], nave_dx, nave_dy, 0);
-
     if (tiroTecla)
     {
         tiroTecla = false;
@@ -192,9 +195,10 @@ void redesenhaTiro()
     for (int i = 0; i < quantidadeTiros; i++)
     {
         if (struct_tiro[i].ativado == true && struct_tiro[i].colisao == false)
-        {
+        { 
             al_draw_bitmap_region(tiros, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
-        }else if(struct_tiro[i].colisao == true)
+        }
+        else if(struct_tiro[i].colisao == true)
         {
             animacaoExplosao(i);
         }
@@ -203,7 +207,57 @@ void redesenhaTiro()
 
 void animacaoExplosao(int i)
 {
+    printf("x:%d, y:%d\n", struct_tiro[i].x, struct_tiro[i].y);
+    if(struct_tiro[i].timerExplosao < 10)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+    }
+    else if(struct_tiro[i].timerExplosao < 20)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[1][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[1][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+    }
+    else if(struct_tiro[i].timerExplosao < 30)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[2][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[2][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+    }
+    else if(struct_tiro[i].timerExplosao < 40)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[3][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[3][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+    }
+    else if(struct_tiro[i].timerExplosao < 50)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[4][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[4][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+    }
+    else if(struct_tiro[i].timerExplosao < 60)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[5][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[5][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+    }
+    else if(struct_tiro[i].timerExplosao < 70)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[6][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[6][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+    }
+    else if(struct_tiro[i].timerExplosao < 80)
+    {
+        al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[7][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        limpaTiro(i);
+    }
+    struct_tiro[i].timerExplosao++;
+}
 
+void limpaTiro(int i)
+{
+    struct_tiro[i].timerExplosao = 0;
+    struct_tiro[i].ativado = false;
+    struct_tiro[i].colisao = false;
+    struct_tiro[i].tipo = 0;
+    struct_tiro[i].x = 0;
+    struct_tiro[i].y = 0;
+    struct_tiro[i].x_inicial = 0;
+    struct_tiro[i].y_inicial = 0;
+    struct_tiro[i].largura = 0;
+    struct_tiro[i].altura = 0;
+    struct_tiro[i].offset_x = 0;
+    struct_tiro[i].velocidade = velocidadeTiroSimples;
 }
 
 void teclasTiro(int tecla, int tipoEvento)

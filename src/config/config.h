@@ -96,6 +96,7 @@ const int explosao_tamanho[8][4] = {
 	{256, 256, 856, 400}
 };
 
+// declarando funções
 int iniciarAllegro();
 int finalizaAllegro();
 void iniciarBackground();
