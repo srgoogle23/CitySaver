@@ -7,7 +7,13 @@ const int NAVE_H = 100;
 const bool DEBUG = false;
 
 // imagens
-const char background_local[] = "src/images/background.jpg";
+const char background_local[] = "src/images/bg/01/sky.png";
+const char background_2_local[] = "src/images/bg/01/clouds_bg.png";
+const char background_3_local[] = "src/images/bg/01/cloud_lonely.png";
+const char background_4_local[] = "src/images/bg/01/glacial_mountains.png";
+const char background_5_local[] = "src/images/bg/01/clouds_mg_3.png";
+const char background_6_local[] = "src/images/bg/01/clouds_mg_2.png";
+const char background_7_local[] = "src/images/bg/01/clouds_mg_1.png";
 const char nave_local[] = "src/images/nave.png";
 const char asteroids_local[] = "src/images/asteroids.png";
 const char tiros_local[] = "src/images/shoots.png";
@@ -23,7 +29,13 @@ ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_EVENT ev;
-ALLEGRO_BITMAP* background;
+ALLEGRO_BITMAP* background; // sky.png => ceu azul
+ALLEGRO_BITMAP* background_2; // clouds_bg.png => nuvens de fundo
+ALLEGRO_BITMAP* background_3; // cloud_lonely.png => nuvens solitarias
+ALLEGRO_BITMAP* background_4; // glacial_mountains.png => montanhas geladas
+ALLEGRO_BITMAP* background_5; // clouds_mg_3.png => nuvens de meio-gravidade
+ALLEGRO_BITMAP* background_6; // clouds_mg_2.png => nuvens de meio-gravidade
+ALLEGRO_BITMAP* background_7; // clouds_mg_1.png => nuvens de meio-gravidade
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
 ALLEGRO_BITMAP *tiros;
@@ -101,6 +113,7 @@ int iniciarAllegro();
 int finalizaAllegro();
 void iniciarBackground();
 void finalizaBackground();
+ALLEGRO_BITMAP *load_bitmap_at_size(const char *filename, int w, int h);
 
 int iniciarAllegro()
 {
@@ -218,11 +231,67 @@ int finalizaAllegro()
 void iniciarBackground()
 {
     // define o background
-    background = al_load_bitmap(background_local);
+    background 	 = load_bitmap_at_size(background_local, SCREEN_W, SCREEN_H);
+	background_2 = load_bitmap_at_size(background_2_local, SCREEN_W, SCREEN_H);
+	background_3 = load_bitmap_at_size(background_3_local, SCREEN_W, SCREEN_H);
+	background_4 = load_bitmap_at_size(background_4_local, SCREEN_W, SCREEN_H);
+	background_5 = load_bitmap_at_size(background_5_local, SCREEN_W, SCREEN_H);
+	background_6 = load_bitmap_at_size(background_6_local, SCREEN_W, SCREEN_H);
+	background_7 = load_bitmap_at_size(background_7_local, SCREEN_W, SCREEN_H);
+
     al_draw_bitmap(background, 0, 0, 0);
+	al_draw_bitmap(background_2, 0, 0, 0);
+	al_draw_bitmap(background_3, 0, 0, 0);
+	al_draw_bitmap(background_4, 0, 0, 0);
+	al_draw_bitmap(background_5, 0, 0, 0);
+	al_draw_bitmap(background_6, 0, 0, 0);
+	al_draw_bitmap(background_7, 0, 0, 0);
 }
 
 void finalizaBackground()
 {
-    al_destroy_bitmap(background); 
+    al_destroy_bitmap(background);
+	al_destroy_bitmap(background_2); 
+	al_destroy_bitmap(background_3);
+	al_destroy_bitmap(background_4);
+	al_destroy_bitmap(background_5);
+	al_destroy_bitmap(background_6);
+	al_destroy_bitmap(background_7);   
+}
+
+ALLEGRO_BITMAP *load_bitmap_at_size(const char *filename, int w, int h)
+{
+	ALLEGRO_BITMAP *resized_bmp, *loaded_bmp, *prev_target;
+
+	// 1. create a temporary bitmap of size we want
+	resized_bmp = al_create_bitmap(w, h);
+	if (!resized_bmp) return NULL;
+
+	// 2. load the bitmap at the original size
+	loaded_bmp = al_load_bitmap(filename);
+	if (!loaded_bmp)
+	{
+		al_destroy_bitmap(resized_bmp);
+		return NULL;
+	}
+
+	// 3. set the target bitmap to the resized bmp
+	prev_target = al_get_target_bitmap();
+	al_set_target_bitmap(resized_bmp);
+
+	// 4. copy the loaded bitmap to the resized bmp
+	al_draw_scaled_bitmap(loaded_bmp,
+		0, 0,                                // source origin
+		al_get_bitmap_width(loaded_bmp),     // source width
+		al_get_bitmap_height(loaded_bmp),    // source height
+		0, 0,                                // target origin
+		w, h,                                // target dimensions
+		0                                    // flags
+	);
+
+	// 5. restore the previous target and clean up
+	al_set_target_bitmap(prev_target);
+	al_destroy_bitmap(loaded_bmp); 
+
+	return resized_bmp;      
 }
