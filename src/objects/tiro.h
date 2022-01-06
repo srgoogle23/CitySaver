@@ -3,12 +3,15 @@ void finalizaTiro();
 void teclasTiro(int tecla, int tipoEvento);
 void calculaMovimentoTiro();
 void redesenhaTiro();
+void mudaAnimacaoTiro(int i);
 
 struct Tiro {
     bool ativado;
     int tipo;
 	int x;
 	int y;
+    int x_inicial;
+	int y_inicial;
 	int largura;
 	int altura;
     int offset_x;
@@ -25,6 +28,8 @@ void inciarTiros()
         struct_tiro[i].tipo = 0;
         struct_tiro[i].x = 0;
         struct_tiro[i].y = 0;
+        struct_tiro[i].x_inicial = 0;
+        struct_tiro[i].y_inicial = 0;
         struct_tiro[i].largura = 0;
         struct_tiro[i].altura = 0;
         struct_tiro[i].offset_x = 0;
@@ -42,13 +47,14 @@ void disparaTiro()
         struct_tiro[filaTiros-1].tipo = 0;
         struct_tiro[filaTiros-1].x = nave_dx + 50;
         struct_tiro[filaTiros-1].y = nave_dy + 40;
+        struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
+        struct_tiro[filaTiros-1].y_inicial = struct_tiro[filaTiros-1].y;
         struct_tiro[filaTiros-1].largura = tiros_tamanho[struct_tiro[filaTiros - 1].tipo][0];
         struct_tiro[filaTiros-1].altura = tiros_tamanho[struct_tiro[filaTiros-1].tipo][1];
         struct_tiro[filaTiros-1].offset_x = tiros_tamanho[struct_tiro[filaTiros-1].tipo][2];
 
         al_draw_bitmap_region(tiros, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
     }
-    printf("filaTiros: %d\n", filaTiros);
 }
 
 void calculaMovimentoTiro()
@@ -57,8 +63,40 @@ void calculaMovimentoTiro()
     {
         if (struct_tiro[i].ativado == true)
         {
+            mudaAnimacaoTiro(i);
             struct_tiro[i].x += struct_tiro[i].velocidade;
+            struct_tiro[i].largura = tiros_tamanho[struct_tiro[i].tipo][0];
+            struct_tiro[i].altura = tiros_tamanho[struct_tiro[i].tipo][1];
+            struct_tiro[i].offset_x = tiros_tamanho[struct_tiro[i].tipo][2];
         }
+    }
+}
+
+void mudaAnimacaoTiro(int i)
+{
+    if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 50)
+    {
+        struct_tiro[i].tipo = 0;
+    }
+    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 100)
+    {
+        struct_tiro[i].tipo = 1;
+    }
+    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 150)
+    {
+        struct_tiro[i].tipo = 2;
+    }
+    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 200)
+    {
+        struct_tiro[i].tipo = 3;
+    }
+    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 250)
+    {
+        struct_tiro[i].tipo = 4;
+    }
+    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 300)
+    {
+        struct_tiro[i].tipo = 5;
     }
 }
 
@@ -70,11 +108,12 @@ void redesenhaTiro()
         disparaTiro();
     }
 
+    calculaMovimentoTiro();
+
     for (int i = 0; i < quantidadeTiros; i++)
     {
         if (struct_tiro[i].ativado == true)
         {
-            struct_tiro[i].x += struct_tiro[i].velocidade;
             al_draw_bitmap_region(tiros, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
         }
     }
