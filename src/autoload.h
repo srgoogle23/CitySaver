@@ -7,12 +7,18 @@
 
 // includes nativos
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+
+// includes de utilidades
+#include "utilities/rand.h"
 
 // includes de configurações
 #include "config/config.h"
 
 // includes de objetos
 #include "objects/nave.h"
+#include "objects/asteroid.h"
 #include "objects/tela.h"
 
 // includes de eventos

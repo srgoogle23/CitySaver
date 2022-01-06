@@ -3,6 +3,7 @@ void iniciaNave();
 void finalizaNave();
 void teclasMovimentoNave(int tecla, int tipoEvento);
 void calculaMovimentoNave();
+void redesenhaNave();
 
 void iniciaNave()
 {
@@ -86,4 +87,10 @@ void calculaMovimentoNave()
 	{
 		nave_dx += movimentacaoNave;
 	}
+}
+
+void redesenhaNave()
+{
+    calculaMovimentoNave();
+    al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx, nave_dy, 0);
 }

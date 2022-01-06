@@ -1,5 +1,4 @@
 void redesenhaTela();
-void redesenhaNave();
 void redesenhaBackground();
 
 void redesenhaTela()
@@ -10,12 +9,7 @@ void redesenhaTela()
     // redesenha objetos
     redesenhaBackground();
     redesenhaNave();
-}
-
-void redesenhaNave()
-{
-    calculaMovimentoNave();
-    al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx, nave_dy, 0);
+    redesenhaAsteroids();
 }
 
 void redesenhaBackground()

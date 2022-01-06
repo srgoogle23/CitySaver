@@ -24,6 +24,7 @@ ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP *nave;
+ALLEGRO_BITMAP *arteroids;
 
 // definição de jogo
 int jogando = 1;
@@ -45,9 +46,19 @@ int limite_y_inferior = 456;
 int limite_x_direita = 876;
 int limite_y_superior = -12;
 
+// definições de asteroids
+#define quantidadeArteroids 4
+int tipo_asteroid;
+int LARGURA_ASTEROID_1 = 128, ALTURA_ASTEROID_1 = 128;
+int LARGURA_ASTEROID_2 = 128, ALTURA_ASTEROID_2 = 128;
+int LARGURA_ASTEROID_3 = 128, ALTURA_ASTEROID_3 = 128;
+int LARGURA_ASTEROID_4 = 128, ALTURA_ASTEROID_4 = 128;
+int VELOCIDADE_ASTEROID_1 = 1, VELOCIDADE_ASTEROID_2 = 2, VELOCIDADE_ASTEROID_3 = 3, VELOCIDADE_ASTEROID_4 = 4;
+
 int iniciarAllegro();
 int finalizaAllegro();
 void iniciarBackground();
+void finalizaBackground();
 
 int iniciarAllegro()
 {
@@ -138,6 +149,9 @@ int iniciarAllegro()
     // incia a nave
     nave = al_load_bitmap(nave_local);
 
+	// inicia os asteroids
+	arteroids = al_load_bitmap("src/images/asteroids.png");
+
     // atualiza a tela
     al_flip_display();
 
@@ -158,4 +172,9 @@ void iniciarBackground()
     // define o background
     background = al_load_bitmap(background_local);
     al_draw_bitmap(background, 0, 0, 0);
+}
+
+void finalizaBackground()
+{
+    al_destroy_bitmap(background); 
 }
