@@ -4,6 +4,7 @@ const int SCREEN_W = 960;
 const int SCREEN_H = 540;
 const int NAVE_W = 100;
 const int NAVE_H = 100;
+const bool DEBUG = false;
 
 // fontes
 const char fonte_local[] = "src/fonts/arial.TTF";

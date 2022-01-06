@@ -5,12 +5,18 @@ void eventosDeTemporizador()
 {
 	if(ev.type == ALLEGRO_EVENT_TIMER)
 	{
+		// redesenha objetos na tela
 		redesenhaTela();
+
 		//atualiza a tela (quando houver algo para mostrar)
 		al_flip_display();
 
-		// mostra os segundos se passando ao longo do jogo
-		mostrarSegundosPassando();
+		if(DEBUG == true)
+		{
+			// mostra os segundos se passando ao longo do jogo
+			mostrarSegundosPassando();
+		}
+		
 	}
 }
 
