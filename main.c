@@ -1,8 +1,5 @@
 #include "src/autoload.h"
 
-void redesenhaTela();
-void calculaMovimentoNave();
-
 int main(int argc, char **argv)
 {
 	iniciarAllegro();
@@ -36,14 +33,4 @@ int main(int argc, char **argv)
     finalizaNave();
 	
     return 0;
-}
-
-void redesenhaTela()
-{
-	calculaMovimentoNave();
-
-	al_clear_to_color(al_map_rgb(0, 0, 0));
-	al_draw_bitmap(background, 0, 0, 0);
-	al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx, nave_dy, 0);
-	al_flip_display();
 }

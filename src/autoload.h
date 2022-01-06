@@ -13,6 +13,7 @@
 
 // includes de objetos
 #include "objects/nave.h"
+#include "objects/tela.h"
 
 // includes de eventos
 #include "events/mouse.h"
