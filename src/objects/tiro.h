@@ -7,9 +7,11 @@ void mudaAnimacaoTiro(int i);
 void verificaSeOTiroEstaNaTela(int i);
 int verificaSeTodosOsTirosEstaoDesativados();
 void limpaTiros();
+void colisaoTiros(int j);
 
 struct Tiro {
     bool ativado;
+    bool colisao;
     int tipo;
 	int x;
 	int y;
@@ -28,6 +30,7 @@ void inciarTiros()
     for (int i = 0; i < quantidadeTiros; i++)
     {
         struct_tiro[i].ativado = false;
+        struct_tiro[i].colisao = false;
         struct_tiro[i].tipo = 0;
         struct_tiro[i].x = 0;
         struct_tiro[i].y = 0;
@@ -47,6 +50,7 @@ void disparaTiro()
         filaTiros++;
 
         struct_tiro[filaTiros-1].ativado = true;
+        struct_tiro[filaTiros-1].colisao = false;
         struct_tiro[filaTiros-1].tipo = 0;
         struct_tiro[filaTiros-1].x = nave_dx + 50;
         struct_tiro[filaTiros-1].y = nave_dy + 40;
@@ -74,7 +78,8 @@ void calculaMovimentoTiro()
     for (int i = 0; i < quantidadeTiros; i++)
     {
         verificaSeOTiroEstaNaTela(i);
-        if (struct_tiro[i].ativado == true)
+        colisaoTiros(i);
+        if (struct_tiro[i].ativado == true && struct_tiro[i].colisao == false)
         {
             mudaAnimacaoTiro(i);
             struct_tiro[i].x += struct_tiro[i].velocidade;
@@ -85,11 +90,31 @@ void calculaMovimentoTiro()
     }
 }
 
+void colisaoTiros(int j)
+{
+    if (struct_tiro[j].ativado == true)
+    {
+        //verifica se o tiro colidiu com algum asteroide
+        for(int i = 0; i < quantidadeArteroids; i++)
+        {
+            if(asteroid[i].x + tamanho_sprite_asteroid >= struct_tiro[j].x && asteroid[i].x <= struct_tiro[j].x + struct_tiro[j].largura)
+            {
+                if(asteroid[i].y + tamanho_sprite_asteroid >= struct_tiro[j].y  && asteroid[i].y <= struct_tiro[j].y + struct_tiro[j].altura)
+                {
+                    //se o tiro com o asteroide, atualiza o valor da colisão
+                    struct_tiro[j].colisao = true;
+                }
+            }
+        }
+    }
+}
+
 void limpaTiros()
 {
     for (int i = 0; i < quantidadeTiros; i++)
     {
         struct_tiro[i].ativado = false;
+        struct_tiro[i].colisao = false;
         struct_tiro[i].tipo = 0;
         struct_tiro[i].x = 0;
         struct_tiro[i].y = 0;
