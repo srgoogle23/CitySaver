@@ -10,6 +10,7 @@ void redesenhaTela()
     redesenhaBackground();
     redesenhaNave();
     redesenhaAsteroids();
+    redesenhaTiro();
 }
 
 void redesenhaBackground()

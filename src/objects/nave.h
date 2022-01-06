@@ -95,7 +95,7 @@ void redesenhaNave()
 {
     calculaMovimentoNave();
 	colisaoNave();
-
+	
 	if(colisao)
 	{
 		animacaoExplosaoNave();

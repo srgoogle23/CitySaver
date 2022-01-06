@@ -6,6 +6,7 @@ int main(int argc, char **argv)
 	iniciarAllegro();
     iniciaNave();
 	iniciaAsteroids();
+	inciarTiros();
 
 	// loop principal
 	while(jogando)
@@ -30,6 +31,7 @@ int main(int argc, char **argv)
 	finalizaBackground();
 	finalizaNave();
 	finalizaAsteroids();
+	finalizaTiro();
 	finalizaAllegro();
 	
     return 0;

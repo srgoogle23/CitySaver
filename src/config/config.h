@@ -6,15 +6,15 @@ const int NAVE_W = 100;
 const int NAVE_H = 100;
 const bool DEBUG = false;
 
+// imagens
+const char background_local[] = "src/images/background.jpg";
+const char nave_local[] = "src/images/nave.png";
+const char asteroids_local[] = "src/images/asteroids.png";
+const char tiros_local[] = "src/images/shoots.png";
+
 // fontes
 const char fonte_local[] = "src/fonts/arial.TTF";
 const int tamanho_fonte = 36;
-
-// background
-const char background_local[] = "src/images/background.jpg";
-
-// sprites da nave
-const char nave_local[] = "src/images/nave.png";
 
 // variaveis globais allegro
 ALLEGRO_DISPLAY *display = NULL;
@@ -25,6 +25,7 @@ ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
+ALLEGRO_BITMAP *tiros;
 
 // definição de jogo
 int jogando = 1;
@@ -65,6 +66,21 @@ const int limite_x_esquerda_asteroids = 0;
 const int limite_y_inferior_asteroids  = 418;
 const int limite_x_direita_asteroids  = 830;
 const int limite_y_superior_asteroids  = 0;
+
+// definições de tiros
+// [6] => tipos de tiros | [3] => tamanho width, height do sprite, offsex x
+#define quantidadeTiros 100
+const int tiros_tamanho[6][3] = {
+	{40, 22, 70},
+	{40, 22, 110},
+	{40, 22, 150},
+	{40, 22, 190},
+	{35, 22, 37},
+	{35, 22, 0}
+};
+bool tiroTecla = false;
+int filaTiros = 0;
+const int velocidadeTiroSimples = 5;
 
 int iniciarAllegro();
 int finalizaAllegro();
@@ -161,7 +177,10 @@ int iniciarAllegro()
     nave = al_load_bitmap(nave_local);
 
 	// inicia os asteroids
-	arteroids = al_load_bitmap("src/images/asteroids.png");
+	arteroids = al_load_bitmap(asteroids_local);
+
+	// inicia os tiros
+	tiros = al_load_bitmap(tiros_local);
 
     // atualiza a tela
     al_flip_display();
