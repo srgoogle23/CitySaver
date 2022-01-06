@@ -1,6 +1,9 @@
 # Visual Studio Code
 *.vscode/
 
+# Compilador Automático
+compilar.bat
+
 # Prerequisites
 *.d
 

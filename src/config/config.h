@@ -11,6 +11,7 @@ const char background_local[] = "src/images/background.jpg";
 const char nave_local[] = "src/images/nave.png";
 const char asteroids_local[] = "src/images/asteroids.png";
 const char tiros_local[] = "src/images/shoots.png";
+const char explosao_local[] = "src/images/explosao.png";
 
 // fontes
 const char fonte_local[] = "src/fonts/arial.TTF";
@@ -26,6 +27,7 @@ ALLEGRO_BITMAP* background;
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
 ALLEGRO_BITMAP *tiros;
+ALLEGRO_BITMAP *explosao;
 
 // definição de jogo
 int jogando = 1;
@@ -81,6 +83,18 @@ const int tiros_tamanho[6][3] = {
 bool tiroTecla = false;
 int filaTiros = 0;
 const int velocidadeTiroSimples = 5;
+
+// definições de explosao
+const int explosao_tamanho[8][4] = {
+	{256, 256, 0, 0},
+	{300, 256, 256, 0},
+	{300, 300, 556, 0},
+	{325, 300, 856, 0},
+	{256, 400, 0, 400},
+	{300, 256, 256, 400},
+	{256, 256, 556, 400},
+	{256, 256, 856, 400}
+};
 
 int iniciarAllegro();
 int finalizaAllegro();
@@ -181,6 +195,9 @@ int iniciarAllegro()
 
 	// inicia os tiros
 	tiros = al_load_bitmap(tiros_local);
+
+	// incia as explosoes
+	explosao = al_load_bitmap(explosao_local);
 
     // atualiza a tela
     al_flip_display();

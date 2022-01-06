@@ -32,6 +32,7 @@ int main(int argc, char **argv)
 	finalizaNave();
 	finalizaAsteroids();
 	finalizaTiro();
+	finalizaExplosao();
 	finalizaAllegro();
 	
     return 0;

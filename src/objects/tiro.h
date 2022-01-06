@@ -8,6 +8,8 @@ void verificaSeOTiroEstaNaTela(int i);
 int verificaSeTodosOsTirosEstaoDesativados();
 void limpaTiros();
 void colisaoTiros(int j);
+void animacaoExplosao(int i);
+void finalizaExplosao();
 
 struct Tiro {
     bool ativado;
@@ -177,7 +179,9 @@ void mudaAnimacaoTiro(int i)
 
 void redesenhaTiro()
 {
-    if(tiroTecla)
+    //al_draw_bitmap_region(explosao, explosao_tamanho[leo][2], explosao_tamanho[leo][3], explosao_tamanho[leo][0], explosao_tamanho[leo][1], nave_dx, nave_dy, 0);
+
+    if (tiroTecla)
     {
         tiroTecla = false;
         disparaTiro();
@@ -187,11 +191,19 @@ void redesenhaTiro()
 
     for (int i = 0; i < quantidadeTiros; i++)
     {
-        if (struct_tiro[i].ativado == true)
+        if (struct_tiro[i].ativado == true && struct_tiro[i].colisao == false)
         {
             al_draw_bitmap_region(tiros, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
+        }else if(struct_tiro[i].colisao == true)
+        {
+            animacaoExplosao(i);
         }
     }
+}
+
+void animacaoExplosao(int i)
+{
+
 }
 
 void teclasTiro(int tecla, int tipoEvento)
@@ -223,4 +235,9 @@ void teclasTiro(int tecla, int tipoEvento)
 void finalizaTiro()
 {
     al_destroy_bitmap(tiros);
+}
+
+void finalizaExplosao()
+{
+    al_destroy_bitmap(explosao);
 }
