@@ -26,6 +26,10 @@ ALLEGRO_BITMAP *nave;
 int jogando = 1;
 int nave_dx = 20;
 int nave_dy = 0;
+bool move_up = false;
+bool move_down = false;
+bool move_left = false;
+bool move_right = false;
 
 int iniciarAllegro();
 int finalizaAllegro();

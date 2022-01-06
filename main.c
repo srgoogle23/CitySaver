@@ -1,6 +1,7 @@
 #include "src/autoload.h"
 
-void atualizatela(int c);
+void redesenhaTela();
+void calculaMovimentoNave();
 
 int main(int argc, char **argv)
 {
@@ -27,10 +28,8 @@ int main(int argc, char **argv)
 		//se o tipo de evento for um pressionar de uma tecla
 		eventoPressionarTecla();
 
-        atualizatela(c);
-
-        c += 1;
-    }
+		redesenhaTela();
+	}
 
     // execuções de finalizações
 	finalizaAllegro();
@@ -39,10 +38,32 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void atualizatela( int c)
+void redesenhaTela()
 {
-        al_clear_to_color(al_map_rgb(0,0,0));
-        al_draw_bitmap(background, 0, 0, 0);
-        al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx+c, nave_dy, 0);
-        al_flip_display();
+	calculaMovimentoNave();
+
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	al_draw_bitmap(background, 0, 0, 0);
+	al_draw_bitmap_region(nave, 0, 0, 100, 100, nave_dx, nave_dy, 0);
+	al_flip_display();
+}
+
+void calculaMovimentoNave()
+{
+	if(move_up)
+	{
+		nave_dy -= 4;
+	}
+	else if(move_down)
+	{
+		nave_dy += 4;
+	}
+	else if(move_left)
+	{
+		nave_dx -= 4;
+	}
+	else if(move_right)
+	{
+		nave_dx += 4;
+	}
 }
