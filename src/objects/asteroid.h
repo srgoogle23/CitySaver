@@ -7,11 +7,11 @@ void reposicionaAsteroid(int indice);
 struct Asteroid {
 	bool colisao;
 	int tipo;
-	int x;
-	int y;
+	double x;
+	double y;
 	int largura;
 	int altura;
-	float velocidade;
+	double velocidade;
 };
 
 struct Asteroid asteroid[quantidadeArteroids];

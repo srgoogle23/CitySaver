@@ -9,11 +9,11 @@ struct Background {
     ALLEGRO_BITMAP* background;
     ALLEGRO_BITMAP* background_2;
 	int tipo;
-    float x;
-	float y;
-    float dx;
-	float dy;
-	float velocidade;
+    double x;
+	double y;
+    double dx;
+	double dy;
+	double velocidade;
 };
 
 struct Background background[quantidadeBackground];
