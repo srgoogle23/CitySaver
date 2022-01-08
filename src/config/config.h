@@ -7,13 +7,16 @@ const int NAVE_H = 100;
 const bool DEBUG = false;
 
 // imagens
-const char background_local[] = "src/images/bg/01/sky.png";
-const char background_2_local[] = "src/images/bg/01/clouds_bg.png";
-const char background_3_local[] = "src/images/bg/01/cloud_lonely.png";
-const char background_4_local[] = "src/images/bg/01/glacial_mountains.png";
-const char background_5_local[] = "src/images/bg/01/clouds_mg_3.png";
-const char background_6_local[] = "src/images/bg/01/clouds_mg_2.png";
-const char background_7_local[] = "src/images/bg/01/clouds_mg_1.png";
+const char *background_local[7] = {
+	"src/images/bg/01/sky.png",
+	"src/images/bg/01/clouds_bg.png",
+	"src/images/bg/01/cloud_lonely.png",
+	"src/images/bg/01/glacial_mountains.png",
+	"src/images/bg/01/clouds_mg_3.png",
+	"src/images/bg/01/clouds_mg_2.png",
+	"src/images/bg/01/clouds_mg_1.png"
+};
+
 const char nave_local[] = "src/images/nave.png";
 const char asteroids_local[] = "src/images/asteroids.png";
 const char tiros_local[] = "src/images/shoots.png";
@@ -29,13 +32,6 @@ ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_EVENT ev;
-ALLEGRO_BITMAP* background; // sky.png => ceu azul
-ALLEGRO_BITMAP* background_2; // clouds_bg.png => nuvens de fundo
-ALLEGRO_BITMAP* background_3; // cloud_lonely.png => nuvens solitarias
-ALLEGRO_BITMAP* background_4; // glacial_mountains.png => montanhas geladas
-ALLEGRO_BITMAP* background_5; // clouds_mg_3.png => nuvens de meio-gravidade
-ALLEGRO_BITMAP* background_6; // clouds_mg_2.png => nuvens de meio-gravidade
-ALLEGRO_BITMAP* background_7; // clouds_mg_1.png => nuvens de meio-gravidade
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
 ALLEGRO_BITMAP *tiros;
@@ -108,11 +104,12 @@ const int explosao_tamanho[8][4] = {
 	{256, 256, 856, 400}
 };
 
+// definições do background
+#define quantidadeBackground 7
+
 // declarando funções
 int iniciarAllegro();
 int finalizaAllegro();
-void iniciarBackground();
-void finalizaBackground();
 ALLEGRO_BITMAP *load_bitmap_at_size(const char *filename, int w, int h);
 
 int iniciarAllegro()
@@ -198,9 +195,6 @@ int iniciarAllegro()
     // Dá nome a janela
     al_set_window_title(display, "R-Type | Leonardo Oliveira");
 
-    //carrega a imagem de fundo
-    iniciarBackground();
-
     // incia a nave
     nave = al_load_bitmap(nave_local);
 
@@ -226,37 +220,6 @@ int finalizaAllegro()
     al_destroy_timer(timer);
 	al_destroy_display(display);
 	al_destroy_event_queue(event_queue);
-}
-
-void iniciarBackground()
-{
-    // define o background
-    background 	 = load_bitmap_at_size(background_local, SCREEN_W, SCREEN_H);
-	background_2 = load_bitmap_at_size(background_2_local, SCREEN_W, SCREEN_H);
-	background_3 = load_bitmap_at_size(background_3_local, SCREEN_W, SCREEN_H);
-	background_4 = load_bitmap_at_size(background_4_local, SCREEN_W, SCREEN_H);
-	background_5 = load_bitmap_at_size(background_5_local, SCREEN_W, SCREEN_H);
-	background_6 = load_bitmap_at_size(background_6_local, SCREEN_W, SCREEN_H);
-	background_7 = load_bitmap_at_size(background_7_local, SCREEN_W, SCREEN_H);
-
-    al_draw_bitmap(background, 0, 0, 0);
-	al_draw_bitmap(background_2, 0, 0, 0);
-	al_draw_bitmap(background_3, 0, 0, 0);
-	al_draw_bitmap(background_4, 0, 0, 0);
-	al_draw_bitmap(background_5, 0, 0, 0);
-	al_draw_bitmap(background_6, 0, 0, 0);
-	al_draw_bitmap(background_7, 0, 0, 0);
-}
-
-void finalizaBackground()
-{
-    al_destroy_bitmap(background);
-	al_destroy_bitmap(background_2); 
-	al_destroy_bitmap(background_3);
-	al_destroy_bitmap(background_4);
-	al_destroy_bitmap(background_5);
-	al_destroy_bitmap(background_6);
-	al_destroy_bitmap(background_7);   
 }
 
 ALLEGRO_BITMAP *load_bitmap_at_size(const char *filename, int w, int h)

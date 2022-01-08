@@ -4,7 +4,8 @@ int main(int argc, char **argv)
 {
 	srand ( time(NULL) );
 	iniciarAllegro();
-    iniciaNave();
+	iniciarBackground();
+	iniciaNave();
 	iniciaAsteroids();
 	inciarTiros();
 
