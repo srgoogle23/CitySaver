@@ -9,8 +9,8 @@ const bool DEBUG = false;
 // imagens
 const char *background_local[7] = {
 	"src/images/bg/01/sky.png",
-	"src/images/bg/01/clouds_bg.png",
 	"src/images/bg/01/cloud_lonely.png",
+	"src/images/bg/01/clouds_bg.png",
 	"src/images/bg/01/glacial_mountains.png",
 	"src/images/bg/01/clouds_mg_3.png",
 	"src/images/bg/01/clouds_mg_2.png",
