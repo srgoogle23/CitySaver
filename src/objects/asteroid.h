@@ -3,6 +3,7 @@ void calculaAsteroids();
 void redesenhaAsteroids();
 void movimentacaoAsteroid(int indice, int tipo);
 void reposicionaAsteroid(int indice);
+bool verificaSeVaiColidirComAlgumAsteroid(int indice);
 
 struct Asteroid {
 	bool colisao;
@@ -45,6 +46,7 @@ void calculaAsteroids()
 {
     for (int i = 0; i < quantidadeArteroids; i++)
 	{
+		do{
 		tipo_asteroid = randInt(4);
 		asteroid[i].colisao = false;
 		if (tipo_asteroid == 0)
@@ -83,7 +85,65 @@ void calculaAsteroids()
 			asteroid[i].altura = ALTURA_ASTEROID_4;
 			asteroid[i].velocidade = VELOCIDADE_ASTEROID_4;
 		}
+		}while(verificaSeVaiColidirComAlgumAsteroid(i));
 	}
+}
+
+
+bool verificaSeVaiColidirComAlgumAsteroid(int indice)
+{
+	bool colisaoEntreAsteroids = false;
+
+	// verifica se os arteroids já não colidiram
+	for (int i = 0; i < quantidadeArteroids; i++)
+	{
+		if (i != indice && asteroid[i].colisao == false && asteroid[indice].colisao == false)
+		{
+			if (asteroid[i].x < asteroid[indice].x + asteroid[indice].largura && asteroid[i].x + asteroid[i].largura > asteroid[indice].x && asteroid[i].y < asteroid[indice].y + asteroid[indice].altura && asteroid[i].y + asteroid[i].altura > asteroid[indice].y)
+			{
+				colisaoEntreAsteroids = true;
+			}
+		}
+	}
+
+	// se não tiverem colido, calcula se irão colidir
+	if(colisaoEntreAsteroids == false)
+	{
+		for (int i = 0; i < quantidadeArteroids; i++)
+		{
+			// se o asteroid analisado nao for o mesmo
+			// e ambos estiverem com colisão false
+			if (i != indice && asteroid[i].colisao == false && asteroid[indice].colisao == false)
+			{
+				if(asteroid[i].y < asteroid[indice].y + asteroid[indice].altura && asteroid[i].y + asteroid[i].altura > asteroid[indice].y)
+				{
+					/*
+						S(t) = So + v * t
+
+						S(t) = asteroid[i].x + asteroid[i].velocidade * t
+						S(t) = asteroid[indice].x + asteroid[indice].velocidade * t
+
+						asteroid[i].x + asteroid[i].velocidade * t = asteroid[indice].x + asteroid[indice].velocidade * t
+						asteroid[i].x - asteroid[indice].x = (asteroid[i].velocidade - asteroid[indice].velocidade) * t
+						t = (asteroid[i].x - asteroid[indice].x) / (asteroid[i].velocidade - asteroid[indice].velocidade)
+
+						como asteroid[indice].x nas chamadas dessa função sempre será SCREEN_W, considerado o zero da direita para a esquerda,:
+						
+						t = (asteroid[i].x) / (asteroid[i].velocidade - asteroid[indice].velocidade)
+					*/
+					double tempo_de_colisao = fabs(asteroid[i].x / (asteroid[i].velocidade - asteroid[indice].velocidade));
+					tempo_de_colisao = tempo_de_colisao / FPS;
+					double posicaoColisao = (asteroid[indice].velocidade * tempo_de_colisao) + asteroid[indice].x;
+					
+					if(posicaoColisao > 0)
+					{
+						colisaoEntreAsteroids = true;
+					}
+				}
+			}
+		}
+	}
+	return colisaoEntreAsteroids;
 }
 
 void redesenhaAsteroids()
@@ -146,8 +206,11 @@ void reposicionaAsteroid(int indice)
 {
 	if(asteroid[indice].x < (-1 * tamanho_sprite_asteroid))
 	{
-		asteroid[indice].x = SCREEN_W;
-		asteroid[indice].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
+		do
+		{
+			asteroid[indice].x = SCREEN_W;
+			asteroid[indice].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
+		} while (verificaSeVaiColidirComAlgumAsteroid(indice) == true);
 	}
 }
 

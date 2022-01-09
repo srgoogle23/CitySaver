@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include <math.h>
 
 // includes de utilidades
 #include "utilities/rand.h"

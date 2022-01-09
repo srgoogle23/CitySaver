@@ -62,7 +62,7 @@ const int limite_x_direita_nave  = 876;
 const int limite_y_superior_nave  = -12;
 
 // definições de asteroids
-#define quantidadeArteroids 2
+#define quantidadeArteroids 3
 const int tamanho_sprite_asteroid = 128;
 int tipo_asteroid;
 int LARGURA_ASTEROID_1 = 128, ALTURA_ASTEROID_1 = 128;
