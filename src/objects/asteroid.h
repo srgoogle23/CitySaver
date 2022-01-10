@@ -13,6 +13,9 @@ struct Asteroid {
 	int largura;
 	int altura;
 	double velocidade;
+	bool status;
+	int tentativas;
+	int tempoTentativas;
 };
 
 struct Asteroid asteroid[quantidadeArteroids];
@@ -46,45 +49,51 @@ void calculaAsteroids()
 {
     for (int i = 0; i < quantidadeArteroids; i++)
 	{
-		do{
 		tipo_asteroid = randInt(4);
 		asteroid[i].colisao = false;
-		if (tipo_asteroid == 0)
-		{
-			asteroid[i].tipo = 1;
-			asteroid[i].x = SCREEN_W;
-			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
-			asteroid[i].largura = LARGURA_ASTEROID_1;
-			asteroid[i].altura = ALTURA_ASTEROID_1;
-			asteroid[i].velocidade = VELOCIDADE_ASTEROID_1;
-		}
-		else if (tipo_asteroid == 1)
-		{
-			asteroid[i].tipo = 2;
-			asteroid[i].x = SCREEN_W;
-			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
-			asteroid[i].largura = LARGURA_ASTEROID_2;
-			asteroid[i].altura = ALTURA_ASTEROID_2;
-			asteroid[i].velocidade = VELOCIDADE_ASTEROID_2;
-		}
-		else  if (tipo_asteroid == 2)
-		{
-			asteroid[i].tipo = 3;
-			asteroid[i].x = SCREEN_W;
-			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
-			asteroid[i].largura = LARGURA_ASTEROID_3;
-			asteroid[i].altura = ALTURA_ASTEROID_3;
-			asteroid[i].velocidade = VELOCIDADE_ASTEROID_3;
-		}
-		else
-		{
-			asteroid[i].tipo = 4;
-			asteroid[i].x = SCREEN_W;
-			asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
-			asteroid[i].largura = LARGURA_ASTEROID_4;
-			asteroid[i].altura = ALTURA_ASTEROID_4;
-			asteroid[i].velocidade = VELOCIDADE_ASTEROID_4;
-		}
+		asteroid[i].status = true;
+		do{
+			if(al_get_timer_count(timer) < asteroid[i].tempoTentativas)
+			{
+				break;
+			}
+
+			if (tipo_asteroid == 0)
+			{
+				asteroid[i].tipo = 1;
+				asteroid[i].x = SCREEN_W;
+				asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
+				asteroid[i].largura = LARGURA_ASTEROID_1;
+				asteroid[i].altura = ALTURA_ASTEROID_1;
+				asteroid[i].velocidade = VELOCIDADE_ASTEROID_1;
+			}
+			else if (tipo_asteroid == 1)
+			{
+				asteroid[i].tipo = 2;
+				asteroid[i].x = SCREEN_W;
+				asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
+				asteroid[i].largura = LARGURA_ASTEROID_2;
+				asteroid[i].altura = ALTURA_ASTEROID_2;
+				asteroid[i].velocidade = VELOCIDADE_ASTEROID_2;
+			}
+			else  if (tipo_asteroid == 2)
+			{
+				asteroid[i].tipo = 3;
+				asteroid[i].x = SCREEN_W;
+				asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
+				asteroid[i].largura = LARGURA_ASTEROID_3;
+				asteroid[i].altura = ALTURA_ASTEROID_3;
+				asteroid[i].velocidade = VELOCIDADE_ASTEROID_3;
+			}
+			else
+			{
+				asteroid[i].tipo = 4;
+				asteroid[i].x = SCREEN_W;
+				asteroid[i].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
+				asteroid[i].largura = LARGURA_ASTEROID_4;
+				asteroid[i].altura = ALTURA_ASTEROID_4;
+				asteroid[i].velocidade = VELOCIDADE_ASTEROID_4;
+			}
 		}while(verificaSeVaiColidirComAlgumAsteroid(i));
 	}
 }
@@ -94,10 +103,38 @@ bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 {
 	bool colisaoEntreAsteroids = false;
 
+	// se o asteroide está ativo
+	if(asteroid[indice].status == true)
+	{
+		// verifica se o numero de tentativas ja saiu do limite
+		if(asteroid[indice].tentativas >= 5)
+		{
+			asteroid[indice].status = false;
+			asteroid[indice].tempoTentativas = al_get_timer_count(timer) + (FPS * 2);
+
+			return false;
+		}
+	}
+	else
+	{
+		// verifica se ja passou o tempo para tentar novamente
+		if(al_get_timer_count(timer) > asteroid[indice].tempoTentativas)
+		{
+			asteroid[indice].status = true;
+			asteroid[indice].tentativas = 0;
+			asteroid[indice].tempoTentativas = 0;
+		}
+		else
+		{
+			// se não passou, retorna false para não tentar novamente nessa mesa execução de código
+			return false;
+		}
+	}
+	
 	// verifica se os arteroids já não colidiram
 	for (int i = 0; i < quantidadeArteroids; i++)
 	{
-		if (i != indice && asteroid[i].colisao == false && asteroid[indice].colisao == false)
+		if (i != indice && asteroid[i].colisao == false && asteroid[indice].colisao == false && asteroid[indice].status == true && asteroid[i].status == true)
 		{
 			if (asteroid[i].x < asteroid[indice].x + asteroid[indice].largura && asteroid[i].x + asteroid[i].largura > asteroid[indice].x && asteroid[i].y < asteroid[indice].y + asteroid[indice].altura && asteroid[i].y + asteroid[i].altura > asteroid[indice].y)
 			{
@@ -113,7 +150,7 @@ bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 		{
 			// se o asteroid analisado nao for o mesmo
 			// e ambos estiverem com colisão false
-			if (i != indice && asteroid[i].colisao == false && asteroid[indice].colisao == false)
+			if (i != indice && asteroid[i].colisao == false && asteroid[indice].colisao == false && asteroid[indice].status == true && asteroid[i].status == true)
 			{
 				if(asteroid[i].y < asteroid[indice].y + asteroid[indice].altura && asteroid[i].y + asteroid[i].altura > asteroid[indice].y)
 				{
@@ -143,6 +180,9 @@ bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 			}
 		}
 	}
+	
+	asteroid[indice].tentativas++;
+
 	return colisaoEntreAsteroids;
 }
 
@@ -152,7 +192,7 @@ void redesenhaAsteroids()
 	{
 		movimentacaoAsteroid(i, asteroid[i].tipo);
 
-		if(asteroid[i].colisao == false)
+		if(asteroid[i].colisao == false &&  asteroid[i].status == true)
 		{
 			if(asteroid[i].tipo == 1)
 			{
@@ -173,7 +213,7 @@ void redesenhaAsteroids()
 		}
 		else
 		{
-			asteroid[i].x = (-2 * tamanho_sprite_asteroid);
+			asteroid[i].x = (-1 * randIntMinMax(2, 10) * tamanho_sprite_asteroid);
 			asteroid[i].colisao = false;
 			reposicionaAsteroid(i);
 		}
@@ -182,23 +222,25 @@ void redesenhaAsteroids()
 
 void movimentacaoAsteroid(int indice, int tipo)
 {
-	if (tipo == 1)
+	if(asteroid[indice].status == true)
 	{
-		asteroid[indice].x -= asteroid[indice].velocidade;
+		if (tipo == 1)
+		{
+			asteroid[indice].x -= asteroid[indice].velocidade;
+		}
+		else if (tipo == 2)
+		{
+			asteroid[indice].x -= asteroid[indice].velocidade;
+		}
+		else if (tipo == 3)
+		{
+			asteroid[indice].x -= asteroid[indice].velocidade;
+		}
+		else if (tipo == 4)
+		{
+			asteroid[indice].x -= asteroid[indice].velocidade;
+		}
 	}
-	else if (tipo == 2)
-	{
-		asteroid[indice].x -= asteroid[indice].velocidade;
-	}
-	else if (tipo == 3)
-	{
-		asteroid[indice].x -= asteroid[indice].velocidade;
-	}
-	else if (tipo == 4)
-	{
-		asteroid[indice].x -= asteroid[indice].velocidade;
-	}
-
 	reposicionaAsteroid(indice);
 }
 
@@ -208,6 +250,10 @@ void reposicionaAsteroid(int indice)
 	{
 		do
 		{
+			if(al_get_timer_count(timer) < asteroid[indice].tempoTentativas)
+			{
+				break;
+			}
 			asteroid[indice].x = SCREEN_W;
 			asteroid[indice].y = randIntMinMax(limite_y_superior_asteroids, limite_y_inferior_asteroids);
 		} while (verificaSeVaiColidirComAlgumAsteroid(indice) == true);
