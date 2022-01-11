@@ -356,35 +356,35 @@ void animacaoTiroIniciando()
 
 void animacaoExplosao(int i)
 {
-    if(struct_tiro[i].timerExplosao < 10)
+    if(struct_tiro[i].timerExplosao < 5)
     {
        al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
-    else if(struct_tiro[i].timerExplosao < 20)
+    else if(struct_tiro[i].timerExplosao < 10)
     {
         al_draw_bitmap_region(explosao, explosao_tamanho[1][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[1][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
-    else if(struct_tiro[i].timerExplosao < 30)
+    else if(struct_tiro[i].timerExplosao < 15)
     {
         al_draw_bitmap_region(explosao, explosao_tamanho[2][2], explosao_tamanho[2][3], explosao_tamanho[2][0], explosao_tamanho[2][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
-    else if(struct_tiro[i].timerExplosao < 40)
+    else if(struct_tiro[i].timerExplosao < 20)
     {
         al_draw_bitmap_region(explosao, explosao_tamanho[3][2], explosao_tamanho[3][3], explosao_tamanho[3][0], explosao_tamanho[3][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
-    else if(struct_tiro[i].timerExplosao < 50)
+    else if(struct_tiro[i].timerExplosao < 25)
     {
         al_draw_bitmap_region(explosao, explosao_tamanho[4][2], explosao_tamanho[4][3], explosao_tamanho[4][0], explosao_tamanho[4][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
-    else if(struct_tiro[i].timerExplosao < 60)
+    else if(struct_tiro[i].timerExplosao < 30)
     {
         al_draw_bitmap_region(explosao, explosao_tamanho[5][2], explosao_tamanho[5][3], explosao_tamanho[5][0], explosao_tamanho[5][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
-    else if(struct_tiro[i].timerExplosao < 70)
+    else if(struct_tiro[i].timerExplosao < 35)
     {
         al_draw_bitmap_region(explosao, explosao_tamanho[6][2], explosao_tamanho[6][3], explosao_tamanho[6][0], explosao_tamanho[6][1], struct_tiro[i].x, struct_tiro[i].y, 0);
     }
-    else if(struct_tiro[i].timerExplosao < 80)
+    else if(struct_tiro[i].timerExplosao < 40)
     {
         al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[7][3], explosao_tamanho[7][0], explosao_tamanho[7][1], struct_tiro[i].x, struct_tiro[i].y, 0);
         limpaTiro(i);
