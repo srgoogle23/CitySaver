@@ -7,6 +7,7 @@ void redesenhaTela()
 
     // redesenha objetos
     redesenhaBackground();
+    redesenhaBloco();
     redesenhaTiro();
     redesenhaNave();
     redesenhaAsteroids();

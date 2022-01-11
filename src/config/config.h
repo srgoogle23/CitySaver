@@ -66,7 +66,7 @@ const int limite_x_direita_nave  = 876;
 const int limite_y_superior_nave  = -12;
 
 // definições de asteroids
-#define quantidadeArteroids 8
+#define quantidadeArteroids 100
 const int tamanho_sprite_asteroid = 128;
 int tipo_asteroid;
 int LARGURA_ASTEROID_1 = 128, ALTURA_ASTEROID_1 = 128;
@@ -125,6 +125,9 @@ const int explosao_tamanho[8][4] = {
 
 // definições do background
 #define quantidadeBackground 7
+
+// definições de blocos
+double blocoAlturaMin, blocoAlturaMax, blocoLarguraMin, blocoLarguraMax;
 
 // declarando funções
 int iniciarAllegro();

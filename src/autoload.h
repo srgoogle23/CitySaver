@@ -20,6 +20,7 @@
 
 // includes de objetos
 #include "objects/background.h"
+#include "objects/bloco.h"
 #include "objects/asteroid.h"
 #include "objects/tiro.h"
 #include "objects/nave.h"

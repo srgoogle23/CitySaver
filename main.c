@@ -5,6 +5,7 @@ int main(int argc, char **argv)
 	srand ( time(NULL) );
 	iniciarAllegro();
 	iniciarBackground();
+	iniciaBloco();
 	iniciaNave();
 	iniciaAsteroids();
 	inciarTiros();
@@ -30,6 +31,7 @@ int main(int argc, char **argv)
 
     // execuções de finalizações
 	finalizaBackground();
+	finalizaBloco();
 	finalizaNave();
 	finalizaAsteroids();
 	finalizaTiro();

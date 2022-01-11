@@ -98,7 +98,6 @@ void calculaAsteroids()
 	}
 }
 
-
 bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 {
 	bool colisaoEntreAsteroids = false;
@@ -143,6 +142,31 @@ bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 		}
 	}
 
+	// verifica se os asteroids já não colidiu com um bloco
+	if (asteroid[indice].colisao == false && asteroid[indice].status == true)
+	{
+		if (asteroid[indice].x < bloco.x + bloco.largura && asteroid[indice].x + asteroid[indice].largura > bloco.x && asteroid[indice].y < bloco.y + bloco.altura && asteroid[indice].y + asteroid[indice].altura > bloco.y)
+		{
+			colisaoEntreAsteroids = true;
+		}
+	}
+
+	//verifica não tiverem colidido, se irá colidir com um bloco
+	if(colisaoEntreAsteroids == false && asteroid[indice].colisao == false && asteroid[indice].status == true)
+	{
+		if(asteroid[indice].y < bloco.y + bloco.altura && asteroid[indice].y + asteroid[indice].altura > bloco.y)
+		{
+			double tempo_de_colisao = (bloco.x - asteroid[indice].x ) / ( bloco.velocidade - asteroid[indice].velocidade );
+			double posicaoColisao = asteroid[indice].x - (asteroid[indice].velocidade * tempo_de_colisao);
+
+			// se a colisão estiver na tela ou perto dela
+			if(posicaoColisao >= -SCREEN_W && posicaoColisao <= SCREEN_W)
+			{
+				colisaoEntreAsteroids = true;
+			}
+		}
+	}
+	
 	// se não tiverem colido, calcula se irão colidir
 	if(colisaoEntreAsteroids == false)
 	{
@@ -157,22 +181,20 @@ bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 					/*
 						S(t) = So + v * t
 
-						S(t) = asteroid[i].x + asteroid[i].velocidade * t
-						S(t) = asteroid[indice].x + asteroid[indice].velocidade * t
+						Sa(t) = asteroid[i].x - asteroid[i].velocidade * t
+						Sb(t) = asteroid[indice].x - asteroid[indice].velocidade * t
 
-						asteroid[i].x + asteroid[i].velocidade * t = asteroid[indice].x + asteroid[indice].velocidade * t
-						asteroid[i].x - asteroid[indice].x = (asteroid[i].velocidade - asteroid[indice].velocidade) * t
-						t = (asteroid[i].x - asteroid[indice].x) / (asteroid[i].velocidade - asteroid[indice].velocidade)
-
-						como asteroid[indice].x nas chamadas dessa função sempre será SCREEN_W, considerado o zero da direita para a esquerda,:
-						
-						t = (asteroid[i].x) / (asteroid[i].velocidade - asteroid[indice].velocidade)
+						Sa(t)=Sb(t)
+						asteroid[i].x - asteroid[i].velocidade * t = asteroid[indice].x - asteroid[indice].velocidade * t
+						asteroid[i].x - asteroid[indice].x = asteroid[i].velocidade * t - asteroid[indice].velocidade * t
+						asteroid[i].x - asteroid[indice].x = ( asteroid[i].velocidade - asteroid[indice].velocidade ) * t
+						(asteroid[i].x - asteroid[indice].x ) / ( asteroid[i].velocidade - asteroid[indice].velocidade ) = t
 					*/
-					double tempo_de_colisao = fabs(asteroid[i].x / (asteroid[i].velocidade - asteroid[indice].velocidade));
-					tempo_de_colisao = tempo_de_colisao / FPS;
-					double posicaoColisao = (asteroid[indice].velocidade * tempo_de_colisao) + asteroid[indice].x;
-					
-					if(posicaoColisao > 0)
+					double tempo_de_colisao = (asteroid[i].x - asteroid[indice].x ) / ( asteroid[i].velocidade - asteroid[indice].velocidade );
+					double posicaoColisao = asteroid[indice].x - (asteroid[indice].velocidade * tempo_de_colisao);
+
+					// se a colisão estiver na tela ou perto dela
+					if(posicaoColisao >= -SCREEN_W && posicaoColisao <= SCREEN_W)
 					{
 						colisaoEntreAsteroids = true;
 					}
