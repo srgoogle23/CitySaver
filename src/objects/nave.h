@@ -121,6 +121,13 @@ void colisaoNave()
 			}
 		}
 	}
+
+	//verifica se a nave colidiu com algum bloco
+	if(nave_dx < bloco.x + bloco.largura && nave_dx + NAVE_W > bloco.x && nave_dy < bloco.y + bloco.altura && nave_dy + NAVE_H > bloco.y)
+	{
+		//se a nave colidiu com uma nave, atualiza o valor da colisão
+		colisao = true;
+	}
 }
 
 void animacaoExplosaoNave()
