@@ -16,6 +16,7 @@ void animacaoTiroIniciando();
 struct Tiro {
     bool ativado;
     bool colisao;
+    bool colisaoAvancada;
     int timerExplosao;
     int categoriaTiro;
     int timerTiro;
@@ -39,6 +40,7 @@ void inciarTiros()
         struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
+        struct_tiro[i].colisaoAvancada = false;
         struct_tiro[i].categoriaTiro = 0;
         struct_tiro[i].timerTiro = 0;
         struct_tiro[i].tipo = 0;
@@ -65,6 +67,7 @@ void disparaTiro()
             struct_tiro[filaTiros-1].timerExplosao = 0;
             struct_tiro[filaTiros-1].ativado = true;
             struct_tiro[filaTiros-1].colisao = false;
+            struct_tiro[filaTiros-1].colisaoAvancada = false;
             struct_tiro[filaTiros-1].categoriaTiro = 0;
             struct_tiro[filaTiros-1].timerTiro = 0;
             struct_tiro[filaTiros-1].tipo = 0;
@@ -88,6 +91,7 @@ void disparaTiro()
             struct_tiro[filaTiros-1].timerExplosao = 0;
             struct_tiro[filaTiros-1].ativado = true;
             struct_tiro[filaTiros-1].colisao = false;
+            struct_tiro[filaTiros-1].colisaoAvancada = false;
             struct_tiro[filaTiros-1].categoriaTiro = 1;
             struct_tiro[filaTiros-1].timerTiro = 0;
             struct_tiro[filaTiros-1].tipo = 0;
@@ -151,8 +155,20 @@ void colisaoTiros(int j)
                 if(asteroid[i].y + tamanho_sprite_asteroid >= struct_tiro[j].y  && asteroid[i].y <= struct_tiro[j].y + struct_tiro[j].altura)
                 {
                     //se o tiro com o asteroide, atualiza o valor da colisão
-                    struct_tiro[j].colisao = true;
-                    asteroid[i].colisao = true;
+
+                    // se o tiro for um tiro simples
+                    if(struct_tiro[j].categoriaTiro == 0)
+                    {
+                        // atualiza a colisão do asteroide e do tiro
+                        struct_tiro[j].colisao = true;
+                        asteroid[i].colisao = true;
+                    }
+                    else if(struct_tiro[j].categoriaTiro == 1) // se o tiro for um tiro avançado
+                    {
+                        // atualiza a colisão do asteroide e do tiro avançado
+                        asteroid[i].colisao = true;
+                        struct_tiro[j].colisaoAvancada = true;
+                    }
                 }
             }
         }
@@ -166,6 +182,7 @@ void limpaTiros()
         struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
+        struct_tiro[i].colisaoAvancada = false;
         struct_tiro[i].categoriaTiro = 0;
         struct_tiro[i].timerTiro = 0;
         struct_tiro[i].tipo = 0;
@@ -284,6 +301,11 @@ void redesenhaTiro()
         {
             animacaoExplosao(i);
         }
+
+        if(struct_tiro[i].colisaoAvancada == true)
+        {
+            animacaoExplosao(i);
+        }
     }
 }
 
@@ -356,38 +378,92 @@ void animacaoTiroIniciando()
 
 void animacaoExplosao(int i)
 {
-    if(struct_tiro[i].timerExplosao < 5)
+    if(struct_tiro[i].categoriaTiro == 0)
     {
-       al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        if(struct_tiro[i].timerExplosao < 5)
+        {
+        al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 10)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[1][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[1][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 15)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[2][2], explosao_tamanho[2][3], explosao_tamanho[2][0], explosao_tamanho[2][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 20)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[3][2], explosao_tamanho[3][3], explosao_tamanho[3][0], explosao_tamanho[3][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 25)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[4][2], explosao_tamanho[4][3], explosao_tamanho[4][0], explosao_tamanho[4][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 30)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[5][2], explosao_tamanho[5][3], explosao_tamanho[5][0], explosao_tamanho[5][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 35)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[6][2], explosao_tamanho[6][3], explosao_tamanho[6][0], explosao_tamanho[6][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 40)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[7][3], explosao_tamanho[7][0], explosao_tamanho[7][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+            limpaTiro(i);
+            /*
+            if(struct_tiro[i].categoriaTiro == 0)
+            {
+                limpaTiro(i);
+            }
+            else if(struct_tiro[i].categoriaTiro == 1)
+            {
+                struct_tiro[i].colisaoAvancada = false;
+                struct_tiro[i].timerExplosao = 0;
+            }
+            */
+        }
     }
-    else if(struct_tiro[i].timerExplosao < 10)
+    else if(struct_tiro[i].categoriaTiro == 1)
     {
-        al_draw_bitmap_region(explosao, explosao_tamanho[1][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[1][1], struct_tiro[i].x, struct_tiro[i].y, 0);
-    }
-    else if(struct_tiro[i].timerExplosao < 15)
-    {
-        al_draw_bitmap_region(explosao, explosao_tamanho[2][2], explosao_tamanho[2][3], explosao_tamanho[2][0], explosao_tamanho[2][1], struct_tiro[i].x, struct_tiro[i].y, 0);
-    }
-    else if(struct_tiro[i].timerExplosao < 20)
-    {
-        al_draw_bitmap_region(explosao, explosao_tamanho[3][2], explosao_tamanho[3][3], explosao_tamanho[3][0], explosao_tamanho[3][1], struct_tiro[i].x, struct_tiro[i].y, 0);
-    }
-    else if(struct_tiro[i].timerExplosao < 25)
-    {
-        al_draw_bitmap_region(explosao, explosao_tamanho[4][2], explosao_tamanho[4][3], explosao_tamanho[4][0], explosao_tamanho[4][1], struct_tiro[i].x, struct_tiro[i].y, 0);
-    }
-    else if(struct_tiro[i].timerExplosao < 30)
-    {
-        al_draw_bitmap_region(explosao, explosao_tamanho[5][2], explosao_tamanho[5][3], explosao_tamanho[5][0], explosao_tamanho[5][1], struct_tiro[i].x, struct_tiro[i].y, 0);
-    }
-    else if(struct_tiro[i].timerExplosao < 35)
-    {
-        al_draw_bitmap_region(explosao, explosao_tamanho[6][2], explosao_tamanho[6][3], explosao_tamanho[6][0], explosao_tamanho[6][1], struct_tiro[i].x, struct_tiro[i].y, 0);
-    }
-    else if(struct_tiro[i].timerExplosao < 40)
-    {
-        al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[7][3], explosao_tamanho[7][0], explosao_tamanho[7][1], struct_tiro[i].x, struct_tiro[i].y, 0);
-        limpaTiro(i);
+        double explosao_dx = struct_tiro[i].x - tiroAvancadoExplosaoDY;
+        double explosao_dy = struct_tiro[i].y - tiroAvancadoExplosaoDY;
+
+        if(struct_tiro[i].timerExplosao < 5)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], explosao_dx, explosao_dy, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 10)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[1][2], explosao_tamanho[1][3], explosao_tamanho[1][0], explosao_tamanho[1][1], explosao_dx, explosao_dy, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 15)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[2][2], explosao_tamanho[2][3], explosao_tamanho[2][0], explosao_tamanho[2][1], explosao_dx, explosao_dy, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 20)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[3][2], explosao_tamanho[3][3], explosao_tamanho[3][0], explosao_tamanho[3][1], explosao_dx, explosao_dy, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 25)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[4][2], explosao_tamanho[4][3], explosao_tamanho[4][0], explosao_tamanho[4][1], explosao_dx, explosao_dy, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 30)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[5][2], explosao_tamanho[5][3], explosao_tamanho[5][0], explosao_tamanho[5][1], explosao_dx, explosao_dy, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 35)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[6][2], explosao_tamanho[6][3], explosao_tamanho[6][0], explosao_tamanho[6][1], explosao_dx, explosao_dy, 0);
+        }
+        else if(struct_tiro[i].timerExplosao < 40)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[7][3], explosao_tamanho[7][0], explosao_tamanho[7][1], explosao_dx, explosao_dy, 0);
+            struct_tiro[i].colisaoAvancada = false;
+            struct_tiro[i].timerExplosao = 0;
+        }
     }
     struct_tiro[i].timerExplosao++;
 }

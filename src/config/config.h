@@ -106,7 +106,7 @@ const int tiros_avancados_tamanho[4][3] = {
 	{108, 62, 335}
 };
 bool tiroTecla = false, segurando_tecla = false, controleCrescimento = true;
-double duracao_tiro, inicio_tiro, controleCrescimentoAnimacaoTiroAvancado = 1.0, controlePosicaoCrescimento = 40.0;
+double duracao_tiro, inicio_tiro, controleCrescimentoAnimacaoTiroAvancado = 1.0, controlePosicaoCrescimento = 40.0, tiroAvancadoExplosaoDY = 100;
 const double duracao_tiro_avancado = 1.0;
 int filaTiros = 0, filaAnimacaoTiroAvancado = 0;
 const int velocidadeTiroSimples = 5;
