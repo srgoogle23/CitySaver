@@ -11,11 +11,14 @@ void colisaoTiros(int j);
 void animacaoExplosao(int i);
 void finalizaExplosao();
 void limpaTiro(int i);
+void animacaoTiroIniciando();
 
 struct Tiro {
     bool ativado;
     bool colisao;
     int timerExplosao;
+    int categoriaTiro;
+    int timerTiro;
     int tipo;
 	int x;
 	int y;
@@ -36,6 +39,8 @@ void inciarTiros()
         struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
+        struct_tiro[i].categoriaTiro = 0;
+        struct_tiro[i].timerTiro = 0;
         struct_tiro[i].tipo = 0;
         struct_tiro[i].x = 0;
         struct_tiro[i].y = 0;
@@ -54,19 +59,48 @@ void disparaTiro()
     {
         filaTiros++;
 
-        struct_tiro[filaTiros-1].timerExplosao = 0;
-        struct_tiro[filaTiros-1].ativado = true;
-        struct_tiro[filaTiros-1].colisao = false;
-        struct_tiro[filaTiros-1].tipo = 0;
-        struct_tiro[filaTiros-1].x = nave_dx + 50;
-        struct_tiro[filaTiros-1].y = nave_dy + 40;
-        struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
-        struct_tiro[filaTiros-1].y_inicial = struct_tiro[filaTiros-1].y;
-        struct_tiro[filaTiros-1].largura = tiros_tamanho[struct_tiro[filaTiros - 1].tipo][0];
-        struct_tiro[filaTiros-1].altura = tiros_tamanho[struct_tiro[filaTiros-1].tipo][1];
-        struct_tiro[filaTiros-1].offset_x = tiros_tamanho[struct_tiro[filaTiros-1].tipo][2];
+        // se o tiro for um tiro simples
+        if(duracao_tiro < duracao_tiro_avancado)
+        {
+            struct_tiro[filaTiros-1].timerExplosao = 0;
+            struct_tiro[filaTiros-1].ativado = true;
+            struct_tiro[filaTiros-1].colisao = false;
+            struct_tiro[filaTiros-1].categoriaTiro = 0;
+            struct_tiro[filaTiros-1].timerTiro = 0;
+            struct_tiro[filaTiros-1].tipo = 0;
+            struct_tiro[filaTiros-1].x = nave_dx + 50;
+            struct_tiro[filaTiros-1].y = nave_dy + 40;
+            struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
+            struct_tiro[filaTiros-1].y_inicial = struct_tiro[filaTiros-1].y;
+            struct_tiro[filaTiros-1].largura = tiros_tamanho[struct_tiro[filaTiros - 1].tipo][0];
+            struct_tiro[filaTiros-1].altura = tiros_tamanho[struct_tiro[filaTiros-1].tipo][1];
+            struct_tiro[filaTiros-1].offset_x = tiros_tamanho[struct_tiro[filaTiros-1].tipo][2];
 
-        al_draw_bitmap_region(tiros, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
+            al_draw_bitmap_region(tiros, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
+            
+            tiroTecla = false; // como o tiro é simples, desativa a tecla de tiro para permitir apenas um tiro por aperto de tecla
+        }
+        else
+        {
+            duracao_tiro = 0;
+            tiroTecla = false;
+            
+            struct_tiro[filaTiros-1].timerExplosao = 0;
+            struct_tiro[filaTiros-1].ativado = true;
+            struct_tiro[filaTiros-1].colisao = false;
+            struct_tiro[filaTiros-1].categoriaTiro = 1;
+            struct_tiro[filaTiros-1].timerTiro = 0;
+            struct_tiro[filaTiros-1].tipo = 0;
+            struct_tiro[filaTiros-1].x = nave_dx + 50;
+            struct_tiro[filaTiros-1].y = nave_dy + 40;
+            struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
+            struct_tiro[filaTiros-1].y_inicial = struct_tiro[filaTiros-1].y;
+            struct_tiro[filaTiros-1].largura = tiros_avancados_tamanho[struct_tiro[filaTiros - 1].tipo][0];
+            struct_tiro[filaTiros-1].altura = tiros_avancados_tamanho[struct_tiro[filaTiros-1].tipo][1];
+            struct_tiro[filaTiros-1].offset_x = tiros_avancados_tamanho[struct_tiro[filaTiros-1].tipo][2];
+
+            al_draw_bitmap_region(tiro_avancado, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
+        }
     }
     else
     {
@@ -87,9 +121,20 @@ void calculaMovimentoTiro()
         {
             mudaAnimacaoTiro(i);
             struct_tiro[i].x += struct_tiro[i].velocidade;
-            struct_tiro[i].largura = tiros_tamanho[struct_tiro[i].tipo][0];
-            struct_tiro[i].altura = tiros_tamanho[struct_tiro[i].tipo][1];
-            struct_tiro[i].offset_x = tiros_tamanho[struct_tiro[i].tipo][2];
+
+            if(struct_tiro[i].categoriaTiro == 0)
+            {
+                struct_tiro[i].largura = tiros_tamanho[struct_tiro[i].tipo][0];
+                struct_tiro[i].altura = tiros_tamanho[struct_tiro[i].tipo][1];
+                struct_tiro[i].offset_x = tiros_tamanho[struct_tiro[i].tipo][2];
+            }
+            else if(struct_tiro[i].categoriaTiro == 1)
+            {
+                struct_tiro[i].largura = tiros_avancados_tamanho[struct_tiro[i].tipo][0];
+                struct_tiro[i].altura = tiros_avancados_tamanho[struct_tiro[i].tipo][1];
+                struct_tiro[i].offset_x = tiros_avancados_tamanho[struct_tiro[i].tipo][2];
+            }
+
         }
     }
 }
@@ -121,6 +166,8 @@ void limpaTiros()
         struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
+        struct_tiro[i].categoriaTiro = 0;
+        struct_tiro[i].timerTiro = 0;
         struct_tiro[i].tipo = 0;
         struct_tiro[i].x = 0;
         struct_tiro[i].y = 0;
@@ -156,37 +203,65 @@ void verificaSeOTiroEstaNaTela(int i)
 
 void mudaAnimacaoTiro(int i)
 {
-    if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 50)
+    if(struct_tiro[i].categoriaTiro == 0)
     {
-        struct_tiro[i].tipo = 0;
+        if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 50)
+        {
+            struct_tiro[i].tipo = 0;
+        }
+        else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 100)
+        {
+            struct_tiro[i].tipo = 1;
+        }
+        else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 150)
+        {
+            struct_tiro[i].tipo = 2;
+        }
+        else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 200)
+        {
+            struct_tiro[i].tipo = 3;
+        }
+        else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 250)
+        {
+            struct_tiro[i].tipo = 4;
+        }
+        else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 300)
+        {
+            struct_tiro[i].tipo = 5;
+        }
     }
-    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 100)
+    else if(struct_tiro[i].categoriaTiro == 1)
     {
-        struct_tiro[i].tipo = 1;
-    }
-    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 150)
-    {
-        struct_tiro[i].tipo = 2;
-    }
-    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 200)
-    {
-        struct_tiro[i].tipo = 3;
-    }
-    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 250)
-    {
-        struct_tiro[i].tipo = 4;
-    }
-    else if((struct_tiro[i].x - struct_tiro[i].x_inicial) < 300)
-    {
-        struct_tiro[i].tipo = 5;
+        if(struct_tiro[i].timerTiro < 10)
+        {
+            struct_tiro[i].tipo = 0;
+        }
+        else if(struct_tiro[i].timerTiro < 20)
+        {
+            struct_tiro[i].tipo = 1;
+        }
+        else if(struct_tiro[i].timerTiro < 30)
+        {
+            struct_tiro[i].tipo = 2;
+        }
+        else if(struct_tiro[i].timerTiro < 40)
+        {
+            struct_tiro[i].tipo = 3;
+        }
+        else
+        {
+            struct_tiro[i].timerTiro = 0;
+        }
+        struct_tiro[i].timerTiro++;
     }
 }
 
 void redesenhaTiro()
 {
+    animacaoTiroIniciando();
+    
     if (tiroTecla)
     {
-        tiroTecla = false;
         disparaTiro();
     }
 
@@ -196,12 +271,55 @@ void redesenhaTiro()
     {
         if (struct_tiro[i].ativado == true && struct_tiro[i].colisao == false)
         { 
-            al_draw_bitmap_region(tiros, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
+            if(struct_tiro[i].categoriaTiro == 0)
+            {
+                al_draw_bitmap_region(tiros, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
+            }
+            else if(struct_tiro[i].categoriaTiro == 1)
+            {
+                printf("struct_tiro[%d].offset_x = %d\n", i, struct_tiro[i].offset_x);
+                al_draw_bitmap_region(tiro_avancado, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
+            }
         }
         else if(struct_tiro[i].colisao == true)
         {
             animacaoExplosao(i);
         }
+    }
+}
+
+void animacaoTiroIniciando()
+{
+    if (segurando_tecla)
+    {
+        double x_animacao = nave_dx + 80;
+        double y_animacao = nave_dy + 40;
+
+        if (filaAnimacaoTiroAvancado < 10)
+        {
+            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[0][2], 0, animacao_tiros_avancados_tamanho[0][0], animacao_tiros_avancados_tamanho[0][1], x_animacao, y_animacao, 0);
+        }
+        else if(filaAnimacaoTiroAvancado < 20)
+        {
+            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[1][2], 0, animacao_tiros_avancados_tamanho[1][0], animacao_tiros_avancados_tamanho[1][1], x_animacao, y_animacao, 0);
+        }
+        else if(filaAnimacaoTiroAvancado < 30)
+        {
+            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[2][2], 0, animacao_tiros_avancados_tamanho[2][0], animacao_tiros_avancados_tamanho[2][1], x_animacao, y_animacao, 0);
+        }
+        else if(filaAnimacaoTiroAvancado < 40)
+        {
+            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[3][2], 0, animacao_tiros_avancados_tamanho[3][0], animacao_tiros_avancados_tamanho[3][1], x_animacao, y_animacao, 0);
+        }
+        else
+        {
+            filaAnimacaoTiroAvancado = 0;
+        }
+        filaAnimacaoTiroAvancado++;
+    }
+    else
+    {
+        filaAnimacaoTiroAvancado = 0;
     }
 }
 
@@ -249,6 +367,8 @@ void limpaTiro(int i)
     struct_tiro[i].ativado = false;
     struct_tiro[i].colisao = false;
     struct_tiro[i].tipo = 0;
+    struct_tiro[i].categoriaTiro = 0;
+    struct_tiro[i].timerTiro = 0;
     struct_tiro[i].x = 0;
     struct_tiro[i].y = 0;
     struct_tiro[i].x_inicial = 0;
@@ -266,28 +386,31 @@ void teclasTiro(int tecla, int tipoEvento)
         switch(tecla) {
 			//se a tecla for o W
 			case ALLEGRO_KEY_SPACE:
-				tiroTecla = true;
+                inicio_tiro = al_get_time ();
+                segurando_tecla = true;
 			break;
 
 		}
     }
-    /*
     else if(tipoEvento == 2)
     {
         //verifica qual tecla foi
 		switch(tecla) {
 			//se a tecla for o W
 			case ALLEGRO_KEY_SPACE:
-				tiroTecla = false;
-			break;
+                duracao_tiro = al_get_time() - inicio_tiro;
+				tiroTecla = true;
+                segurando_tecla = false;
+            break;
 		}
     }
-    */
 }
 
 void finalizaTiro()
 {
     al_destroy_bitmap(tiros);
+    al_destroy_bitmap(animacaoTiroAvancado);
+    al_destroy_bitmap(tiro_avancado);
 }
 
 void finalizaExplosao()

@@ -20,6 +20,8 @@ const char *background_local[7] = {
 const char nave_local[] = "src/images/nave.png";
 const char asteroids_local[] = "src/images/asteroids.png";
 const char tiros_local[] = "src/images/shoots.png";
+const char animacao_tiro_avancado_local[] = "src/images/animacaoTiroAvancado.png";
+const char tiro_avancado_local[] = "src/images/shoots_big.png";
 const char explosao_local[] = "src/images/explosao.png";
 
 // fontes
@@ -35,6 +37,8 @@ ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
 ALLEGRO_BITMAP *tiros;
+ALLEGRO_BITMAP *animacaoTiroAvancado;
+ALLEGRO_BITMAP *tiro_avancado;
 ALLEGRO_BITMAP *explosao;
 
 // definição de jogo
@@ -88,8 +92,22 @@ const int tiros_tamanho[6][3] = {
 	{35, 22, 37},
 	{35, 22, 0}
 };
-bool tiroTecla = false;
-int filaTiros = 0;
+const int animacao_tiros_avancados_tamanho[4][3] = {
+	{20, 20, 0},
+	{20, 20, 25},
+	{20, 20, 50},
+	{20, 20, 70}
+};
+const int tiros_avancados_tamanho[4][3] = {
+	{108, 62, 2},
+	{108, 62, 120},
+	{108, 62, 230},
+	{108, 62, 335}
+};
+bool tiroTecla = false, segurando_tecla = false;
+double duracao_tiro, inicio_tiro;
+const double duracao_tiro_avancado = 1.0;
+int filaTiros = 0, filaAnimacaoTiroAvancado = 0;
 const int velocidadeTiroSimples = 5;
 
 // definições de explosao
@@ -203,6 +221,12 @@ int iniciarAllegro()
 
 	// inicia os tiros
 	tiros = al_load_bitmap(tiros_local);
+
+	// inicia a animação dos tiros avançados
+	animacaoTiroAvancado = al_load_bitmap(animacao_tiro_avancado_local);
+
+	// inicia os tiros avançados
+	tiro_avancado = al_load_bitmap(tiro_avancado_local);
 
 	// incia as explosoes
 	explosao = al_load_bitmap(explosao_local);
