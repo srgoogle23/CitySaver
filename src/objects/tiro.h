@@ -92,7 +92,7 @@ void disparaTiro()
             struct_tiro[filaTiros-1].timerTiro = 0;
             struct_tiro[filaTiros-1].tipo = 0;
             struct_tiro[filaTiros-1].x = nave_dx + 50;
-            struct_tiro[filaTiros-1].y = nave_dy + 40;
+            struct_tiro[filaTiros-1].y = nave_dy + 20;
             struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
             struct_tiro[filaTiros-1].y_inicial = struct_tiro[filaTiros-1].y;
             struct_tiro[filaTiros-1].largura = tiros_avancados_tamanho[struct_tiro[filaTiros - 1].tipo][0];

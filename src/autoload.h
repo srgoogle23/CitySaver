@@ -13,6 +13,7 @@
 
 // includes de utilidades
 #include "utilities/rand.h"
+#include "utilities/bitmap.h"
 
 // includes de configurações
 #include "config/config.h"
