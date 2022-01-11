@@ -98,14 +98,15 @@ const int animacao_tiros_avancados_tamanho[4][3] = {
 	{20, 20, 50},
 	{20, 20, 70}
 };
+const int animacao_tiros_avancados_tamanho_bmp[2] = {92, 22};
 const int tiros_avancados_tamanho[4][3] = {
 	{108, 62, 2},
 	{108, 62, 120},
 	{108, 62, 230},
 	{108, 62, 335}
 };
-bool tiroTecla = false, segurando_tecla = false;
-double duracao_tiro, inicio_tiro;
+bool tiroTecla = false, segurando_tecla = false, controleCrescimento = true;
+double duracao_tiro, inicio_tiro, controleCrescimentoAnimacaoTiroAvancado = 1.0, controlePosicaoCrescimento = 40.0;
 const double duracao_tiro_avancado = 1.0;
 int filaTiros = 0, filaAnimacaoTiroAvancado = 0;
 const int velocidadeTiroSimples = 5;

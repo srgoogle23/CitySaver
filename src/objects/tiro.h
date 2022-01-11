@@ -277,7 +277,6 @@ void redesenhaTiro()
             }
             else if(struct_tiro[i].categoriaTiro == 1)
             {
-                printf("struct_tiro[%d].offset_x = %d\n", i, struct_tiro[i].offset_x);
                 al_draw_bitmap_region(tiro_avancado, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
             }
         }
@@ -292,34 +291,66 @@ void animacaoTiroIniciando()
 {
     if (segurando_tecla)
     {
-        double x_animacao = nave_dx + 80;
-        double y_animacao = nave_dy + 40;
+        if(controleCrescimento)
+        {
+            al_destroy_bitmap(animacaoTiroAvancado);
 
+            int w = animacao_tiros_avancados_tamanho_bmp[0] * controleCrescimentoAnimacaoTiroAvancado;
+            int h = animacao_tiros_avancados_tamanho_bmp[1] * controleCrescimentoAnimacaoTiroAvancado;
+
+            animacaoTiroAvancado = load_bitmap_at_size(animacao_tiro_avancado_local, w, h);
+            controleCrescimento = false;
+        }
+
+        double x_animacao = nave_dx + 80, y_animacao = nave_dy + controlePosicaoCrescimento;
+ 
         if (filaAnimacaoTiroAvancado < 10)
         {
-            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[0][2], 0, animacao_tiros_avancados_tamanho[0][0], animacao_tiros_avancados_tamanho[0][1], x_animacao, y_animacao, 0);
+            int offset_x = animacao_tiros_avancados_tamanho[0][2] * controleCrescimentoAnimacaoTiroAvancado;
+            int largura  = animacao_tiros_avancados_tamanho[0][0] * controleCrescimentoAnimacaoTiroAvancado;
+            int altura  = animacao_tiros_avancados_tamanho[0][1] * controleCrescimentoAnimacaoTiroAvancado;
+            al_draw_bitmap_region(animacaoTiroAvancado, offset_x, 0, largura, altura, x_animacao, y_animacao, 0);
         }
         else if(filaAnimacaoTiroAvancado < 20)
         {
-            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[1][2], 0, animacao_tiros_avancados_tamanho[1][0], animacao_tiros_avancados_tamanho[1][1], x_animacao, y_animacao, 0);
+            int offset_x = animacao_tiros_avancados_tamanho[1][2] * controleCrescimentoAnimacaoTiroAvancado;
+            int largura = animacao_tiros_avancados_tamanho[1][0] * controleCrescimentoAnimacaoTiroAvancado;
+            int altura = animacao_tiros_avancados_tamanho[1][1] * controleCrescimentoAnimacaoTiroAvancado;
+            al_draw_bitmap_region(animacaoTiroAvancado, offset_x, 0, largura, altura, x_animacao, y_animacao, 0);
         }
         else if(filaAnimacaoTiroAvancado < 30)
         {
-            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[2][2], 0, animacao_tiros_avancados_tamanho[2][0], animacao_tiros_avancados_tamanho[2][1], x_animacao, y_animacao, 0);
+            int offset_x = animacao_tiros_avancados_tamanho[2][2] * controleCrescimentoAnimacaoTiroAvancado;
+            int largura = animacao_tiros_avancados_tamanho[2][0] * controleCrescimentoAnimacaoTiroAvancado;
+            int altura = animacao_tiros_avancados_tamanho[2][1] * controleCrescimentoAnimacaoTiroAvancado;
+            al_draw_bitmap_region(animacaoTiroAvancado, offset_x, 0, largura, altura, x_animacao, y_animacao, 0);
         }
         else if(filaAnimacaoTiroAvancado < 40)
         {
-            al_draw_bitmap_region(animacaoTiroAvancado, animacao_tiros_avancados_tamanho[3][2], 0, animacao_tiros_avancados_tamanho[3][0], animacao_tiros_avancados_tamanho[3][1], x_animacao, y_animacao, 0);
+            int offset_x = animacao_tiros_avancados_tamanho[3][2] * controleCrescimentoAnimacaoTiroAvancado;
+            int largura = animacao_tiros_avancados_tamanho[3][0] * controleCrescimentoAnimacaoTiroAvancado;
+            int altura = animacao_tiros_avancados_tamanho[3][1] * controleCrescimentoAnimacaoTiroAvancado;
+            al_draw_bitmap_region(animacaoTiroAvancado, offset_x, 0, largura, altura, x_animacao, y_animacao, 0);
         }
         else
         {
+            controleCrescimento = true;
             filaAnimacaoTiroAvancado = 0;
+
+            if(controleCrescimentoAnimacaoTiroAvancado <= 2)
+            {
+                controleCrescimentoAnimacaoTiroAvancado += 0.5;
+                controlePosicaoCrescimento -= 5;
+            }
         }
         filaAnimacaoTiroAvancado++;
     }
     else
     {
+        controlePosicaoCrescimento = 40;
+        controleCrescimentoAnimacaoTiroAvancado = 1;
         filaAnimacaoTiroAvancado = 0;
+        controleCrescimento = true;
     }
 }
 
