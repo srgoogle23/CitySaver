@@ -22,6 +22,7 @@
 #include "objects/background.h"
 #include "objects/bloco.h"
 #include "objects/asteroid.h"
+#include "objects/extended/calculosBloco.h"
 #include "objects/tiro.h"
 #include "objects/nave.h"
 #include "objects/tela.h"
