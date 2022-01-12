@@ -81,6 +81,9 @@ void disparaTiro()
 
             al_draw_bitmap_region(tiros, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
             
+            // reproduz barulho do tiro
+            al_play_sample(som_tiro, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+
             tiroTecla = false; // como o tiro é simples, desativa a tecla de tiro para permitir apenas um tiro por aperto de tecla
         }
         else
@@ -104,6 +107,9 @@ void disparaTiro()
             struct_tiro[filaTiros-1].offset_x = tiros_avancados_tamanho[struct_tiro[filaTiros-1].tipo][2];
 
             al_draw_bitmap_region(tiro_avancado, struct_tiro[filaTiros-1].offset_x, 0, struct_tiro[filaTiros-1].largura, struct_tiro[filaTiros-1].altura, struct_tiro[filaTiros-1].x, struct_tiro[filaTiros-1].y, 0);
+        
+            // reproduz barulho do tiro
+            al_play_sample(som_tiro, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
         }
     }
     else
@@ -387,9 +393,14 @@ void animacaoExplosao(int i)
 {
     if(struct_tiro[i].categoriaTiro == 0)
     {
-        if(struct_tiro[i].timerExplosao < 5)
+        if(struct_tiro[i].timerExplosao == 0)
         {
-        al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
+            // reproduz som de explosao
+            al_play_sample(som_explosao, 1.0, 0.0, 1.8, ALLEGRO_PLAYMODE_ONCE, NULL);
+        }
+        else if(struct_tiro[i].timerExplosao < 5)
+        {
+            al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], struct_tiro[i].x, struct_tiro[i].y, 0);
         }
         else if(struct_tiro[i].timerExplosao < 10)
         {
@@ -426,7 +437,12 @@ void animacaoExplosao(int i)
         double explosao_dx = struct_tiro[i].x - tiroAvancadoExplosaoDY;
         double explosao_dy = struct_tiro[i].y - tiroAvancadoExplosaoDY;
 
-        if(struct_tiro[i].timerExplosao < 5)
+        if(struct_tiro[i].timerExplosao == 0)
+        {
+            // reproduz som de explosao
+            al_play_sample(som_explosao, 1.0, 0.0, 1.8, ALLEGRO_PLAYMODE_ONCE, NULL);
+        }
+        else if(struct_tiro[i].timerExplosao < 5)
         {
             al_draw_bitmap_region(explosao, explosao_tamanho[0][2], explosao_tamanho[0][3], explosao_tamanho[0][0], explosao_tamanho[0][1], explosao_dx, explosao_dy, 0);
         }
@@ -514,9 +530,11 @@ void finalizaTiro()
     al_destroy_bitmap(tiros);
     al_destroy_bitmap(animacaoTiroAvancado);
     al_destroy_bitmap(tiro_avancado);
+    al_destroy_sample(som_tiro);
 }
 
 void finalizaExplosao()
 {
     al_destroy_bitmap(explosao);
+    al_destroy_sample(som_explosao);
 }

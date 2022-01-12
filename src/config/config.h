@@ -16,7 +16,6 @@ const char *background_local[7] = {
 	"src/images/bg/01/clouds_mg_2.png",
 	"src/images/bg/01/clouds_mg_1.png"
 };
-
 const char nave_local[] = "src/images/nave.png";
 const char asteroids_local[] = "src/images/asteroids.png";
 const char tiros_local[] = "src/images/shoots.png";
@@ -27,6 +26,10 @@ const char explosao_local[] = "src/images/explosao.png";
 // fontes
 const char fonte_local[] = "src/fonts/arial.TTF";
 const int tamanho_fonte = 36;
+
+// sons
+const char tiro_som_local[] = "src/sounds/tiro.ogg";
+const char explosao_som_local[] = "src/sounds/explosao.ogg";
 
 // variaveis globais allegro
 ALLEGRO_DISPLAY *display = NULL;
@@ -40,6 +43,8 @@ ALLEGRO_BITMAP *tiros;
 ALLEGRO_BITMAP *animacaoTiroAvancado;
 ALLEGRO_BITMAP *tiro_avancado;
 ALLEGRO_BITMAP *explosao;
+ALLEGRO_SAMPLE *som_tiro;
+ALLEGRO_SAMPLE *som_explosao;
 
 // definição de jogo
 int jogando = 1;
@@ -180,8 +185,29 @@ int iniciarAllegro()
 		return -1;
 	}
 
+	//instala o audio
+	if(!al_install_audio()) {
+		fprintf(stderr, "falha ao instalar o audio!\n");
+		return -1;
+	}
+
+	//instala o decodificador de audio
+	if (!al_init_acodec_addon()){
+        fprintf(stderr, "falha ao instalar o decodificador de audio!\n");
+        return -1;
+    }
+
 	//inicializa o modulo allegro que carrega as fontes
 	al_init_font_addon();
+
+	//incializa o audio
+	al_install_audio();
+
+	//incializa o decodificador de audio
+    al_init_acodec_addon();
+
+	//reserva instancias de audio
+	al_reserve_samples(2);
 
 	//inicializa o modulo allegro que entende arquivos tff de fontes
 	if(!al_init_ttf_addon()) {
@@ -233,6 +259,12 @@ int iniciarAllegro()
 
 	// incia as explosoes
 	explosao = al_load_bitmap(explosao_local);
+
+	// carrega o som do tiro
+	som_tiro = al_load_sample(tiro_som_local);
+
+	// carrega o som da explosao
+	som_explosao = al_load_sample(explosao_som_local);
 
     // atualiza a tela
     al_flip_display();
