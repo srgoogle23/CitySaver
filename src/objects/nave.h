@@ -6,6 +6,7 @@ void calculaMovimentoNave();
 void redesenhaNave();
 void colisaoNave();
 void animacaoExplosaoNave();
+void desenhaAnimacaoNave();
 
 void iniciaNave()
 {
@@ -169,25 +170,78 @@ void redesenhaNave()
 	}
 	else
 	{
-		// se a nave estiver se movimentando para frente, ela está acelerando
-		if(move_right == true)
+		desenhaAnimacaoNave();
+	}
+	
+}
+
+void desenhaAnimacaoNave()
+{
+	// se a nave estiver se movimentando para frente, ela está acelerando
+	if(move_right == true)
+	{
+		if(move_right == true && move_up == true)
+		{
+			al_draw_bitmap_region(nave, 5 * NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else if(move_right == true && move_down == true)
+		{
+			al_draw_bitmap_region(nave, 2 * NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else
 		{
 			al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 		}
-		else if(move_up == true) // se a nave estiver para a esquerda, ela está acelerando para a esquerda
+	}
+	else if(move_up == true) // se a nave estiver para a esquerda, ela está acelerando para a esquerda
+	{
+		if(move_left == true && move_up == true)
+		{
+			al_draw_bitmap_region(nave, 4 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else if(move_right == true && move_up == true)
+		{
+			al_draw_bitmap_region(nave, 5 * NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else
 		{
 			al_draw_bitmap_region(nave, 4 * NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 		}
-		else if(move_down == true)  // se a nave estiver para a direita, ela está acelerando para a direita
+	}
+	else if(move_down == true)  // se a nave estiver para a direita, ela está acelerando para a direita
+	{
+		if(move_left == true && move_down == true)
+		{
+			al_draw_bitmap_region(nave, 6 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else if(move_right == true && move_down == true)
+		{
+			al_draw_bitmap_region(nave, 2 * NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else
 		{
 			al_draw_bitmap_region(nave, NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 		}
-		else // se não, ela desliga o motor
+	}
+	else if(move_left == true)
+	{
+		if(move_left == true && move_up == true)
+		{
+			al_draw_bitmap_region(nave, 4 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else if(move_left == true && move_down == true)
+		{
+			al_draw_bitmap_region(nave, 6 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else
 		{
 			al_draw_bitmap_region(nave, 3 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 		}
 	}
-	
+	else // se não, ela desliga o motor
+	{
+		al_draw_bitmap_region(nave, 3 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+	}
 }
 
 void colisaoNave()
