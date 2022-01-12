@@ -201,22 +201,22 @@ void calculaMovimentoTiro()
             if(struct_tiro[i].movimentacao_right_up)
             {
                 struct_tiro[i].x += struct_tiro[i].velocidade;
-                struct_tiro[i].y -= struct_tiro[i].velocidade;
+                struct_tiro[i].y -= (struct_tiro[i].velocidade / 2);
             }
             else if(struct_tiro[i].movimentacao_right_down)
             {
                 struct_tiro[i].x += struct_tiro[i].velocidade;
-                struct_tiro[i].y += struct_tiro[i].velocidade;
+                struct_tiro[i].y += (struct_tiro[i].velocidade / 2);
             }
             else if(struct_tiro[i].movimentacao_left_up)
             {
                 struct_tiro[i].x += struct_tiro[i].velocidade;
-                struct_tiro[i].y += struct_tiro[i].velocidade;
+                struct_tiro[i].y += (struct_tiro[i].velocidade / 2);
             }
             else if(struct_tiro[i].movimentacao_left_down)
             {
                 struct_tiro[i].x += struct_tiro[i].velocidade;
-                struct_tiro[i].y -= struct_tiro[i].velocidade;
+                struct_tiro[i].y -= (struct_tiro[i].velocidade / 2);
             }
             else
             {
@@ -398,11 +398,90 @@ void redesenhaTiro()
         { 
             if(struct_tiro[i].categoriaTiro == 0)
             {
-                al_draw_bitmap_region(tiros, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
+                if(struct_tiro[i].movimentacao_right_up)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiros,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(-18), 0);
+                }
+                else if(struct_tiro[i].movimentacao_right_down)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiros,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(18), 0);
+                }
+                else if(struct_tiro[i].movimentacao_left_up)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiros,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(18), 0);
+                }
+                else if(struct_tiro[i].movimentacao_left_down)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiros,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(-18), 0);
+                }
+                else
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiros,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(0), 0);
+                }
             }
             else if(struct_tiro[i].categoriaTiro == 1)
             {
-                al_draw_bitmap_region(tiro_avancado, struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura, struct_tiro[i].x, struct_tiro[i].y, 0);
+                
+                if(struct_tiro[i].movimentacao_right_up)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiro_avancado,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(-18), 0);
+                }
+                else if(struct_tiro[i].movimentacao_right_down)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiro_avancado,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(18), 0);
+                }
+                else if(struct_tiro[i].movimentacao_left_up)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiro_avancado,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(18), 0);
+                }
+                else if(struct_tiro[i].movimentacao_left_down)
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiro_avancado,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(-18), 0);
+                }
+                else
+                {
+                    al_draw_tinted_scaled_rotated_bitmap_region(tiro_avancado,
+                    struct_tiro[i].offset_x, 0, struct_tiro[i].largura, struct_tiro[i].altura,
+                    al_map_rgba_f(1, 1, 1, 1), // branco pra nao pintar nada
+                    20, 11, struct_tiro[i].x, struct_tiro[i].y, 1, 1,
+                    to_radians(0), 0);
+                }
             }
         }
         else if(struct_tiro[i].colisao == true)
