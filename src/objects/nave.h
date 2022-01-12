@@ -10,7 +10,7 @@ void animacaoExplosaoNave();
 void iniciaNave()
 {
     nave_dy = (SCREEN_H / 2) - NAVE_W / 2;
-    al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+    al_draw_bitmap_region(nave, 3 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 }
 
 void finalizaNave()
@@ -102,7 +102,23 @@ void redesenhaNave()
 	}
 	else
 	{
-		al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		// se a nave estiver se movimentando para frente, ela está acelerando
+		if(move_right == true)
+		{
+			al_draw_bitmap_region(nave, 0, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else if(move_up == true) // se a nave estiver para a esquerda, ela está acelerando para a esquerda
+		{
+			al_draw_bitmap_region(nave, 4 * NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else if(move_down == true)  // se a nave estiver para a direita, ela está acelerando para a direita
+		{
+			al_draw_bitmap_region(nave, NAVE_W, 0, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
+		else // se não, ela desliga o motor
+		{
+			al_draw_bitmap_region(nave, 3 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
+		}
 	}
 	
 }
