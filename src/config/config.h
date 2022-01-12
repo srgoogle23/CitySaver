@@ -30,6 +30,7 @@ const int tamanho_fonte = 36;
 // sons
 const char tiro_som_local[] = "src/sounds/tiro.ogg";
 const char explosao_som_local[] = "src/sounds/explosao.ogg";
+const char game_over_som_local[] = "src/sounds/game_over.ogg";
 
 // variaveis globais allegro
 ALLEGRO_DISPLAY *display = NULL;
@@ -45,6 +46,7 @@ ALLEGRO_BITMAP *tiro_avancado;
 ALLEGRO_BITMAP *explosao;
 ALLEGRO_SAMPLE *som_tiro;
 ALLEGRO_SAMPLE *som_explosao;
+ALLEGRO_SAMPLE *game_over;
 
 // definição de jogo
 int jogando = 1;
@@ -266,6 +268,9 @@ int iniciarAllegro()
 	// carrega o som da explosao
 	som_explosao = al_load_sample(explosao_som_local);
 
+	// carrega o som do game_over
+	game_over = al_load_sample(game_over_som_local);
+	
     // atualiza a tela
     al_flip_display();
 

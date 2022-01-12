@@ -132,7 +132,11 @@ void colisaoNave()
 
 void animacaoExplosaoNave()
 {
-	if(animacaoColisao < 20)
+	if(animacaoColisao == 1)
+	{
+		al_play_sample(game_over, 1.5, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+	}
+	else if(animacaoColisao < 20)
 	{
 		al_draw_bitmap_region(nave, 0, NAVE_H * 3, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 	}
