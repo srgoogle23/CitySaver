@@ -172,6 +172,13 @@ void colisaoTiros(int j)
                 }
             }
         }
+
+        // verifica se o tiro colidiu com o bloco
+        if(struct_tiro[j].x < bloco.x + bloco.largura && struct_tiro[j].x + struct_tiro[j].largura > bloco.x && struct_tiro[j].y < bloco.y + bloco.altura && struct_tiro[j].y + struct_tiro[j].altura > bloco.y)
+        {
+            //se o tiro colidiu com o bloco, retira o tiro da tela para não ser desenhado nem realizado animação de explosão
+            struct_tiro[j].x = SCREEN_W * 2;
+        }
     }
 }
 
@@ -412,17 +419,6 @@ void animacaoExplosao(int i)
         {
             al_draw_bitmap_region(explosao, explosao_tamanho[7][2], explosao_tamanho[7][3], explosao_tamanho[7][0], explosao_tamanho[7][1], struct_tiro[i].x, struct_tiro[i].y, 0);
             limpaTiro(i);
-            /*
-            if(struct_tiro[i].categoriaTiro == 0)
-            {
-                limpaTiro(i);
-            }
-            else if(struct_tiro[i].categoriaTiro == 1)
-            {
-                struct_tiro[i].colisaoAvancada = false;
-                struct_tiro[i].timerExplosao = 0;
-            }
-            */
         }
     }
     else if(struct_tiro[i].categoriaTiro == 1)
