@@ -17,6 +17,10 @@ struct Tiro {
     bool ativado;
     bool colisao;
     bool colisaoAvancada;
+    bool movimentacao_right_up;
+    bool movimentacao_right_down;
+    bool movimentacao_left_up;
+    bool movimentacao_left_down;
     int timerExplosao;
     int categoriaTiro;
     int timerTiro;
@@ -41,6 +45,10 @@ void inciarTiros()
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
         struct_tiro[i].colisaoAvancada = false;
+        struct_tiro[i].movimentacao_right_up = false;
+        struct_tiro[i].movimentacao_right_down = false;
+        struct_tiro[i].movimentacao_left_up = false;
+        struct_tiro[i].movimentacao_left_down = false;
         struct_tiro[i].categoriaTiro = 0;
         struct_tiro[i].timerTiro = 0;
         struct_tiro[i].tipo = 0;
@@ -71,8 +79,38 @@ void disparaTiro()
             struct_tiro[filaTiros-1].categoriaTiro = 0;
             struct_tiro[filaTiros-1].timerTiro = 0;
             struct_tiro[filaTiros-1].tipo = 0;
-            struct_tiro[filaTiros-1].x = nave_dx + 50;
-            struct_tiro[filaTiros-1].y = nave_dy + 40;
+
+            // calculando posição to tiro baseado na diagonalidade da nave
+            if(move_up == true && move_left == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_left_up = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 50;
+            }
+            else if(move_down == true && move_right == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_right_down = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 50;
+            }
+            else if(move_up == true && move_right == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_right_up = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 30;
+            }
+            else if(move_down == true && move_left == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_left_down = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 30;
+            }
+            else
+            {
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 40;
+            }
+
             struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
             struct_tiro[filaTiros-1].y_inicial = struct_tiro[filaTiros-1].y;
             struct_tiro[filaTiros-1].largura = tiros_tamanho[struct_tiro[filaTiros - 1].tipo][0];
@@ -98,8 +136,38 @@ void disparaTiro()
             struct_tiro[filaTiros-1].categoriaTiro = 1;
             struct_tiro[filaTiros-1].timerTiro = 0;
             struct_tiro[filaTiros-1].tipo = 0;
-            struct_tiro[filaTiros-1].x = nave_dx + 50;
-            struct_tiro[filaTiros-1].y = nave_dy + 20;
+
+            // calculando posição to tiro baseado na diagonalidade da nave
+            if(move_up == true && move_left == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_left_up = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 30;
+            }
+            else if(move_down == true && move_right == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_right_down = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 30;
+            }
+            else if(move_up == true && move_right == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_right_up = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 10;
+            }
+            else if(move_down == true && move_left == true)
+            {
+                struct_tiro[filaTiros-1].movimentacao_left_down = true;
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 10;
+            }
+            else
+            {
+                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].y = nave_dy + 20;
+            }
+
             struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
             struct_tiro[filaTiros-1].y_inicial = struct_tiro[filaTiros-1].y;
             struct_tiro[filaTiros-1].largura = tiros_avancados_tamanho[struct_tiro[filaTiros - 1].tipo][0];
@@ -130,7 +198,30 @@ void calculaMovimentoTiro()
         if (struct_tiro[i].ativado == true && struct_tiro[i].colisao == false)
         {
             mudaAnimacaoTiro(i);
-            struct_tiro[i].x += struct_tiro[i].velocidade;
+            if(struct_tiro[i].movimentacao_right_up)
+            {
+                struct_tiro[i].x += struct_tiro[i].velocidade;
+                struct_tiro[i].y -= struct_tiro[i].velocidade;
+            }
+            else if(struct_tiro[i].movimentacao_right_down)
+            {
+                struct_tiro[i].x += struct_tiro[i].velocidade;
+                struct_tiro[i].y += struct_tiro[i].velocidade;
+            }
+            else if(struct_tiro[i].movimentacao_left_up)
+            {
+                struct_tiro[i].x += struct_tiro[i].velocidade;
+                struct_tiro[i].y += struct_tiro[i].velocidade;
+            }
+            else if(struct_tiro[i].movimentacao_left_down)
+            {
+                struct_tiro[i].x += struct_tiro[i].velocidade;
+                struct_tiro[i].y -= struct_tiro[i].velocidade;
+            }
+            else
+            {
+                struct_tiro[i].x += struct_tiro[i].velocidade;
+            }
 
             if(struct_tiro[i].categoriaTiro == 0)
             {
@@ -196,6 +287,10 @@ void limpaTiros()
         struct_tiro[i].ativado = false;
         struct_tiro[i].colisao = false;
         struct_tiro[i].colisaoAvancada = false;
+        struct_tiro[i].movimentacao_right_up = false;
+        struct_tiro[i].movimentacao_right_down = false;
+        struct_tiro[i].movimentacao_left_up = false;
+        struct_tiro[i].movimentacao_left_down = false;
         struct_tiro[i].categoriaTiro = 0;
         struct_tiro[i].timerTiro = 0;
         struct_tiro[i].tipo = 0;
@@ -337,7 +432,25 @@ void animacaoTiroIniciando()
             controleCrescimento = false;
         }
 
-        double x_animacao = nave_dx + 80, y_animacao = nave_dy + controlePosicaoCrescimento;
+        double x_animacao = nave_dx + 80;
+        double y_animacao = nave_dy + controlePosicaoCrescimento;
+
+        if(move_up == true && move_left == true)
+        {
+            y_animacao += 10;
+        }
+        else if(move_down == true && move_right == true)
+        {
+            y_animacao += 10;
+        }
+        else if(move_up == true && move_right == true)
+        {
+            y_animacao -= 10;
+        }
+        else if(move_down == true && move_left == true)
+        {
+            y_animacao -= 10;
+        }
  
         if (filaAnimacaoTiroAvancado < 10)
         {
@@ -488,6 +601,10 @@ void limpaTiro(int i)
     struct_tiro[i].timerExplosao = 0;
     struct_tiro[i].ativado = false;
     struct_tiro[i].colisao = false;
+    struct_tiro[i].movimentacao_right_up = false;
+    struct_tiro[i].movimentacao_right_down = false;
+    struct_tiro[i].movimentacao_left_up = false;
+    struct_tiro[i].movimentacao_left_down = false;
     struct_tiro[i].tipo = 0;
     struct_tiro[i].categoriaTiro = 0;
     struct_tiro[i].timerTiro = 0;
