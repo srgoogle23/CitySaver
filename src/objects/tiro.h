@@ -259,12 +259,14 @@ void colisaoTiros(int j)
                         // atualiza a colisão do asteroide e do tiro
                         struct_tiro[j].colisao = true;
                         asteroid[i].colisao = true;
+                        pontuacao += asteroid[i].tipo;
                     }
                     else if(struct_tiro[j].categoriaTiro == 1) // se o tiro for um tiro avançado
                     {
                         // atualiza a colisão do asteroide e do tiro avançado
                         asteroid[i].colisao = true;
                         struct_tiro[j].colisaoAvancada = true;
+                        pontuacao += asteroid[i].tipo;
                     }
                 }
             }

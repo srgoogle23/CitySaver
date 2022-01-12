@@ -136,6 +136,9 @@ const int explosao_tamanho[8][4] = {
 // definições de blocos
 double blocoAlturaMin, blocoAlturaMax, blocoLarguraMin, blocoLarguraMax;
 
+// definições de pontuação
+int pontuacao = 0;
+
 // declarando funções
 int iniciarAllegro();
 int finalizaAllegro();
