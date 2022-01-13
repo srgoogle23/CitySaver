@@ -24,8 +24,8 @@ const char tiro_avancado_local[] = "src/images/shoots_big.png";
 const char explosao_local[] = "src/images/explosao.png";
 
 // fontes
-const char fonte_local[] = "src/fonts/arial.TTF";
-const int tamanho_fonte = 36;
+const char fonte_local[] = "src/fonts/ARCADE_N.TTF";
+const int tamanho_fonte = 18;
 
 // sons
 const char tiro_som_local[] = "src/sounds/tiro.ogg";
@@ -138,6 +138,7 @@ double blocoAlturaMin, blocoAlturaMax, blocoLarguraMin, blocoLarguraMax;
 
 // definições de pontuação
 int pontuacao = 0;
+char pontuacaoTexto[] = "Pontos: ";
 
 // declarando funções
 int iniciarAllegro();

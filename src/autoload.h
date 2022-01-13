@@ -17,6 +17,7 @@
 #include "utilities/rand.h"
 #include "utilities/bitmap.h"
 #include "utilities/graus.h"
+#include "utilities/string.h"
 
 // includes de configurações
 #include "config/config.h"
@@ -28,6 +29,7 @@
 #include "objects/extended/calculosBloco.h"
 #include "objects/tiro.h"
 #include "objects/nave.h"
+#include "objects/pontuacao.h"
 #include "objects/tela.h"
 
 // includes de eventos
