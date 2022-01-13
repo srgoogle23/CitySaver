@@ -101,60 +101,63 @@ void teclasMovimentoNave(int tecla, int tipoEvento)
 
 void calculaMovimentoNave()
 {
-	if(move_up && (nave_dy - 4) >= limite_y_superior_nave && (nave_dy - 4) <= limite_y_inferior_nave)
+	if(!nave_game_over)
 	{
-		nave_dy -= movimentacaoNave;
-
-		// calculando movimentação diagonal
-		if(move_right && (nave_dx + 4) >= limite_x_esquerda_nave && (nave_dx + 4) <= limite_x_direita_nave)
+		if(move_up && (nave_dy - 4) >= limite_y_superior_nave && (nave_dy - 4) <= limite_y_inferior_nave)
 		{
-			nave_dx += movimentacaoNave;
+			nave_dy -= movimentacaoNave;
+
+			// calculando movimentação diagonal
+			if(move_right && (nave_dx + 4) >= limite_x_esquerda_nave && (nave_dx + 4) <= limite_x_direita_nave)
+			{
+				nave_dx += movimentacaoNave;
+			}
+			else if(move_left && (nave_dx - 4) >= limite_x_esquerda_nave && (nave_dx - 4) <= limite_x_direita_nave)
+			{
+				nave_dx -= movimentacaoNave;
+			}
+		}
+		else if(move_down && (nave_dy + 4) >= limite_y_superior_nave && (nave_dy + 4) <= limite_y_inferior_nave)
+		{
+			nave_dy += movimentacaoNave;
+
+			// calculando movimentação diagonal
+			if(move_right && (nave_dx + 4) >= limite_x_esquerda_nave && (nave_dx + 4) <= limite_x_direita_nave)
+			{
+				nave_dx += movimentacaoNave;
+			}
+			else if(move_left && (nave_dx - 4) >= limite_x_esquerda_nave && (nave_dx - 4) <= limite_x_direita_nave)
+			{
+				nave_dx -= movimentacaoNave;
+			}
 		}
 		else if(move_left && (nave_dx - 4) >= limite_x_esquerda_nave && (nave_dx - 4) <= limite_x_direita_nave)
 		{
 			nave_dx -= movimentacaoNave;
-		}
-	}
-	else if(move_down && (nave_dy + 4) >= limite_y_superior_nave && (nave_dy + 4) <= limite_y_inferior_nave)
-	{
-		nave_dy += movimentacaoNave;
 
-		// calculando movimentação diagonal
-		if(move_right && (nave_dx + 4) >= limite_x_esquerda_nave && (nave_dx + 4) <= limite_x_direita_nave)
+			// calculando movimentação diagonal
+			if(move_down && (nave_dy + 4) >= limite_y_superior_nave && (nave_dy + 4) <= limite_y_inferior_nave)
+			{
+				nave_dy += movimentacaoNave;
+			}
+			else if(move_up && (nave_dy - 4) >= limite_y_superior_nave && (nave_dy - 4) <= limite_y_inferior_nave)
+			{
+				nave_dy -= movimentacaoNave;
+			}
+		}
+		else if(move_right && (nave_dx + 4) >= limite_x_esquerda_nave && (nave_dx + 4) <= limite_x_direita_nave)
 		{
 			nave_dx += movimentacaoNave;
-		}
-		else if(move_left && (nave_dx - 4) >= limite_x_esquerda_nave && (nave_dx - 4) <= limite_x_direita_nave)
-		{
-			nave_dx -= movimentacaoNave;
-		}
-	}
-	else if(move_left && (nave_dx - 4) >= limite_x_esquerda_nave && (nave_dx - 4) <= limite_x_direita_nave)
-	{
-		nave_dx -= movimentacaoNave;
 
-		// calculando movimentação diagonal
-		if(move_down && (nave_dy + 4) >= limite_y_superior_nave && (nave_dy + 4) <= limite_y_inferior_nave)
-		{
-			nave_dy += movimentacaoNave;
-		}
-		else if(move_up && (nave_dy - 4) >= limite_y_superior_nave && (nave_dy - 4) <= limite_y_inferior_nave)
-		{
-			nave_dy -= movimentacaoNave;
-		}
-	}
-	else if(move_right && (nave_dx + 4) >= limite_x_esquerda_nave && (nave_dx + 4) <= limite_x_direita_nave)
-	{
-		nave_dx += movimentacaoNave;
-
-		// calculando movimentação diagonal
-		if(move_down && (nave_dy + 4) >= limite_y_superior_nave && (nave_dy + 4) <= limite_y_inferior_nave)
-		{
-			nave_dy += movimentacaoNave;
-		}
-		else if(move_up && (nave_dy - 4) >= limite_y_superior_nave && (nave_dy - 4) <= limite_y_inferior_nave)
-		{
-			nave_dy -= movimentacaoNave;
+			// calculando movimentação diagonal
+			if(move_down && (nave_dy + 4) >= limite_y_superior_nave && (nave_dy + 4) <= limite_y_inferior_nave)
+			{
+				nave_dy += movimentacaoNave;
+			}
+			else if(move_up && (nave_dy - 4) >= limite_y_superior_nave && (nave_dy - 4) <= limite_y_inferior_nave)
+			{
+				nave_dy -= movimentacaoNave;
+			}
 		}
 	}
 }
