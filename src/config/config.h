@@ -139,6 +139,7 @@ double blocoAlturaMin, blocoAlturaMax, blocoLarguraMin, blocoLarguraMax;
 // definições de pontuação
 int pontuacao = 0, recorde = 0;
 char pontuacaoTexto[] = "Pontos: ";
+char recordeTexto[] = " | Recorde: ";
 const char recorde_arquivo[] = "src/data/recorde.txt";
 
 // declarando funções

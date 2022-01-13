@@ -3,9 +3,15 @@ void resetaPontuacao();
 
 void redesenhaPontuacao()
 {
-    char pontos[10];
-    itoa(pontuacao, pontos, 10);
-    al_draw_text(fonte, al_map_rgb(0, 0, 0), 10, 10, 0, concat(pontuacaoTexto, pontos));
+    int numero_digitos_pontos = (pontuacao == 0) ? 1 : log10(pontuacao) + 1;
+    int numero_digitos_recorde = (recorde == 0) ? 1 : log10(recorde) + 1;
+
+    char p[numero_digitos_pontos];
+    char r[numero_digitos_recorde];
+    itoa(pontuacao, p, 10);
+    itoa(recorde, r, 10);
+
+    al_draw_text(fonte, al_map_rgb(0, 0, 0), 10, 10, 0, concat(concat(pontuacaoTexto, p), concat(recordeTexto, r)));
 }
 
 void resetaPontuacao()
