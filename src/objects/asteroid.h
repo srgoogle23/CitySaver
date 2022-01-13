@@ -164,6 +164,10 @@ bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 			{
 				colisaoEntreAsteroids = true;
 			}
+			else if(asteroid[indice].velocidade > bloco.velocidade)
+			{
+				colisaoEntreAsteroids = true;
+			}
 		}
 	}
 	
