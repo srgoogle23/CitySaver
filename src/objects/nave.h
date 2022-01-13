@@ -271,6 +271,7 @@ void animacaoExplosaoNave()
 {
 	if(animacaoColisao == 1)
 	{
+		nave_game_over = true;
 		resetaPontuacao();
 		al_play_sample(game_over, 1.5, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	}

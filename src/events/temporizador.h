@@ -12,11 +12,11 @@ void eventosDeTemporizador()
 		al_flip_display();
 
 		// adiciona um ponto a cada segundo
-		if(al_get_timer_count(timer)%(int)FPS == 0)
+		if(al_get_timer_count(timer)%(int)FPS == 0 && !nave_game_over)
 		{
-			pontuacao++;
+			pontuacao++;			
 		}
-
+		
 		if(DEBUG == true)
 		{
 			// mostra os segundos se passando ao longo do jogo

@@ -31,6 +31,7 @@
 #include "objects/extended/calculosBloco.h"
 #include "objects/tiro.h"
 #include "objects/nave.h"
+#include "objects/gameover.h"
 #include "objects/tela.h"
 
 // includes de eventos
@@ -38,3 +39,4 @@
 #include "events/tela.h"
 #include "events/teclas.h"
 #include "events/temporizador.h"
+#include "events/extended/carregaEventos.h"
