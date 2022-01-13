@@ -14,7 +14,6 @@ void eventosDeTemporizador()
 		// adiciona um ponto a cada segundo
 		if(al_get_timer_count(timer)%(int)FPS == 0)
 		{
-			//printf("nave_game_over %d\n", nave_game_over);
 			pontuacao++;
 		}
 
