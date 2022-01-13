@@ -102,13 +102,13 @@ void disparaTiro()
             else if(move_down == true && move_left == true)
             {
                 struct_tiro[filaTiros-1].movimentacao_left_down = true;
-                struct_tiro[filaTiros-1].x = nave_dx + 50;
+                struct_tiro[filaTiros-1].x = nave_dx + 100;
                 struct_tiro[filaTiros-1].y = nave_dy + 30;
             }
             else
             {
                 struct_tiro[filaTiros-1].x = nave_dx + 50;
-                struct_tiro[filaTiros-1].y = nave_dy + 40;
+                struct_tiro[filaTiros-1].y = nave_dy + 50;
             }
 
             struct_tiro[filaTiros-1].x_inicial = struct_tiro[filaTiros-1].x;
@@ -389,7 +389,16 @@ void redesenhaTiro()
     
     if (tiroTecla)
     {
-        disparaTiro();
+        if(!nave_game_over)
+        {
+            disparaTiro();
+        }
+        else
+        {
+            duracao_tiro = 0;
+            tiroTecla = false;
+        }
+        
     }
 
     calculaMovimentoTiro();
@@ -500,7 +509,7 @@ void redesenhaTiro()
 
 void animacaoTiroIniciando()
 {
-    if (segurando_tecla)
+    if (segurando_tecla && !nave_game_over)
     {
         if(controleCrescimento)
         {

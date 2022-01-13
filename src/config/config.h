@@ -142,6 +142,9 @@ char pontuacaoTexto[] = "Pontos: ";
 char recordeTexto[] = " | Recorde: ";
 const char recorde_arquivo[] = "src/data/recorde.txt";
 
+// game over
+bool nave_game_over = false;
+
 // declarando funções
 int iniciarAllegro();
 int finalizaAllegro();

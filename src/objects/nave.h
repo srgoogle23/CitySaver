@@ -304,8 +304,7 @@ void animacaoExplosaoNave()
 	}
 	else
 	{
-		colisao = false;
-		animacaoColisao = 0;
+		nave_game_over = true;
 	}
 
 	animacaoColisao++;
