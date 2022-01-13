@@ -137,8 +137,9 @@ const int explosao_tamanho[8][4] = {
 double blocoAlturaMin, blocoAlturaMax, blocoLarguraMin, blocoLarguraMax;
 
 // definições de pontuação
-int pontuacao = 0;
+int pontuacao = 0, recorde = 0;
 char pontuacaoTexto[] = "Pontos: ";
+const char recorde_arquivo[] = "src/data/recorde.txt";
 
 // declarando funções
 int iniciarAllegro();
@@ -274,6 +275,9 @@ int iniciarAllegro()
 
 	// carrega o som do game_over
 	game_over = al_load_sample(game_over_som_local);
+
+	// carrega o valor do recorde atual
+	recorde = leInteiroArquivo(recorde_arquivo);
 	
     // atualiza a tela
     al_flip_display();

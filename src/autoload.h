@@ -18,18 +18,19 @@
 #include "utilities/bitmap.h"
 #include "utilities/graus.h"
 #include "utilities/string.h"
+#include "utilities/arquivo.h"
 
 // includes de configurações
 #include "config/config.h"
 
 // includes de objetos
 #include "objects/background.h"
+#include "objects/pontuacao.h"
 #include "objects/bloco.h"
 #include "objects/asteroid.h"
 #include "objects/extended/calculosBloco.h"
 #include "objects/tiro.h"
 #include "objects/nave.h"
-#include "objects/pontuacao.h"
 #include "objects/tela.h"
 
 // includes de eventos

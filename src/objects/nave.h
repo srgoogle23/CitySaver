@@ -269,10 +269,9 @@ void colisaoNave()
 
 void animacaoExplosaoNave()
 {
-	pontuacao = 0;
-	
 	if(animacaoColisao == 1)
 	{
+		resetaPontuacao();
 		al_play_sample(game_over, 1.5, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	}
 	else if(animacaoColisao < 20)
