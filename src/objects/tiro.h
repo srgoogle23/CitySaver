@@ -713,7 +713,7 @@ void teclasTiro(int tecla, int tipoEvento)
     if(tipoEvento == 1)
     {
         switch(tecla) {
-			//se a tecla for o W
+			//se a tecla for o espaço
 			case ALLEGRO_KEY_SPACE:
                 inicio_tiro = al_get_time ();
                 segurando_tecla = true;
@@ -725,7 +725,7 @@ void teclasTiro(int tecla, int tipoEvento)
     {
         //verifica qual tecla foi
 		switch(tecla) {
-			//se a tecla for o W
+			//se a tecla for o espaço
 			case ALLEGRO_KEY_SPACE:
                 duracao_tiro = al_get_time() - inicio_tiro;
 				tiroTecla = true;

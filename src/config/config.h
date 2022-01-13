@@ -25,11 +25,13 @@ const char explosao_local[] = "src/images/explosao.png";
 
 // fontes
 const char fonte_local[] = "src/fonts/ARCADE_N.TTF";
-const int tamanho_fonte = 18;
-
 const char fonte_2_local[] = "src/fonts/ARCADE_I.TTF";
-const int tamanho_fonte_2_1 = 64;
-const int tamanho_fonte_2_2 = 24;
+const char fonte_3_local[] = "src/fonts/ARCADE_R.TTF";
+
+const int tamanho_fonte_18 = 18;
+const int tamanho_fonte_64 = 64;
+const int tamanho_fonte_24 = 24;
+const int tamanho_fonte_26 = 24;
 
 // sons
 const char tiro_som_local[] = "src/sounds/tiro.ogg";
@@ -43,6 +45,8 @@ ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_FONT *fonte = NULL;
 ALLEGRO_FONT *fonte2_64 = NULL;
 ALLEGRO_FONT *fonte2_24 = NULL;
+ALLEGRO_FONT *fonte3_24 = NULL;
+ALLEGRO_FONT *fonte3_26 = NULL;
 ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
@@ -156,6 +160,13 @@ char pontuacao_game_over_texto[] = "PONTOS: ";
 char recorde_game_over_texto[] = "RECORDE: ";
 char bateu_recorde_game_over_texto[] = "NOVO RECORDE!";
 
+char menu_texto[] = "MENU";
+double menu_texto_animacao = 0.0;
+char reiniciar_texto[] = "REINICIAR";
+double reiniciar_texto_animacao = 0.0;
+
+bool menu_game_over[2] = {true, false};
+
 // declarando funções
 int iniciarAllegro();
 int finalizaAllegro();
@@ -238,10 +249,12 @@ int iniciarAllegro()
 	}
 	
 	//carrega os arquivos de fonte e define o tamanho que sera usado
-    fonte = al_load_font(fonte_local, tamanho_fonte, 0);
-	fonte2_64 = al_load_font(fonte_2_local, tamanho_fonte_2_1, 0);
-	fonte2_24 = al_load_font(fonte_2_local, tamanho_fonte_2_2, 0);  
-	if(fonte == NULL || fonte2_64 == NULL || fonte2_24 == NULL) {
+    fonte = al_load_font(fonte_local, tamanho_fonte_18, 0);
+	fonte2_64 = al_load_font(fonte_2_local, tamanho_fonte_64, 0);
+	fonte2_24 = al_load_font(fonte_2_local, tamanho_fonte_24, 0);
+	fonte3_24 = al_load_font(fonte_3_local, tamanho_fonte_24, 0);
+	fonte3_26 = al_load_font(fonte_3_local, tamanho_fonte_26, 0);
+	if(fonte == NULL || fonte2_64 == NULL || fonte2_24 == NULL || fonte3_24 == NULL || fonte3_26 == NULL) {
 		fprintf(stderr, "arquivo de fonte nao pode ser encontrado!\n");
 	}
 

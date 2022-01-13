@@ -11,13 +11,28 @@ void eventoPressionarTecla()
 			imprimirTeclaPressionada(ev.keyboard.keycode);
 		}
 		
-		teclasMovimentoNave(ev.keyboard.keycode, 1);
-		teclasTiro(ev.keyboard.keycode, 1);
+		if(!nave_game_over)
+		{
+			teclasMovimentoNave(ev.keyboard.keycode, 1);
+			teclasTiro(ev.keyboard.keycode, 1);
+		}
+		else
+		{
+			teclasGameOver(ev.keyboard.keycode, 1);
+		}
+		
 	}
 	else if(ev.type == ALLEGRO_EVENT_KEY_UP) 
 	{
-		teclasMovimentoNave(ev.keyboard.keycode, 2);
-		teclasTiro(ev.keyboard.keycode, 2);
+		if(!nave_game_over)
+		{
+			teclasMovimentoNave(ev.keyboard.keycode, 2);
+			teclasTiro(ev.keyboard.keycode, 2);
+		}
+		else
+		{
+			teclasGameOver(ev.keyboard.keycode, 2);
+		}
 	}
 }
 
