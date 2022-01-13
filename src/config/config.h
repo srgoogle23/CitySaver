@@ -27,6 +27,10 @@ const char explosao_local[] = "src/images/explosao.png";
 const char fonte_local[] = "src/fonts/ARCADE_N.TTF";
 const int tamanho_fonte = 18;
 
+const char fonte_2_local[] = "src/fonts/ARCADE_I.TTF";
+const int tamanho_fonte_2_1 = 64;
+const int tamanho_fonte_2_2 = 24;
+
 // sons
 const char tiro_som_local[] = "src/sounds/tiro.ogg";
 const char explosao_som_local[] = "src/sounds/explosao.ogg";
@@ -37,6 +41,8 @@ ALLEGRO_DISPLAY *display = NULL;
 ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 ALLEGRO_TIMER *timer = NULL;
 ALLEGRO_FONT *fonte = NULL;
+ALLEGRO_FONT *fonte2_64 = NULL;
+ALLEGRO_FONT *fonte2_24 = NULL;
 ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
@@ -141,9 +147,14 @@ int pontuacao = 0, recorde = 0;
 char pontuacaoTexto[] = "Pontos: ";
 char recordeTexto[] = " | Recorde: ";
 const char recorde_arquivo[] = "src/data/recorde.txt";
+bool bateu_recorde = false;
 
 // game over
 bool nave_game_over = false;
+char game_over_texto[] = "GAME OVER";
+char pontuacao_game_over_texto[] = "PONTOS: ";
+char recorde_game_over_texto[] = "RECORDE: ";
+char bateu_recorde_game_over_texto[] = "VOCE BATEU O RECORDE!!";
 
 // declarando funções
 int iniciarAllegro();
@@ -226,9 +237,11 @@ int iniciarAllegro()
 		return -1;
 	}
 	
-	//carrega o arquivo de fonte e define o tamanho que sera usado
-    fonte = al_load_font(fonte_local, tamanho_fonte, 0);   
-	if(fonte == NULL) {
+	//carrega os arquivos de fonte e define o tamanho que sera usado
+    fonte = al_load_font(fonte_local, tamanho_fonte, 0);
+	fonte2_64 = al_load_font(fonte_2_local, tamanho_fonte_2_1, 0);
+	fonte2_24 = al_load_font(fonte_2_local, tamanho_fonte_2_2, 0);  
+	if(fonte == NULL || fonte2_64 == NULL || fonte2_24 == NULL) {
 		fprintf(stderr, "arquivo de fonte nao pode ser encontrado!\n");
 	}
 

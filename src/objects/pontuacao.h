@@ -19,11 +19,10 @@ void resetaPontuacao()
     if(recorde < pontuacao)
     {
         recorde = pontuacao;
+        bateu_recorde = true;
         if(!escreveInteiroArquivo(recorde_arquivo, recorde))
         {
             printf("Erro ao salvar pontuacao no arquivo de recorde\n");
         }  
     }
-
-    pontuacao = 0;
 }
