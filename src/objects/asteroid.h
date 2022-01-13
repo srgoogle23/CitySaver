@@ -160,7 +160,7 @@ bool verificaSeVaiColidirComAlgumAsteroid(int indice)
 			double posicaoColisao = asteroid[indice].x - (asteroid[indice].velocidade * tempo_de_colisao);
 
 			// se a colisão estiver na tela ou perto dela
-			if(posicaoColisao >= (-4*SCREEN_W) && posicaoColisao <= (4*SCREEN_W))
+			if(posicaoColisao >= (-1*SCREEN_W) && posicaoColisao <= (1*SCREEN_W))
 			{
 				colisaoEntreAsteroids = true;
 			}
