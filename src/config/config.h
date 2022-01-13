@@ -154,7 +154,7 @@ bool nave_game_over = false;
 char game_over_texto[] = "GAME OVER";
 char pontuacao_game_over_texto[] = "PONTOS: ";
 char recorde_game_over_texto[] = "RECORDE: ";
-char bateu_recorde_game_over_texto[] = "VOCE BATEU O RECORDE!!";
+char bateu_recorde_game_over_texto[] = "NOVO RECORDE!";
 
 // declarando funções
 int iniciarAllegro();
