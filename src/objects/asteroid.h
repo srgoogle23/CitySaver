@@ -4,6 +4,7 @@ void redesenhaAsteroids();
 void movimentacaoAsteroid(int indice, int tipo);
 void reposicionaAsteroid(int indice);
 bool verificaSeVaiColidirComAlgumAsteroid(int indice);
+void verificaColisaoComBloco(int indice);
 
 struct Asteroid {
 	bool colisao;
@@ -217,6 +218,7 @@ void redesenhaAsteroids()
     for (int i = 0; i < quantidadeArteroids; i++)
 	{
 		movimentacaoAsteroid(i, asteroid[i].tipo);
+		verificaColisaoComBloco(i);
 
 		if(asteroid[i].colisao == false &&  asteroid[i].status == true)
 		{
@@ -244,6 +246,19 @@ void redesenhaAsteroids()
 			reposicionaAsteroid(i);
 		}
 	}	
+}
+
+void verificaColisaoComBloco(int indice)
+{
+	if (asteroid[indice].colisao == false && asteroid[indice].status == true)
+	{
+		if (asteroid[indice].x < bloco.x + bloco.largura && asteroid[indice].x + asteroid[indice].largura > bloco.x && asteroid[indice].y < bloco.y + bloco.altura && asteroid[indice].y + asteroid[indice].altura > bloco.y)
+		{
+			criaExplosao(asteroid[indice].x, asteroid[indice].y);
+			asteroid[indice].colisao = true;
+			asteroid[indice].status = false;
+		}
+	}
 }
 
 void movimentacaoAsteroid(int indice, int tipo)

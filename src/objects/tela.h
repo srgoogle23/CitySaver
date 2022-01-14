@@ -11,6 +11,7 @@ void redesenhaTela()
     redesenhaTiro();
     redesenhaNave();
     redesenhaAsteroids();
+    redesenhaExplosaoAsteroides();
     redesenhaPontuacao();
     desenhaGameOver();
 }

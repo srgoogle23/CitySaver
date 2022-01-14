@@ -27,6 +27,7 @@
 #include "objects/background.h"
 #include "objects/pontuacao.h"
 #include "objects/bloco.h"
+#include "objects/extended/explosaoAsteroides.h"
 #include "objects/asteroid.h"
 #include "objects/extended/calculosBloco.h"
 #include "objects/extended/gameOverReinicia.h"
