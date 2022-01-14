@@ -259,6 +259,20 @@ void verificaColisaoComBloco(int indice)
 			asteroid[indice].status = false;
 		}
 	}
+
+	// verifica se os arteroids já não colidiram
+	for (int i = 0; i < quantidadeArteroids; i++)
+	{
+		if (i != indice && asteroid[i].colisao == false && asteroid[indice].colisao == false && asteroid[indice].status == true && asteroid[i].status == true)
+		{
+			if (asteroid[i].x < asteroid[indice].x + asteroid[indice].largura && asteroid[i].x + asteroid[i].largura > asteroid[indice].x && asteroid[i].y < asteroid[indice].y + asteroid[indice].altura && asteroid[i].y + asteroid[i].altura > asteroid[indice].y)
+			{
+				criaExplosao(asteroid[indice].x, asteroid[indice].y);
+				asteroid[indice].colisao = true;
+				asteroid[indice].status = false;
+			}
+		}
+	}
 }
 
 void movimentacaoAsteroid(int indice, int tipo)
