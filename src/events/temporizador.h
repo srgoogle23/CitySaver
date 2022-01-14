@@ -16,13 +16,17 @@ void eventosDeTemporizador()
 		{
 			pontuacao++;			
 		}
-		
+
 		if(DEBUG == true)
 		{
 			// mostra os segundos se passando ao longo do jogo
 			mostrarSegundosPassando();
 		}
 		
+		if(estaNoTimePosReinicial)
+		{
+			verificaGameOverReinicia();
+		}
 	}
 }
 

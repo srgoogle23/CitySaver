@@ -29,8 +29,10 @@
 #include "objects/bloco.h"
 #include "objects/asteroid.h"
 #include "objects/extended/calculosBloco.h"
+#include "objects/extended/gameOverReinicia.h"
 #include "objects/tiro.h"
 #include "objects/nave.h"
+#include "objects/jogo.h"
 #include "objects/gameover.h"
 #include "objects/tela.h"
 

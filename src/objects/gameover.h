@@ -42,6 +42,12 @@ void denhaMenuGameOver()
     {
         animacaoPalavraReiniciar();
         desenhaPalavraMenu();
+
+        if(menu_game_over_selecionado)
+        {
+            menu_game_over_selecionado = false;
+            reiniciarJogo();
+        }
     }
 }
 
@@ -50,7 +56,11 @@ void teclasGameOver(int tecla, int tipoEvento)
     if(tipoEvento == 1)
     {
         switch(tecla) {
-			//se a tecla for o W ou a seta para cima, ou S ou para baixo, troca para a opção
+            // se o usuario selecionou uma opção
+            case ALLEGRO_KEY_SPACE:
+                menu_game_over_selecionado = true;
+            break;
+            //se a tecla for o W ou a seta para cima, ou S ou para baixo, troca para a opção
 			case ALLEGRO_KEY_W:
                 if(menu_game_over[0] == true)
                 {
@@ -100,6 +110,15 @@ void teclasGameOver(int tecla, int tipoEvento)
                 }
 			break;
 		}
+    }
+    else if(tipoEvento == 2)
+    {
+        switch(tecla) {
+            // se o usuario selecionou uma opção
+            case ALLEGRO_KEY_SPACE:
+                menu_game_over_selecionado = false;
+            break;
+        }
     }
 }
 

@@ -727,9 +727,12 @@ void teclasTiro(int tecla, int tipoEvento)
 		switch(tecla) {
 			//se a tecla for o espaço
 			case ALLEGRO_KEY_SPACE:
-                duracao_tiro = al_get_time() - inicio_tiro;
-				tiroTecla = true;
-                segurando_tecla = false;
+                if(verificaGameOverReinicia())
+                {
+                    duracao_tiro = al_get_time() - inicio_tiro;
+                    tiroTecla = true;
+                    segurando_tecla = false;
+                }  
             break;
 		}
     }

@@ -66,7 +66,8 @@ bool colisao = false;
 int animacaoColisao = 1;
 
 // coordenadas da nave
-int nave_dx = -12;
+const int inicio_dx_nave = -12;
+int nave_dx = 0;
 int nave_dy = 0;
 int movimentacaoNave = 4;
 
@@ -154,6 +155,8 @@ const char recorde_arquivo[] = "src/data/recorde.txt";
 bool bateu_recorde = false;
 
 // game over
+bool estaNoTimePosReinicial = false;
+int gameOverReinicia = 0;
 bool nave_game_over = false;
 char game_over_texto[] = "GAME OVER";
 char pontuacao_game_over_texto[] = "PONTOS: ";
@@ -166,6 +169,7 @@ char reiniciar_texto[] = "REINICIAR";
 double reiniciar_texto_animacao = 0.0;
 
 bool menu_game_over[2] = {true, false};
+bool menu_game_over_selecionado = false;
 
 // declarando funções
 int iniciarAllegro();

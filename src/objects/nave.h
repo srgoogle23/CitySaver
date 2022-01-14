@@ -10,7 +10,8 @@ void desenhaAnimacaoNave();
 
 void iniciaNave()
 {
-    nave_dy = (SCREEN_H / 2) - NAVE_W / 2;
+	nave_dx = inicio_dx_nave;
+	nave_dy = (SCREEN_H / 2) - NAVE_W / 2;
     al_draw_bitmap_region(nave, 3 * NAVE_W, NAVE_H, NAVE_W, NAVE_H, nave_dx, nave_dy, 0);
 }
 
