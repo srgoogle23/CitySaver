@@ -241,7 +241,7 @@ void redesenhaAsteroids()
 		}
 		else
 		{
-			asteroid[i].x = (-1 * randIntMinMax(2, 10) * tamanho_sprite_asteroid);
+			asteroid[i].x = (-2  * tamanho_sprite_asteroid);
 			asteroid[i].colisao = false;
 			reposicionaAsteroid(i);
 		}
