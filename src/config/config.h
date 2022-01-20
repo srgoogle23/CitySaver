@@ -245,7 +245,7 @@ int iniciarAllegro()
     al_init_acodec_addon();
 
 	//reserva instancias de audio
-	al_reserve_samples(10);
+	al_reserve_samples(3);
 
 	//inicializa o modulo allegro que entende arquivos tff de fontes
 	if(!al_init_ttf_addon()) {
