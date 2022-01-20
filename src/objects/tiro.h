@@ -39,7 +39,7 @@ struct Tiro struct_tiro[quantidadeTiros];
 
 void inciarTiros()
 {
-    for (int i = 0; i < quantidadeTiros; i++)
+    for (int i = 0; i < quantidadeDisponivelDeTiros; i++)
     {
         struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
@@ -65,7 +65,7 @@ void inciarTiros()
 
 void disparaTiro()
 {
-    if(filaTiros < quantidadeTiros)
+    if(filaTiros < quantidadeDisponivelDeTiros)
     {
         filaTiros++;
 
@@ -191,7 +191,7 @@ void disparaTiro()
 
 void calculaMovimentoTiro()
 {
-    for (int i = 0; i < quantidadeTiros; i++)
+    for (int i = 0; i < quantidadeDisponivelDeTiros; i++)
     {
         verificaSeOTiroEstaNaTela(i);
         colisaoTiros(i);
@@ -283,7 +283,7 @@ void colisaoTiros(int j)
 
 void limpaTiros()
 {
-    for (int i = 0; i < quantidadeTiros; i++)
+    for (int i = 0; i < quantidadeDisponivelDeTiros; i++)
     {
         struct_tiro[i].timerExplosao = 0;
         struct_tiro[i].ativado = false;
@@ -310,7 +310,7 @@ void limpaTiros()
 
 int verificaSeTodosOsTirosEstaoDesativados()
 {
-    for (int i = 0; i < quantidadeTiros; i++)
+    for (int i = 0; i < quantidadeDisponivelDeTiros; i++)
     {
         if (struct_tiro[i].ativado == true)
         {
@@ -403,7 +403,7 @@ void redesenhaTiro()
 
     calculaMovimentoTiro();
 
-    for (int i = 0; i < quantidadeTiros; i++)
+    for (int i = 0; i < quantidadeDisponivelDeTiros; i++)
     {
         if (struct_tiro[i].ativado == true && struct_tiro[i].colisao == false)
         { 

@@ -101,7 +101,8 @@ const int limite_y_superior_asteroids  = 0;
 
 // definições de tiros
 // [6] => tipos de tiros | [3] => tamanho width, height do sprite, offsex x
-#define quantidadeTiros 100
+#define quantidadeTiros 200 // quantidade de tirs totais permitidas na tela
+int quantidadeDisponivelDeTiros = 1;
 const int tiros_tamanho[6][3] = {
 	{40, 22, 70},
 	{40, 22, 110},
