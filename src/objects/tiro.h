@@ -182,9 +182,12 @@ void disparaTiro()
     }
     else
     {
+        tiroTecla = false;
+
         if(verificaSeTodosOsTirosEstaoDesativados())
         {
             limpaTiros();
+            disparaTiro();
         }
     }
 }
@@ -398,7 +401,6 @@ void redesenhaTiro()
             duracao_tiro = 0;
             tiroTecla = false;
         }
-        
     }
 
     calculaMovimentoTiro();
