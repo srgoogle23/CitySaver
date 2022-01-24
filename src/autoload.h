@@ -25,6 +25,7 @@
 
 // includes de objetos
 #include "objects/background.h"
+#include "objects/menu.h"
 #include "objects/pontuacao.h"
 #include "objects/bloco.h"
 #include "objects/extended/explosaoAsteroides.h"

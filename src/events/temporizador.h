@@ -1,5 +1,6 @@
 void eventosDeTemporizador();
 void mostrarSegundosPassando();
+void eventosDeTemporizadorMenu();
 
 void eventosDeTemporizador()
 {
@@ -27,6 +28,24 @@ void eventosDeTemporizador()
 		{
 			verificaGameOverReinicia();
 		}
+	}
+}
+
+void eventosDeTemporizadorMenu()
+{
+	if(ev.type == ALLEGRO_EVENT_TIMER)
+	{
+		// redesenha objetos na tela
+		redesenhaTelaMenu();
+
+		//atualiza a tela (quando houver algo para mostrar)
+		al_flip_display();
+
+		if(DEBUG == true)
+		{
+			// mostra os segundos se passando ao longo do jogo
+			mostrarSegundosPassando();
+		}	
 	}
 }
 

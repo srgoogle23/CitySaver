@@ -5,6 +5,7 @@ int main(int argc, char **argv)
 	srand ( time(NULL) );
 	iniciarAllegro();
 	iniciarBackground();
+	inciarMenu();
 	iniciaBloco();
 	iniciaNave();
 	iniciarExplosoes();
@@ -14,12 +15,18 @@ int main(int argc, char **argv)
 	// loop principal
 	while(jogando)
 	{
-		while(!nave_game_over && jogando)
+
+		while(menu && !nave_game_over && jogando)
+		{
+			carregaEventosMenu();
+		}
+
+		while(!menu && !nave_game_over && jogando)
 		{
 			carregaEventos();
 		}
 
-		while(nave_game_over && jogando)
+		while(!menu && nave_game_over && jogando)
 		{
 			carregaEventos();
 		}
@@ -27,6 +34,7 @@ int main(int argc, char **argv)
 
     // execuções de finalizações
 	finalizaBackground();
+	finalizaMenu();
 	finalizaBloco();
 	finalizaNave();
 	finalizaAsteroids();

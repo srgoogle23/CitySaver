@@ -16,6 +16,13 @@ const char *background_local[7] = {
 	"src/images/bg/01/clouds_mg_2.png",
 	"src/images/bg/01/clouds_mg_1.png"
 };
+const char *background_2_local[5] = {
+	"src/images/bg/02/parallax-mountain-bg.png",
+	"src/images/bg/02/parallax-mountain-montain-far.png",
+	"src/images/bg/02/parallax-mountain-mountains.png",
+	"src/images/bg/02/parallax-mountain-trees.png",
+	"src/images/bg/02/parallax-mountain-foreground-trees.png",
+};
 const char nave_local[] = "src/images/nave.png";
 const char asteroids_local[] = "src/images/asteroids.png";
 const char tiros_local[] = "src/images/shoots.png";
@@ -59,7 +66,8 @@ ALLEGRO_SAMPLE *som_explosao;
 ALLEGRO_SAMPLE *game_over;
 
 // definição de jogo
-int jogando = 1;
+bool jogando = true;
+bool menu = true;
 
 // definição de colisão
 bool colisao = false;
@@ -144,6 +152,7 @@ const int explosao_tamanho[8][4] = {
 
 // definições do background
 #define quantidadeBackground 7
+#define quantidadeBackground2 5
 
 // definições de blocos
 double blocoAlturaMin, blocoAlturaMax, blocoLarguraMin, blocoLarguraMax;
