@@ -37,6 +37,13 @@ void denhaMenuGameOver()
     {
         animacaoPalavraMenu();
         desenhaPalavraReiniciar();
+
+        if(menu_game_over_selecionado)
+        {
+            menu_game_over_selecionado = false;
+            nave_game_over = false;
+            menu = true;
+        }
     }
     else if(menu_game_over[1])
     {
