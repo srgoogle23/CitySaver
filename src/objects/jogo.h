@@ -41,4 +41,5 @@ void reiniciarJogo()
 
     // reinicia o game over
     nave_game_over = false;
+    menu = false;
 }

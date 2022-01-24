@@ -25,7 +25,6 @@
 
 // includes de objetos
 #include "objects/background.h"
-#include "objects/menu.h"
 #include "objects/pontuacao.h"
 #include "objects/bloco.h"
 #include "objects/extended/explosaoAsteroides.h"
@@ -35,6 +34,7 @@
 #include "objects/tiro.h"
 #include "objects/nave.h"
 #include "objects/jogo.h"
+#include "objects/menu.h"
 #include "objects/gameover.h"
 #include "objects/tela.h"
 

@@ -31,4 +31,7 @@ void carregaEventosMenu()
 
     //se o tipo de evento for um clique de mouse
     eventoCliqueDoMouse();
+
+    //se o tipo de evento for um pressionar de uma tecla
+    eventoPressionarTecla();
 }

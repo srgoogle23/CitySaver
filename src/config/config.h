@@ -6,6 +6,9 @@ const int NAVE_W = 100;
 const int NAVE_H = 100;
 const bool DEBUG = false;
 
+// nome do jogo
+const char nome_do_jogo[] = "City Saver";
+
 // imagens
 const char *background_local[7] = {
 	"src/images/bg/01/sky.png",
@@ -34,11 +37,14 @@ const char explosao_local[] = "src/images/explosao.png";
 const char fonte_local[] = "src/fonts/ARCADE_N.TTF";
 const char fonte_2_local[] = "src/fonts/ARCADE_I.TTF";
 const char fonte_3_local[] = "src/fonts/ARCADE_R.TTF";
+const char fonte_4_local[] = "src/fonts/Champagne.TTF";
 
 const int tamanho_fonte_18 = 18;
 const int tamanho_fonte_64 = 64;
 const int tamanho_fonte_24 = 24;
 const int tamanho_fonte_26 = 24;
+const int tamanho_fonte_72 = 72;
+const int tamanho_fonte_71 = 74;
 
 // sons
 const char tiro_som_local[] = "src/sounds/tiro.ogg";
@@ -54,6 +60,8 @@ ALLEGRO_FONT *fonte2_64 = NULL;
 ALLEGRO_FONT *fonte2_24 = NULL;
 ALLEGRO_FONT *fonte3_24 = NULL;
 ALLEGRO_FONT *fonte3_26 = NULL;
+ALLEGRO_FONT *fonte4_72 = NULL;
+ALLEGRO_FONT *fonte4_71 = NULL;
 ALLEGRO_EVENT ev;
 ALLEGRO_BITMAP *nave;
 ALLEGRO_BITMAP *arteroids;
@@ -181,6 +189,12 @@ double reiniciar_texto_animacao = 0.0;
 bool menu_game_over[2] = {true, false};
 bool menu_game_over_selecionado = false;
 
+// menu do jogo
+char inciar_jogo_texto[] = "INICIAR JOGO";
+bool menu_opcoes[1] = {true};
+bool menu_selecionado = false;
+double menu_inciar_jogo_animacao = 0.0;
+
 // declarando funções
 int iniciarAllegro();
 int finalizaAllegro();
@@ -268,7 +282,9 @@ int iniciarAllegro()
 	fonte2_24 = al_load_font(fonte_2_local, tamanho_fonte_24, 0);
 	fonte3_24 = al_load_font(fonte_3_local, tamanho_fonte_24, 0);
 	fonte3_26 = al_load_font(fonte_3_local, tamanho_fonte_26, 0);
-	if(fonte == NULL || fonte2_64 == NULL || fonte2_24 == NULL || fonte3_24 == NULL || fonte3_26 == NULL) {
+	fonte4_72 = al_load_font(fonte_4_local, tamanho_fonte_72, 0);
+	fonte4_71 = al_load_font(fonte_4_local, tamanho_fonte_71, 0);
+	if(fonte == NULL || fonte2_64 == NULL || fonte2_24 == NULL || fonte3_24 == NULL || fonte3_26 == NULL || fonte4_72 == NULL || fonte4_71 == NULL) {
 		fprintf(stderr, "arquivo de fonte nao pode ser encontrado!\n");
 	}
 
@@ -291,7 +307,7 @@ int iniciarAllegro()
 	al_register_event_source(event_queue, al_get_mouse_event_source());
 
     // Dá nome a janela
-    al_set_window_title(display, "R-Type | Leonardo Oliveira");
+    al_set_window_title(display, concat(nome_do_jogo, " | Leonardo Oliveira"));
 
     // incia a nave
     nave = al_load_bitmap(nave_local);
