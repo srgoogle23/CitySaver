@@ -40,6 +40,7 @@ void reiniciarJogo()
     pontuacao = 0;
 
     // reinicia o game over
+    bateu_recorde = false;
     nave_game_over = false;
     menu = false;
 }
