@@ -219,3 +219,128 @@ Funções e tratativas relacionadas aos cálculos, movimentação e interações
 **void limpaTiro(int i);** : limpa o valor de um tiro com valores padrões.
 
 **void animacaoTiroIniciando();** : cria a animação do tiro sendo carregando a medida que o usuário segura a tecla de espaço.
+
+#### ***2.3.3.9. nave.h***
+
+Funções e tratativas relacionadas aos cálculos, movimentação e interações da nave.
+
+**void iniciaNave();** : inicia a nave e seu desenho com valores padrões.
+
+**void finalizaNave();** ; destrói o bitmap da nave.
+
+**void teclasMovimentoNave(int tecla, int tipoEvento);** : identifica qual tecla foi apertada, respectiva a movimentação da nave e define as flags de movimentações baseadas nisto.
+
+**void calculaMovimentoNave();** : calcula a movimentação da nave se condicionando se a nave não perdeu o jogo.
+
+**void redesenhaNave();** : Redesenha a nave baseando-se em seus cálculos de movimentação e de colisão.
+
+**void colisaoNave();** : Calcula se a nave não colidiu com algum bloco ou asteroide.
+
+**void animacaoExplosaoNave();** : Se a nave tiver colidido com um bloco ou asteroide, cria a animação de explosão da nave.
+
+**void desenhaAnimacaoNave();** : Cria a animação da nave baseando-se se a mesma está indo para cima, para baixo, para frente ou para trás, rotacionando a nave ou ligando/desligando os motores.
+
+
+#### ***2.3.3.10. jogo.h***
+
+Funções e tratativas relacionadas ao jogo em si.
+
+**void reiniciarJogo();** : reinicia o jogo, zerando game over, desativando movimentações, colisões, status de objetos, reiniciando posições e valores padrões, etc.
+
+#### ***2.3.3.11. menu.h***
+
+Funções e tratativas relacionadas ao menu principal.
+
+**void redesenhaTelaMenu();** : redesenha tela do menu, baseando-se nos cálculos, movimentação do background, escurecimento da tela, etc.
+
+**void inciarMenu();** : inicia o background do menu com sua respectiva movimentação.
+
+**void defineVelocidadeImagensMenu(int i);** : define velocidade das imagens de background do menu baseadas no tipo.
+
+**void finalizaMenu();** : finaliza os bitmaps de background do menu.
+
+**void calculaMenu();** : calcula a movimentação do background do menu juntamente com seu respectivo clone de movimento.
+
+**void desenhaBackgroundMenuMovendo();** : desenha a movimentação do background do menu.
+
+**void desenhaNomeDoJogo();** : desenha o nome do jogo no menu.
+
+**void escureceParcialmenteTelaMenu();** : escurece parcialmente a tela para dar mais foco nos textos.
+
+**void desenhaMenuOpcoes();** : desenha as opções do menu e calcula quando são selecionadas.
+
+**void animacaoIniciarJogo();** : desenha a animação do texto de iniciar jogo “piscando” quando selecionada.
+
+**void teclasMenu(int tecla, int tipoEvento);** : lê as respectivas teclas de seleção do menu e configura as flags de seleção.
+
+#### ***2.3.3.13. gameover.h***
+
+Funções e tratativas relacionadas ao menu de game over.
+
+**void escurecerTela();** : animação de escurecer parcialmente a tela do background do jogo para dar foco ao menu de game over.
+
+**void desenhaGameOver();** : desenha o menu de game over, juntamente com a animação de escurecimento, pontuação, possível recorde, etc.
+
+**void desenhaTelaEscurecida();** : permanece a tela parcialmente escurecida.
+
+**void desenhaTextosGameOver();** : desenha os textos do game over.
+
+**void denhaMenuGameOver();** : desenha os textos do menu de seleções do game over, com animações de seleções de palavras.
+
+**void animacaoPalavraMenu();** : desenha a animação da palavra menu piscando, quando selecionada.
+
+**void animacaoPalavraReiniciar();** : : desenha a animação da palavra reiniciar piscando, quando selecionada.
+
+**void desenhaPalavraMenu();** : desenha a palavra menu sem animação.
+
+**void desenhaPalavraReiniciar();** : desenha a palavra reiniciar sem animação.
+
+#### ***2.3.3.14. tela.h***
+
+Funções e tratativas relacionadas ao menu da tela.
+
+**void redesenhaTela();** : redesenha tela do jogo, baseando-se no background, blocos, tiros, nave, asteroides, explosões, pontuação, game-over, etc.
+
+### ***2.3.4. Eventos***
+
+Funções e tratativas relacionadas aos eventos disparados pelo jogo.
+
+#### ***2.3.4.1. mouse.h***
+
+Funções e tratativas relacionadas aos eventos do mouse.
+
+**void eventoCliqueDoMouse();** : é disparado quando o mouse dá um clique na tela.
+
+**void imprimirPosicaoCliqueMouse(int x, int y);** : imprime a posição x e y do clique do mouse;
+
+#### ***2.3.4.2. tela.h***
+
+Funções e tratativas relacionadas aos eventos da tela do jogo.
+
+**void eventoFechamentoDeTela()**; : é disparado quando é o jogador clica em no X de fechar a janela do jogo.
+
+#### ***2.3.4.3. teclas.h***
+
+Funções e tratativas relacionadas aos eventos das teclas do teclado.
+
+**void eventoPressionarTecla();** : é disparado quando o jogador pressiona alguma tela ou solta alguma tecla pressionada
+
+**void imprimirTeclaPressionada(int tecla);** : exibe a tecla pressionada no console.
+
+#### ***2.3.4.4. temporizador.h***
+
+Funções e tratativas relacionadas ao evento de passar o tempo no jogo.
+
+**void eventosDeTemporizador();** : calcula os eventos ao passar do tempo, como redesenhar a tela, atualizar a tela, adicionar pontuação a cada segundo, etc.
+
+**void mostrarSegundosPassando();** : a cada um segundo mostra na tela quanto tempo se passou desde o início da aplicação.
+
+**void eventosDeTemporizadorMenu();** : calcula os eventos do menu ao passar do tempo, como redesenhar a tela, atualizar a tela, etc.
+
+#### ***2.3.4.5. extended/carregaEventos.h***
+
+Funções e tratativas relacionadas a carregar os eventos do jogo.
+
+**void carregaEventosMenu();** : carrega os eventos do menu.
+
+**void carregaEventos();** : carrega os eventos do jogo como um todo.

@@ -1,4 +1,4 @@
-void desenhaTelaMenu();
+void redesenhaTelaMenu();
 void inciarMenu();
 void defineVelocidadeImagensMenu(int i);
 void finalizaMenu();

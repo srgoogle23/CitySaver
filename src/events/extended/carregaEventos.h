@@ -1,3 +1,4 @@
+void carregaEventosMenu();
 void carregaEventos();
 
 void carregaEventos()
