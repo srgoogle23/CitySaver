@@ -5,6 +5,7 @@ void movimentacaoAsteroid(int indice, int tipo);
 void reposicionaAsteroid(int indice);
 bool verificaSeVaiColidirComAlgumAsteroid(int indice);
 void verificaColisaoComBloco(int indice);
+void finalizaAsteroids();
 
 struct Asteroid {
 	bool colisao;
