@@ -2,6 +2,14 @@
 
 `	`O jogo denominado como *City Saver* é um remake básico e rudimentar do jogo R-type. A história de City Saver passa em um cenário global prestes a ser destruído, onde cientistas descobriram um grande asteroide vindo para a terra e o destruíram em inúmeros pedaços. O dever do jogador é eliminar cada pequeno asteroide usando as armas da nave, desviando dos obstáculos rumo ao infinito.
 
+## **1.1. Controles**
+
+- W: Nos menus, move para a opção superior, durante o jogo, move a nave para cima.
+- A: Durante o jogo, move a nave para trás.
+- S: Nos menus, move para a opção inferior, durante o jogo, move a nave para baixo.
+- D: Durante o jogo, move a nave para frente.
+- ESPAÇO: Nos menus, confirma a opção selecionada, durante o jogo, caso seja pressionada por menos de um segundo, dispara um tiro simples, caso seja pressionada por mais um segundo, dispara um tiro avançado.
+
 # **2. Documentação**
 
 ## **2.1. Requisitos**
