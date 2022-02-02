@@ -32,6 +32,7 @@ const char tiros_local[] = "src/images/shoots.png";
 const char animacao_tiro_avancado_local[] = "src/images/animacaoTiroAvancado.png";
 const char tiro_avancado_local[] = "src/images/shoots_big.png";
 const char explosao_local[] = "src/images/explosao.png";
+const char icone_da_tela_local[] = "src/images/logo.png";
 
 // fontes
 const char fonte_local[] = "src/fonts/ARCADE_N.TTF";
@@ -72,15 +73,14 @@ ALLEGRO_BITMAP *explosao;
 ALLEGRO_SAMPLE *som_tiro;
 ALLEGRO_SAMPLE *som_explosao;
 ALLEGRO_SAMPLE *game_over;
+ALLEGRO_BITMAP *icone_da_tela;
 
 // definição de jogo
 bool jogando = true;
 bool menu = true;
-
 // definição de colisão
 bool colisao = false;
 int animacaoColisao = 1;
-
 // coordenadas da nave
 const int inicio_dx_nave = -12;
 int nave_dx = 0;
@@ -309,7 +309,11 @@ int iniciarAllegro()
     // Dá nome a janela
     al_set_window_title(display, concat(nome_do_jogo, " | Leonardo Oliveira"));
 
-    // incia a nave
+	// inicializa o icone do jogo
+	icone_da_tela = al_load_bitmap(icone_da_tela_local);
+	al_set_display_icon(display, icone_da_tela);
+
+	// incia a nave
     nave = al_load_bitmap(nave_local);
 
 	// inicia os asteroids
