@@ -8,7 +8,7 @@ LIB_ALLEGRO=\lib\liballegro-$(ALLEGRO_VERSION)-monolith-mt.a
 INCLUDE_ALLEGRO=\include
 
 main.exe: main.o
-	gcc -o main.exe main.o $(PATH_ALLEGRO)$(LIB_ALLEGRO)
+	gcc -o main.exe main.o $(PATH_ALLEGRO)$(LIB_ALLEGRO) -mwindows
 
 main.o: main.c
 	gcc -I $(PATH_ALLEGRO)$(INCLUDE_ALLEGRO) -c main.c
