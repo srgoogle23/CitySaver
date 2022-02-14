@@ -15,7 +15,18 @@ void eventosDeTemporizador()
 		// adiciona um ponto a cada segundo
 		if(al_get_timer_count(timer)%(int)FPS == 0 && !nave_game_over)
 		{
-			pontuacao++;			
+			if(!pause)
+			{
+				pontuacao++;
+			}	
+		}
+
+		if(pause)
+		{
+			move_up = false;
+			move_down = false;
+			move_left = false;
+			move_right = false;
 		}
 
 		if(DEBUG == true)

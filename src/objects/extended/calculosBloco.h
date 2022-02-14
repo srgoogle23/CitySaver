@@ -21,10 +21,14 @@ void reiniciaBloco()
 void calculaMovimentoBloco()
 {
     // movimenta o bloco
-    if(bloco.status)
-    {
-        bloco.x -= bloco.velocidade;
-    }
+	if(!pause)
+	{
+		if(bloco.status)
+		{
+			bloco.x -= bloco.velocidade;
+		}
+	}
+    
 
     // verifica se o bloco ja saiu da tela
     verificaSeOBlocoEstaNaTela();

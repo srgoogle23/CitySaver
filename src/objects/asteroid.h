@@ -280,21 +280,24 @@ void movimentacaoAsteroid(int indice, int tipo)
 {
 	if(asteroid[indice].status == true)
 	{
-		if (tipo == 1)
+		if(!pause)
 		{
-			asteroid[indice].x -= asteroid[indice].velocidade;
-		}
-		else if (tipo == 2)
-		{
-			asteroid[indice].x -= asteroid[indice].velocidade;
-		}
-		else if (tipo == 3)
-		{
-			asteroid[indice].x -= asteroid[indice].velocidade;
-		}
-		else if (tipo == 4)
-		{
-			asteroid[indice].x -= asteroid[indice].velocidade;
+			if (tipo == 1)
+			{
+				asteroid[indice].x -= asteroid[indice].velocidade;
+			}
+			else if (tipo == 2)
+			{
+				asteroid[indice].x -= asteroid[indice].velocidade;
+			}
+			else if (tipo == 3)
+			{
+				asteroid[indice].x -= asteroid[indice].velocidade;
+			}
+			else if (tipo == 4)
+			{
+				asteroid[indice].x -= asteroid[indice].velocidade;
+			}
 		}
 	}
 	reposicionaAsteroid(indice);

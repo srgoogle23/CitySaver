@@ -394,7 +394,15 @@ void redesenhaTiro()
     {
         if(!nave_game_over)
         {
-            disparaTiro();
+            if(!pause)
+            {
+                disparaTiro();
+            }
+            else
+            {
+                duracao_tiro = 0;
+                tiroTecla = false;
+            }
         }
         else
         {
@@ -511,7 +519,7 @@ void redesenhaTiro()
 
 void animacaoTiroIniciando()
 {
-    if (segurando_tecla && !nave_game_over)
+    if (segurando_tecla && !nave_game_over && !pause)
     {
         if(controleCrescimento)
         {

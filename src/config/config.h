@@ -195,6 +195,9 @@ bool menu_opcoes[1] = {true};
 bool menu_selecionado = false;
 double menu_inciar_jogo_animacao = 0.0;
 
+// pause do jogo
+bool pause = false;
+
 // declarando funções
 int iniciarAllegro();
 int finalizaAllegro();

@@ -22,82 +22,85 @@ void finalizaNave()
 
 void teclasMovimentoNave(int tecla, int tipoEvento)
 {
-    if(tipoEvento == 1)
-    {
-		//verifica qual tecla foi
-		if(tecla == ALLEGRO_KEY_W) //se a tecla for o W
-        {
-			move_up = true;
-
-			if(tecla == ALLEGRO_KEY_D)  //se a tecla for o W com o D
-			{
-				move_right = true;
-			} 
-			else if(tecla == ALLEGRO_KEY_A)  //se a tecla for o W com o A
-			{
-				move_left = true;
-			}
-        }
-		else if(tecla == ALLEGRO_KEY_S) //se a tecla for o S
-        {
-            move_down = true;
-
-			if(tecla == ALLEGRO_KEY_D)  //se a tecla for o S com o D
-			{
-				move_right = true;
-			} 
-			else if(tecla == ALLEGRO_KEY_A)  //se a tecla for o S com o A
-			{
-				move_left = true;
-			}
-        }
-		else if(tecla == ALLEGRO_KEY_A) //se a tecla for o A
-        {
-            move_left = true;
-
-			if(tecla == ALLEGRO_KEY_W)  //se a tecla for o A com o W
+	if(!pause)
+	{
+		if(tipoEvento == 1)
+		{
+			//verifica qual tecla foi
+			if(tecla == ALLEGRO_KEY_W) //se a tecla for o W
 			{
 				move_up = true;
-			} 
-			else if(tecla == ALLEGRO_KEY_S)  //se a tecla for o A com o S
-			{
-				move_down = true;
-			}
-        }
-		else if(tecla == ALLEGRO_KEY_D) //se a tecla for o D
-        {
-            move_right = true;
 
-			if(tecla == ALLEGRO_KEY_W)  //se a tecla for o A com o W
-			{
-				move_up = true;
-			} 
-			else if(tecla == ALLEGRO_KEY_S)  //se a tecla for o A com o S
+				if(tecla == ALLEGRO_KEY_D)  //se a tecla for o W com o D
+				{
+					move_right = true;
+				} 
+				else if(tecla == ALLEGRO_KEY_A)  //se a tecla for o W com o A
+				{
+					move_left = true;
+				}
+			}
+			else if(tecla == ALLEGRO_KEY_S) //se a tecla for o S
 			{
 				move_down = true;
+
+				if(tecla == ALLEGRO_KEY_D)  //se a tecla for o S com o D
+				{
+					move_right = true;
+				} 
+				else if(tecla == ALLEGRO_KEY_A)  //se a tecla for o S com o A
+				{
+					move_left = true;
+				}
 			}
-        }
-    }
-    else if(tipoEvento == 2)
-    {
-        //verifica qual tecla foi
-		if(tecla == ALLEGRO_KEY_W) //se a tecla for o W
-        {
-            move_up = false;
-        }
-		else if(tecla == ALLEGRO_KEY_S) //se a tecla for o S
-        {
-            move_down = false;
-        }
-		else if(tecla == ALLEGRO_KEY_A) //se a tecla for o A
-        {
-            move_left = false;
-        }
-		else if(tecla == ALLEGRO_KEY_D) //se a tecla for o D
-        {
-            move_right = false;
-        }
-    }
+			else if(tecla == ALLEGRO_KEY_A) //se a tecla for o A
+			{
+				move_left = true;
+
+				if(tecla == ALLEGRO_KEY_W)  //se a tecla for o A com o W
+				{
+					move_up = true;
+				} 
+				else if(tecla == ALLEGRO_KEY_S)  //se a tecla for o A com o S
+				{
+					move_down = true;
+				}
+			}
+			else if(tecla == ALLEGRO_KEY_D) //se a tecla for o D
+			{
+				move_right = true;
+
+				if(tecla == ALLEGRO_KEY_W)  //se a tecla for o A com o W
+				{
+					move_up = true;
+				} 
+				else if(tecla == ALLEGRO_KEY_S)  //se a tecla for o A com o S
+				{
+					move_down = true;
+				}
+			}
+		}
+		else if(tipoEvento == 2)
+		{
+			//verifica qual tecla foi
+			if(tecla == ALLEGRO_KEY_W) //se a tecla for o W
+			{
+				move_up = false;
+			}
+			else if(tecla == ALLEGRO_KEY_S) //se a tecla for o S
+			{
+				move_down = false;
+			}
+			else if(tecla == ALLEGRO_KEY_A) //se a tecla for o A
+			{
+				move_left = false;
+			}
+			else if(tecla == ALLEGRO_KEY_D) //se a tecla for o D
+			{
+				move_right = false;
+			}
+		}
+	}
 }
 
 void calculaMovimentoNave()
