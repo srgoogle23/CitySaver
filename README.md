@@ -1,6 +1,8 @@
 # **1. City Saver**
 
-`	`O jogo denominado como *City Saver* é um remake básico e rudimentar do jogo R-type. A história de City Saver passa em um cenário global prestes a ser destruído, onde cientistas descobriram um grande asteroide vindo para a terra e o destruíram em inúmeros pedaços. O dever do jogador é eliminar cada pequeno asteroide usando as armas da nave, desviando dos obstáculos rumo ao infinito.
+O jogo denominado como *City Saver* é um remake básico e rudimentar do jogo R-type. A história de City Saver passa em um cenário global prestes a ser destruído, onde cientistas descobriram um grande asteroide vindo para a terra e o destruíram em inúmeros pedaços. O dever do jogador é eliminar cada pequeno asteroide usando as armas da nave, desviando dos obstáculos rumo ao infinito.
+
+Baixe o Instalador em: https://github.com/srgoogle23/CitySaver/releases
 
 ## **1.1. Controles**
 
@@ -23,7 +25,7 @@ Allegro5 e suas dependências (Imagens, áudio, fontes, etc), stdio, time, stdli
 
 ## **2.3. Lógica de implementação**
 
-`	`O corpo principal do jogo foi implementado no arquivo principal, *main.c*, onde é carregado as instancias necessárias para rodar o jogo e a lógica principal. Todas as dependências foram divididas baseadas em tipos e alocadas dentro da pasta src:
+O corpo principal do jogo foi implementado no arquivo principal, *main.c*, onde é carregado as instancias necessárias para rodar o jogo e a lógica principal. Todas as dependências foram divididas baseadas em tipos e alocadas dentro da pasta src:
 
 - Configurações: configurações principais do jogo e da aplicação, são alocadas na pasta config.
 - Data: arquivos para armazenamento de dados da aplicação, são alocadas na pasta data.
@@ -51,7 +53,7 @@ Os includes do autoload são feitos de forma sequencial, onde:
 
 #### ***2.3.1.1 arquivo.h***
 
-`	`Funções relacionadas a manipulação de arquivos.
+Funções relacionadas a manipulação de arquivos.
 
 **bool escreveInteiroArquivo(const char \* localizacao, int valor);** : recebendo a localização do arquivo o valor a ser escrito dentro do mesmo, sobrescreve o conteúdo do arquivo por esse valor, retornando true, se foi feio com sucesso, e false, se deu algo errado.
 
@@ -59,19 +61,19 @@ Os includes do autoload são feitos de forma sequencial, onde:
 
 #### ***2.3.1.2. string.h***
 
-`	`Funções relacionadas a manipulação de strings.
+Funções relacionadas a manipulação de strings.
 
 **char \*concat(const char \*s1, const char \*s2);** : recebendo duas strings, concatena a primeira com a segunda e retorna a string concatenada.
 
 #### ***2.3.1.3. graus.h***
 
-`	`Funções relacionadas a manipulação de graus.
+Funções relacionadas a manipulação de graus.
 
 **double to\_radians(double degrees);** : converte um valor em graus para radianos
 
 #### ***2.3.1.3. bitmap.h***
 
-`	`Funções relacionadas a manipulação de bitmaps.
+Funções relacionadas a manipulação de bitmaps.
 
 **ALLEGRO\_BITMAP \*load\_bitmap\_at\_size(const char \*filename, int w, int h);** : recebendo a localização do arquivo, junto com as dimensões de largura e altura desejadas, retorna um bitmap do alegro no tamanho informado.
 
@@ -89,7 +91,7 @@ Funções relacionadas a manipulação de números aleatórios.
 
 ### ***2.3.2. Configurações***
 
-`	`Funções e inicializações de configurações primordiais para o funcionamento da aplicação.
+Funções e inicializações de configurações primordiais para o funcionamento da aplicação.
 
 #### ***2.3.2.1. config.h***
 
@@ -101,11 +103,11 @@ Funções relacionadas a manipulação de números aleatórios.
 
 ### ***2.3.3. Objetos***
 
-`	`Funções e inicializações dos objetos para o jogo e suas respectivas tratativas.
+Funções e inicializações dos objetos para o jogo e suas respectivas tratativas.
 
 #### ***2.3.3.1. background.h***
 
-`	`Funções e tratativas relacionadas ao fundo do jogo.
+Funções e tratativas relacionadas ao fundo do jogo.
 
 **struct Background** : Struct onde são armazenadas os bitmaps do fundo e seus clones, posições de ambos, tipos, etc. 
 
@@ -121,7 +123,7 @@ Funções relacionadas a manipulação de números aleatórios.
 
 #### ***2.3.3.2. pontuacao.h***
 
-`	`Funções e tratativas relacionadas a pontuação e ao recorde do jogo.
+Funções e tratativas relacionadas a pontuação e ao recorde do jogo.
 
 **void redesenhaPontuacao();** : redesenha a pontuação na tela baseado nos novos pontos.
 
@@ -139,7 +141,7 @@ Funções e tratativas relacionadas ao bloco.
 
 #### ***2.3.3.4. extended/explosaoAsteroides.h***
 
-`	`Funções e tratativas relacionadas às explosões.
+Funções e tratativas relacionadas às explosões.
 
 **struct Explosao** : estrutura das explosões, contém dados com status de ativo ou inativo, posições em x, y e a variável de controle de animação das explosões criadas.
 
@@ -153,7 +155,7 @@ Funções e tratativas relacionadas ao bloco.
 
 #### ***2.3.3.5. asteroid.h***
 
-`	`Funções e tratativas relacionadas aos asteroides.
+Funções e tratativas relacionadas aos asteroides.
 
 **struct Asteroid** : estrutura dos asteroides, onde contém informações como controle de colisão, tipo do asteroide, velocidade, largura, altura, posições x e y, status, etc.
 
